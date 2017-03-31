@@ -10,30 +10,30 @@ import UIKit
 
 public struct Screen {
     public struct Height {
-        static let statusBar: CGFloat = 20
-        static let navigationBar: CGFloat = 44
-        static let tabBar: CGFloat  = 49
-        static let toolBar: CGFloat = 44
-        static let textField: CGFloat = 31
-        static var topBar: CGFloat {
+        public static let statusBar: CGFloat = 20
+        public static let navigationBar: CGFloat = 44
+        public static let tabBar: CGFloat  = 49
+        public static let toolBar: CGFloat = 44
+        public static let textField: CGFloat = 31
+        public static var topBar: CGFloat {
             return statusBar + navigationBar
         }
     }
     
     public struct DevicePortraitSize {
-        static let phone4 = CGSize(width: 320, height: 480) // @2x:  640 x  960
-        static let phone5 = CGSize(width: 320, height: 568) // @2x:  640 x 1136
-        static let phone6 = CGSize(width: 375, height: 667) // @2x:  750 x 1334
-        static let phone6Plus = CGSize(width: 414, height: 736) // @3x: 1242 x 2208
+        public static let phone4 = CGSize(width: 320, height: 480) // @2x:  640 x  960
+        public static let phone5 = CGSize(width: 320, height: 568) // @2x:  640 x 1136
+        public static let phone6 = CGSize(width: 375, height: 667) // @2x:  750 x 1334
+        public static let phone6Plus = CGSize(width: 414, height: 736) // @3x: 1242 x 2208
         
-        static let pad = CGSize(width: 768, height: 1024) // @2x: 1536 x 2048
-        static let padPro = CGSize(width: 1024, height: 1366) // @2x: 2048 x 2732
+        public static let pad = CGSize(width: 768, height: 1024) // @2x: 1536 x 2048
+        public static let padPro = CGSize(width: 1024, height: 1366) // @2x: 2048 x 2732
     }
     
     public struct DesignPortraitWidth {
-        static var phone = DevicePortraitSize.phone6.width
-        static var pad = DevicePortraitSize.pad.width
-        static var universal = DevicePortraitSize.pad.width
+        public static var phone = DevicePortraitSize.phone6.width
+        public static var pad = DevicePortraitSize.pad.width
+        public static var universal = DevicePortraitSize.pad.width
     }
     
     public static var devicePortraitSize: CGSize {
