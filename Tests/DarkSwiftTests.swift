@@ -33,4 +33,7 @@ class DarkSwiftTests: XCTestCase {
         }
     }
     
+    func testDigest() {
+        
+    }
 }
