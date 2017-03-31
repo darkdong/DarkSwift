@@ -9,7 +9,7 @@
 import UIKit
 
 public struct Screen {
-    struct Height {
+    public struct Height {
         static let statusBar: CGFloat = 20
         static let navigationBar: CGFloat = 44
         static let tabBar: CGFloat  = 49
@@ -20,7 +20,7 @@ public struct Screen {
         }
     }
     
-    struct DevicePortraitSize {
+    public struct DevicePortraitSize {
         static let phone4 = CGSize(width: 320, height: 480) // @2x:  640 x  960
         static let phone5 = CGSize(width: 320, height: 568) // @2x:  640 x 1136
         static let phone6 = CGSize(width: 375, height: 667) // @2x:  750 x 1334
@@ -30,18 +30,18 @@ public struct Screen {
         static let padPro = CGSize(width: 1024, height: 1366) // @2x: 2048 x 2732
     }
     
-    struct DesignPortraitWidth {
+    public struct DesignPortraitWidth {
         static var phone = DevicePortraitSize.phone6.width
         static var pad = DevicePortraitSize.pad.width
         static var universal = DevicePortraitSize.pad.width
     }
     
-    static var devicePortraitSize: CGSize {
+    public static var devicePortraitSize: CGSize {
         return CGSize(width: UIScreen.main.nativeBounds.width / UIScreen.main.nativeScale, height: UIScreen.main.nativeBounds.height / UIScreen.main.nativeScale)
     }
     
     //use scale if we have two layouts: phone and pad
-    static var scale: CGFloat = {
+    public static var scale: CGFloat = {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             switch devicePortraitSize.height {
@@ -71,7 +71,7 @@ public struct Screen {
     }()
     
     //use universalScale if we have a universal layout
-    static var universalScale: CGFloat = {
+    public static var universalScale: CGFloat = {
         switch devicePortraitSize.height {
         case DevicePortraitSize.phone4.height:
             return DevicePortraitSize.phone4.width / DesignPortraitWidth.universal

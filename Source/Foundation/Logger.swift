@@ -9,25 +9,25 @@
 import Foundation
 
 public class Logger {
-    var isEnabled = true
+    public var isEnabled = true
 
-    static let shared = Logger()
+    public static let shared = Logger()
     
-    static func log(_ format: String, _ args: CVarArg = []) {
+    public static func log(_ format: String, _ args: CVarArg = []) {
         shared.log(format, args)
     }
     
-    static func print<T>(_ object: T) {
+    public static func print<T>(_ object: T) {
         shared.print(object)
     }
     
-    func log(_ format: String, _ args: CVarArg = []) {
+    public func log(_ format: String, _ args: CVarArg = []) {
         if isEnabled {
             NSLog(format, args)
         }
     }
     
-    func print<T>(_ object: T) {
+    public func print<T>(_ object: T) {
         if isEnabled {
             Swift.print(object)
         }

@@ -9,13 +9,13 @@
 import Foundation
 
 public class Timer {
-    var timer: Foundation.Timer?
-    var handler: ((Timer) -> Void)!
-    var userInfo: Any? {
+    public var timer: Foundation.Timer?
+    public var handler: ((Timer) -> Void)!
+    public var userInfo: Any? {
         return timer?.userInfo
     }
     
-    init(scheduleWithTimeInterval timeInterval: TimeInterval, repeats: Bool, userInfo: Any? = nil, handler: @escaping ((Timer) -> Void)) {
+    public init(scheduleWithTimeInterval timeInterval: TimeInterval, repeats: Bool, userInfo: Any? = nil, handler: @escaping ((Timer) -> Void)) {
         self.handler = handler
         timer = Foundation.Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(Timer.fire), userInfo: userInfo, repeats: repeats)
     }
@@ -25,7 +25,7 @@ public class Timer {
         invalidate()
     }
     
-    func invalidate() {
+    public func invalidate() {
         timer?.invalidate()
         timer = nil
     }
@@ -36,10 +36,10 @@ public class Timer {
 }
 
 public class DisplayLink {
-    var displayLink: CADisplayLink?
-    var handler: ((DisplayLink) -> Void)!
+    public var displayLink: CADisplayLink?
+    public var handler: ((DisplayLink) -> Void)!
     
-    init(handler: @escaping ((DisplayLink) -> Void)) {
+    public init(handler: @escaping ((DisplayLink) -> Void)) {
         self.handler = handler
         displayLink = CADisplayLink(target: self, selector: #selector(DisplayLink.fire))
         displayLink?.add(to: .main, forMode: .defaultRunLoopMode)
@@ -50,7 +50,7 @@ public class DisplayLink {
         invalidate()
     }
     
-    func invalidate() {
+    public func invalidate() {
         displayLink?.invalidate()
         displayLink = nil
     }
