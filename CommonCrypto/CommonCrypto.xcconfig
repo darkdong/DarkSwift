@@ -1,0 +1,9 @@
+//
+//  CommonCrypto.xcconfig
+//  DarkSwift
+//
+//  Created by Dark Dong on 2017/3/31.
+//  Copyright © 2017年 Dark Dong. All rights reserved.
+//
+MODULEMAP_FILE[sdk=iphoneos*] = $(SRCROOT)/CommonCrypto/iphoneos.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator.modulemap

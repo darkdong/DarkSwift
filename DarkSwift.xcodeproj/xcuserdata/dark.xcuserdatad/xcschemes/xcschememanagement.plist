@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CommonCrypto.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>DarkSwift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>42CE79CA1E8DEB3A00834C18</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>42CE79E11E8DF0EE00834C18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
