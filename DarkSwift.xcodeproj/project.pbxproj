@@ -16,6 +16,9 @@
 		42CE79F71E8DF44A00834C18 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79F21E8DF44A00834C18 /* String.swift */; };
 		42CE79F81E8DF44A00834C18 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79F31E8DF44A00834C18 /* UIButton.swift */; };
 		42CE79F91E8DF44A00834C18 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79F41E8DF44A00834C18 /* UIColor.swift */; };
+		42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79FD1E8DFB2E00834C18 /* Screen.swift */; };
+		42CE7A011E8DFED300834C18 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79FF1E8DFED300834C18 /* Logger.swift */; };
+		42CE7A021E8DFED300834C18 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE7A001E8DFED300834C18 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		42CE79F21E8DF44A00834C18 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		42CE79F31E8DF44A00834C18 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		42CE79F41E8DF44A00834C18 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		42CE79FD1E8DFB2E00834C18 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		42CE79FF1E8DFED300834C18 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		42CE7A001E8DFED300834C18 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 		42CE79C41E8DEB3A00834C18 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				42CE79FC1E8DFB2E00834C18 /* Foundation */,
 				42CE79EF1E8DF44A00834C18 /* Extensions */,
 				42CE79C51E8DEB3A00834C18 /* DarkSwift.h */,
 				42CE79C61E8DEB3A00834C18 /* Info.plist */,
@@ -143,6 +150,17 @@
 			);
 			path = Extensions;
 			sourceTree = "<group>";
+		};
+		42CE79FC1E8DFB2E00834C18 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				42CE79FD1E8DFB2E00834C18 /* Screen.swift */,
+				42CE79FF1E8DFED300834C18 /* Logger.swift */,
+				42CE7A001E8DFED300834C18 /* Timer.swift */,
+			);
+			name = Foundation;
+			path = Source/Foundation;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -294,9 +312,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				42CE79F71E8DF44A00834C18 /* String.swift in Sources */,
+				42CE7A021E8DFED300834C18 /* Timer.swift in Sources */,
+				42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */,
 				42CE79F51E8DF44A00834C18 /* CoreGraphics.swift in Sources */,
 				42CE79F61E8DF44A00834C18 /* Data.swift in Sources */,
 				42CE79F81E8DF44A00834C18 /* UIButton.swift in Sources */,
+				42CE7A011E8DFED300834C18 /* Logger.swift in Sources */,
 				42CE79F91E8DF44A00834C18 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
