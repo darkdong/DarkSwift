@@ -1,2 +1,2 @@
 # DarkSwift
-Swift utilities  and extensions in common use
+Swift utilities and extensions in common use
