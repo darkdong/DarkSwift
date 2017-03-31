@@ -10,7 +10,7 @@ import Foundation
 
 public class Timer {
     public var timer: Foundation.Timer?
-    public var handler: ((Timer) -> Void)!
+    public var handler: ((Timer) -> Void)?
     public var userInfo: Any? {
         return timer?.userInfo
     }
@@ -28,6 +28,7 @@ public class Timer {
     public func invalidate() {
         timer?.invalidate()
         timer = nil
+        handler = nil
     }
     
     @objc func fire() {
@@ -37,7 +38,7 @@ public class Timer {
 
 public class DisplayLink {
     public var displayLink: CADisplayLink?
-    public var handler: ((DisplayLink) -> Void)!
+    public var handler: ((DisplayLink) -> Void)?
     
     public init(handler: @escaping ((DisplayLink) -> Void)) {
         self.handler = handler
@@ -53,6 +54,7 @@ public class DisplayLink {
     public func invalidate() {
         displayLink?.invalidate()
         displayLink = nil
+        handler = nil
     }
     
     @objc func fire() {
