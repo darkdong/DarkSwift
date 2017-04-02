@@ -101,12 +101,12 @@ extension UIView: Layoutable {
     
     public static func positions(forTabularItems items: [Layoutable], numberOfTableRows: Int, numberOfTableColumns: Int, in rect: CGRect) -> [CGPoint] {
         var centerPoints: [CGPoint] = []
-        let dx = rect.width / CGFloat(numberOfTableColumns + 1)
-        let dy = rect.height / CGFloat(numberOfTableRows + 1)
-        for row in 1...numberOfTableRows {
-            for col in 1...numberOfTableColumns {
-                let x = rect.minX + dx * CGFloat(col)
-                let y = rect.minY + dy * CGFloat(row)
+        let dx = rect.width / CGFloat(numberOfTableColumns) / 2
+        let dy = rect.height / CGFloat(numberOfTableRows) / 2
+        for row in 0..<numberOfTableRows {
+            for col in 0..<numberOfTableColumns {
+                let x = rect.minX + 2 * dx * CGFloat(col) + dx
+                let y = rect.minY + 2 * dy * CGFloat(row) + dy
                 let point = CGPoint(x: x , y: y)
                 centerPoints.append(point)
             }

@@ -76,15 +76,6 @@ class DarkSwiftTests: XCTestCase {
         container.layout(views: [v1, v2], alignment: .vertical(.right))
         XCTAssert(v1.frame.center == CGPoint(x: 22, y: 2))
         XCTAssert(v2.frame.center == CGPoint(x: 20, y: 20))
-
-        let v3 = v2.clone()
-        let v4 = v1.clone()
-        
-        container.layout(views: [v1, v2, v3, v4], alignment: .tabular(2, 2))
-        XCTAssert(v1.frame.center == CGPoint(x: 8, y: 8))
-        XCTAssert(v2.frame.center == CGPoint(x: 16, y: 8))
-        XCTAssert(v3.frame.center == CGPoint(x: 8, y: 16))
-        XCTAssert(v4.frame.center == CGPoint(x: 16, y: 16))
     }
     
     func testDigest() {
