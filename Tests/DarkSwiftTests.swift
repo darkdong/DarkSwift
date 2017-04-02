@@ -33,6 +33,60 @@ class DarkSwiftTests: XCTestCase {
         }
     }
     
+    func testLayout() {
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        let v1 = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: 4))
+        container.layout(views: [v1], alignment: .horizontal(.center))
+        XCTAssert(v1.frame.center == CGPoint(x: 12, y: 12))
+
+        container.layout(views: [v1], alignment: .horizontal(.top))
+        XCTAssert(v1.frame.center == CGPoint(x: 12, y: 2))
+
+        container.layout(views: [v1], alignment: .horizontal(.bottom))
+        XCTAssert(v1.frame.center == CGPoint(x: 12, y: 22))
+
+        container.layout(views: [v1], alignment: .vertical(.left))
+        XCTAssert(v1.frame.center == CGPoint(x: 2, y: 12))
+
+        container.layout(views: [v1], alignment: .vertical(.right))
+        XCTAssert(v1.frame.center == CGPoint(x: 22, y: 12))
+
+        let v2 = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
+
+        container.layout(views: [v1, v2], alignment: .horizontal(.center))
+        XCTAssert(v1.frame.center == CGPoint(x: 2, y: 12))
+        XCTAssert(v2.frame.center == CGPoint(x: 20, y: 12))
+        
+        container.layout(views: [v1, v2], alignment: .horizontal(.top))
+        XCTAssert(v1.frame.center == CGPoint(x: 2, y: 2))
+        XCTAssert(v2.frame.center == CGPoint(x: 20, y: 4))
+        
+        container.layout(views: [v1, v2], alignment: .horizontal(.bottom))
+        XCTAssert(v1.frame.center == CGPoint(x: 2, y: 22))
+        XCTAssert(v2.frame.center == CGPoint(x: 20, y: 20))
+
+        container.layout(views: [v1, v2], alignment: .vertical(.center))
+        XCTAssert(v1.frame.center == CGPoint(x: 12, y: 2))
+        XCTAssert(v2.frame.center == CGPoint(x: 12, y: 20))
+
+        container.layout(views: [v1, v2], alignment: .vertical(.left))
+        XCTAssert(v1.frame.center == CGPoint(x: 2, y: 2))
+        XCTAssert(v2.frame.center == CGPoint(x: 4, y: 20))
+
+        container.layout(views: [v1, v2], alignment: .vertical(.right))
+        XCTAssert(v1.frame.center == CGPoint(x: 22, y: 2))
+        XCTAssert(v2.frame.center == CGPoint(x: 20, y: 20))
+
+        let v3 = v2.clone()
+        let v4 = v1.clone()
+        
+        container.layout(views: [v1, v2, v3, v4], alignment: .tabular(2, 2))
+        XCTAssert(v1.frame.center == CGPoint(x: 8, y: 8))
+        XCTAssert(v2.frame.center == CGPoint(x: 16, y: 8))
+        XCTAssert(v3.frame.center == CGPoint(x: 8, y: 16))
+        XCTAssert(v4.frame.center == CGPoint(x: 16, y: 16))
+    }
+    
     func testDigest() {
         XCTAssert("".hash(algorithm: .md5) == "d41d8cd98f00b204e9800998ecf8427e")
         XCTAssert("".hash(algorithm: .sha1) == "da39a3ee5e6b4b0d3255bfef95601890afd80709")
