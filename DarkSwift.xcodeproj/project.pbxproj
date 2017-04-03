@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		423FC4B61E908CEF009E1008 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B51E908CEF009E1008 /* Layout.swift */; };
 		423FC4B81E908D60009E1008 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B71E908D60009E1008 /* UIView.swift */; };
+		4289CC001E9211250026DE71 /* SKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4289CBFF1E9211250026DE71 /* SKNode.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
 		42CE79D11E8DEB3A00834C18 /* DarkSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79D01E8DEB3A00834C18 /* DarkSwiftTests.swift */; };
 		42CE79D31E8DEB3A00834C18 /* DarkSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 42CE79C51E8DEB3A00834C18 /* DarkSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,6 +22,7 @@
 		42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79FD1E8DFB2E00834C18 /* Screen.swift */; };
 		42CE7A011E8DFED300834C18 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79FF1E8DFED300834C18 /* Logger.swift */; };
 		42CE7A021E8DFED300834C18 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE7A001E8DFED300834C18 /* Timer.swift */; };
+		42F43DC41E926BAE00F30C95 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F43DC31E926BAE00F30C95 /* Foundation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,7 @@
 /* Begin PBXFileReference section */
 		423FC4B51E908CEF009E1008 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		423FC4B71E908D60009E1008 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4289CBFF1E9211250026DE71 /* SKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNode.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE79C51E8DEB3A00834C18 /* DarkSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkSwift.h; sourceTree = "<group>"; };
 		42CE79C61E8DEB3A00834C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		42CE79FD1E8DFB2E00834C18 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		42CE79FF1E8DFED300834C18 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		42CE7A001E8DFED300834C18 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		42F43DC31E926BAE00F30C95 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				423FC4B71E908D60009E1008 /* UIView.swift */,
+				4289CBFF1E9211250026DE71 /* SKNode.swift */,
 				42CE79F01E8DF44A00834C18 /* CoreGraphics.swift */,
 				42CE79F11E8DF44A00834C18 /* Data.swift */,
 				42CE79F21E8DF44A00834C18 /* String.swift */,
@@ -159,6 +164,7 @@
 		42CE79FC1E8DFB2E00834C18 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				42F43DC31E926BAE00F30C95 /* Foundation.swift */,
 				42CE79FD1E8DFB2E00834C18 /* Screen.swift */,
 				42CE79FF1E8DFED300834C18 /* Logger.swift */,
 				42CE7A001E8DFED300834C18 /* Timer.swift */,
@@ -317,11 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4289CC001E9211250026DE71 /* SKNode.swift in Sources */,
 				423FC4B81E908D60009E1008 /* UIView.swift in Sources */,
 				42CE79F71E8DF44A00834C18 /* String.swift in Sources */,
 				42CE7A021E8DFED300834C18 /* Timer.swift in Sources */,
 				42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */,
 				42CE79F51E8DF44A00834C18 /* CoreGraphics.swift in Sources */,
+				42F43DC41E926BAE00F30C95 /* Foundation.swift in Sources */,
 				42CE79F61E8DF44A00834C18 /* Data.swift in Sources */,
 				423FC4B61E908CEF009E1008 /* Layout.swift in Sources */,
 				42CE79F81E8DF44A00834C18 /* UIButton.swift in Sources */,
