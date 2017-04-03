@@ -7,11 +7,11 @@
 //
 
 public protocol Cloneable {
-    func clone<T>() -> T
+    func clone<T>() -> T?
 }
 
 public extension Cloneable {
-    func clone<T>() -> T {
-        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
+    func clone<T>() -> T? {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as? T
     }
 }

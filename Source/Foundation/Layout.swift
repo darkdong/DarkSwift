@@ -22,8 +22,8 @@ public extension Layoutable {
             cpoints = horizontalCenterPoints(forItems: items, in: rect, verticalAlignment: verticalAlignment)
         case let.vertical(horizontalAlignment):
             cpoints = verticalCenterPoints(forItems: items, in: rect, horizontalAlignment: horizontalAlignment)
-        case let .tabular(numberOfRows, numberOfColumns, itemSize, itemAnchorPoint):
-            cpoints = tabularCenterPoints(forItemSize: itemSize, itemAnchorPoint: itemAnchorPoint, numberOfTableRows: numberOfRows, numberOfTableColumns: numberOfColumns, in: rect)
+        case let .tabular(numberOfRows, numberOfColumns, itemSize):
+            cpoints = tabularCenterPoints(forItemSize: itemSize, numberOfTableRows: numberOfRows, numberOfTableColumns: numberOfColumns, in: rect)
         }
         var points: [CGPoint] = []
         for (cpoint, item) in zip(cpoints, items) {
@@ -81,7 +81,7 @@ public extension Layoutable {
         }
     }
     
-    static func tabularCenterPoints(forItemSize itemSize: CGSize, itemAnchorPoint: CGPoint, numberOfTableRows: Int, numberOfTableColumns: Int, in rect: CGRect) -> [CGPoint] {
+    static func tabularCenterPoints(forItemSize itemSize: CGSize, numberOfTableRows: Int, numberOfTableColumns: Int, in rect: CGRect) -> [CGPoint] {
         var cpoints: [CGPoint] = []
         let rowRectSize = CGSize(width: rect.width, height: rect.height / CGFloat(numberOfTableRows))
         var rowRects: [CGRect] = []
@@ -91,7 +91,7 @@ public extension Layoutable {
             rowRects.append(rowRect)
         }
         
-        let item = LayoutableItem(size: itemSize, anchorPoint: itemAnchorPoint)
+        let item = LayoutableItem(size: itemSize)
         let items = [LayoutableItem](repeating: item, count: numberOfTableColumns)
         for rect in rowRects {
             let rowCenterPoints = horizontalCenterPoints(forItems: items, in: rect)
@@ -160,5 +160,5 @@ public enum CoordinateSystemOrigin {
 public enum Alignment {
     case horizontal(UIControlContentVerticalAlignment)
     case vertical(UIControlContentHorizontalAlignment)
-    case tabular(Int, Int, CGSize, CGPoint)
+    case tabular(Int, Int, CGSize)
 }
