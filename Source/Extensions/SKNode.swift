@@ -21,12 +21,16 @@ extension SKNode: Layoutable, Cloneable {
         return CGPoint(x: 0.5, y: 0.5)
     }
     
-    public func layoutChildren(_ nodes: [SKNode], alignment: Alignment, in rect: CGRect? = nil) {
-        let rect = rect ?? CGRect(origin: CGPoint.zero, size: frame.size)
-        let positions = SKNode.positions(forItems: nodes, alignment: alignment, in: rect)
-        for (node, position) in zip(nodes, positions) {
-            node.position = position
+    public static func layoutNodes(_ nodes: [SKNode], alignment: Alignment, in rect: CGRect) {
+        let points = positions(forItems: nodes, alignment: alignment, in: rect)
+        for (node, point) in zip(nodes, points) {
+            node.position = point
         }
-    }    
+    }
+    
+//    public func layoutChildren(_ nodes: [SKNode], alignment: Alignment, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+//        let rect = frame.bounds.rect(byInsets: insets)
+//        SKNode.layoutNodes(nodes, alignment: alignment, in: rect)
+//    }    
 }
 

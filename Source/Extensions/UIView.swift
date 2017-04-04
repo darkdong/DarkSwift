@@ -21,12 +21,16 @@ extension UIView: Layoutable, Cloneable {
         return CGPoint.zero
     }
     
-    public func layoutSubviews(_ views: [UIView], alignment: Alignment, in rect: CGRect? = nil) {
-        let rect = rect ?? CGRect(origin: CGPoint.zero, size: frame.size)
-        let positions = UIView.positions(forItems: views, alignment: alignment, in: rect)
-        for (view, position) in zip(views, positions) {
-            view.frame.origin = position
+    public static func layoutViews(_ views: [UIView], alignment: Alignment, in rect: CGRect) {
+        let points = positions(forItems: views, alignment: alignment, in: rect)
+        for (view, point) in zip(views, points) {
+            view.frame.origin = point
         }
+    }
+    
+    public func layoutSubviews(_ views: [UIView], alignment: Alignment, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+        let rect = bounds.rect(byInsets: insets)
+        UIView.layoutViews(views, alignment: alignment, in: rect)
     }
     
     public var centerX: CGFloat {

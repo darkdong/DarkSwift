@@ -30,12 +30,21 @@ class ViewController: UIViewController {
             scene.backgroundColor = UIColor.darkGray
             skview.presentScene(scene)
             
-//            let bgrect = CGRect(center: scene.size.center, size: CGSize(width: 320, height: 320))
-            let bgrect = CGRect(origin: CGPoint.zero, size: CGSize(width: 320, height: 320))
-            let container = SKShapeNode(rect: bgrect)
-            container.strokeColor = UIColor.clear
-            container.fillColor = UIColor.blue
+            let cnode = SKNode()
+            cnode.position = scene.size.center
+            scene.addChild(cnode)
+
+            let bgrect = CGRect(center: scene.size.center, size: CGSize(width: 320, height: 320))
+//            let bgrect = CGRect(origin: CGPoint.zero, size: CGSize(width: 320, height: 320))
+//            let container = SKShapeNode(rect: bgrect)
+            let container = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 320, height: 320))
+            container.position = scene.size.center
+            container.zPosition = -100
+//            container.strokeColor = UIColor.clear
+//            container.fillColor = UIColor.blue
             scene.addChild(container)
+            
+            print("scene anchor \(scene.anchorPoint) cnode anchor \(cnode.anchorPoint)")
             
             let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             let rect = bgrect.rect(byInsets: insets)
@@ -46,7 +55,8 @@ class ViewController: UIViewController {
             }
             
             func createShapeNode(color: UIColor, size: CGSize) -> SKNode {
-                let node = SKShapeNode(rectOf: size)
+//                let node = SKShapeNode(rectOf: size)
+                let node = SKShapeNode(rect: CGRect(center: CGPoint.zero, size: size))
                 node.strokeColor = UIColor.clear
                 node.fillColor = color
                 return node
@@ -64,7 +74,8 @@ class ViewController: UIViewController {
             let n1 = createSpriteNode(color: UIColor.cyan, size: CGSize(width: 80, height: 40))
             let n2 = createShapeNode(color: UIColor.magenta, size: CGSize(width: 80, height: 100))
             let n3 = createLabelNode(color: UIColor.yellow, size: CGSize(width: 80, height: 80))
-            
+            print("sprite anchor \(n1.anchorPoint) shape anchor \(n2.anchorPoint)")
+
 //            let n1 = createLabelNode(text: "fg", fontSize: 40, vmode: .center)
 //            let n2 = createLabelNode(text: "fg", fontSize: 40, vmode: .top)
 //            let n3 = createLabelNode(text: "fg", fontSize: 40, vmode: .bottom)
@@ -76,10 +87,13 @@ class ViewController: UIViewController {
 //            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 40, height: 40))
 //            scene.layoutChildren(nodes, alignment: tabAlign, in: rect)
 
+            let crect = CGRect(center: CGPoint.zero, size: CGSize(width: 320, height: 320))
+            let crect2 = crect.rect(byInsets: insets)
+
             let nodes = [n1, n2, n3]
-            container.layoutChildren(nodes, alignment: .horizontal(.bottom), in: rect)
-            print(nodes)
-//            n3.position = CGPoint(x: 0, y: 0)
+//            container.layoutChildren(nodes, alignment: .horizontal(.bottom), insets: insets)
+            SKNode.layoutNodes(nodes, alignment: .horizontal(.bottom), in: rect)
+//            n3.position = CGPoint.zero
             
             for node in nodes {
                 scene.addChild(node)
@@ -102,7 +116,7 @@ class ViewController: UIViewController {
             let views: [UIView] = [v1, v2, v3]
 //            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
 //            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.top), in: rect)
-            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.bottom), in: rect)
+            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.bottom), insets: insets)
 
 //            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.center), in: rect)
 //            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.left), in: rect)

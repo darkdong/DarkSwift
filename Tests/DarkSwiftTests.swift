@@ -36,37 +36,36 @@ class DarkSwiftTests: XCTestCase {
     func testLayout() {
         let container = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 320, height: 320)))
         let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        let rect = container.frame.bounds.rect(byInsets: insets)
         let v1 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         let v2 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 100))
         let v3 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         var views = [v1, v2, v3]
-        container.layoutSubviews(views, alignment: .horizontal(.center), in: rect)
+        container.layoutSubviews(views, alignment: .horizontal(.center), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 160))
         XCTAssert(v2.frame.center == CGPoint(x: 160, y: 160))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 160))
 
-        container.layoutSubviews(views, alignment: .horizontal(.top), in: rect)
+        container.layoutSubviews(views, alignment: .horizontal(.top), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 40))
         XCTAssert(v2.frame.center == CGPoint(x: 160, y: 70))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 60))
 
-        container.layoutSubviews(views, alignment: .horizontal(.bottom), in: rect)
+        container.layoutSubviews(views, alignment: .horizontal(.bottom), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 280))
         XCTAssert(v2.frame.center == CGPoint(x: 160, y: 250))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 260))
 
-        container.layoutSubviews(views, alignment: .vertical(.center), in: rect)
+        container.layoutSubviews(views, alignment: .vertical(.center), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 160, y: 40))
         XCTAssert(v2.frame.center == CGPoint(x: 160, y: 140))
         XCTAssert(v3.frame.center == CGPoint(x: 160, y: 260))
 
-        container.layoutSubviews(views, alignment: .vertical(.left), in: rect)
+        container.layoutSubviews(views, alignment: .vertical(.left), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 40))
         XCTAssert(v2.frame.center == CGPoint(x: 60, y: 140))
         XCTAssert(v3.frame.center == CGPoint(x: 60, y: 260))
 
-        container.layoutSubviews(views, alignment: .vertical(.right), in: rect)
+        container.layoutSubviews(views, alignment: .vertical(.right), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 260, y: 40))
         XCTAssert(v2.frame.center == CGPoint(x: 260, y: 140))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 260))
@@ -75,7 +74,7 @@ class DarkSwiftTests: XCTestCase {
         let v5: UIView! = v2.clone()
         let v6: UIView! = v1.clone()
         views = [v1, v2, v3, v4, v5, v6]
-        container.layoutSubviews(views, alignment: .tabular(2, 3, CGSize(width: 80, height: 80)), in: rect)
+        container.layoutSubviews(views, alignment: .tabular(2, 3, CGSize(width: 80, height: 80)), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 90))
         XCTAssert(v2.frame.center == CGPoint(x: 160, y: 90))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 90))
