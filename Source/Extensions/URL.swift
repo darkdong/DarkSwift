@@ -21,6 +21,10 @@ public extension URL {
         return directory(for: .cachesDirectory)
     }
     
+    static var temporaryDirectory: URL {
+        return URL(fileURLWithPath: NSTemporaryDirectory())
+    }
+
     func checkToCreateDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
         let manager = FileManager.default
         guard !manager.fileExists(atPath: path) else {
