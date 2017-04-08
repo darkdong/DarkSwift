@@ -6,12 +6,12 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-public protocol Cloneable {
-    func clone<T>() -> T?
-}
-
-public extension Cloneable {
-    func clone<T>() -> T? {
-        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as? T
-    }
-}
+//public protocol Cloneable {
+//    func clone<T>() -> T?
+//}
+//
+//public extension Cloneable {
+//    func clone<T>() -> T? {
+//        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as? T
+//    }
+//}

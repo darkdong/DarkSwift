@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-extension SKNode: Layoutable, Cloneable {
+extension SKNode: Layoutable {
     public var coordinateSystemOrigin: CoordinateSystemOrigin {
         return .lowerLeft
     }

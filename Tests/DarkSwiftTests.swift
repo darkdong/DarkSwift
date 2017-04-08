@@ -70,9 +70,9 @@ class DarkSwiftTests: XCTestCase {
         XCTAssert(v2.frame.center == CGPoint(x: 260, y: 140))
         XCTAssert(v3.frame.center == CGPoint(x: 260, y: 260))
 
-        let v4: UIView! = v3.clone()
-        let v5: UIView! = v2.clone()
-        let v6: UIView! = v1.clone()
+        let v4 = v3.clone() as! UIView
+        let v5 = v2.clone() as! UIView
+        let v6 = v1.clone() as! UIView
         views = [v1, v2, v3, v4, v5, v6]
         container.layoutSubviews(views, alignment: .tabular(2, 3, CGSize(width: 80, height: 80)), insets: insets)
         XCTAssert(v1.frame.center == CGPoint(x: 60, y: 90))

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView: Layoutable, Cloneable {
+extension UIView: Layoutable {
     public var coordinateSystemOrigin: CoordinateSystemOrigin {
         return .upperLeft
     }
@@ -66,5 +66,9 @@ extension UIView: Layoutable, Cloneable {
             }
         }
         return nil
-    }    
+    }
+    
+    public func clone() -> Any {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as Any
+    }
 }
