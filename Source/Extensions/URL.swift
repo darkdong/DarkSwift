@@ -25,6 +25,17 @@ public extension URL {
         return URL(fileURLWithPath: NSTemporaryDirectory())
     }
 
+    static func temporaryFile(pathExtension: String? = nil) -> URL {
+        let filename = UUID().uuidString
+        let extname: String
+        if let ext = pathExtension, !ext.isEmpty {
+            extname = "." + ext
+        }else {
+            extname = ""
+        }
+        return URL.temporaryDirectory.appendingPathComponent(filename + extname)
+    }
+    
     func checkToCreateDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
         let manager = FileManager.default
         guard !manager.fileExists(atPath: path) else {
@@ -37,10 +48,14 @@ public extension URL {
         }
     }
     
+    func replacingPathExtension(_ pathExtension: String) -> URL {
+        return deletingPathExtension().appendingPathExtension(pathExtension)
+    }
+    
     func clearContents(_ options: FileManager.DirectoryEnumerationOptions = .skipsHiddenFiles) {
         let manager = FileManager.default
-        var isDir: ObjCBool = false
-        guard manager.fileExists(atPath: path, isDirectory: &isDir) && isDir.boolValue else {
+        var isDirectory: ObjCBool = false
+        guard manager.fileExists(atPath: path, isDirectory: &isDirectory) && isDirectory.boolValue else {
             return
         }
         do {
