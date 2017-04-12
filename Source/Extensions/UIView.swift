@@ -61,7 +61,7 @@ extension UIView: Layoutable {
         while v != nil {
             if let vc = v?.next as? UIViewController {
                 return vc
-            }else {
+            } else {
                 v = v?.superview
             }
         }

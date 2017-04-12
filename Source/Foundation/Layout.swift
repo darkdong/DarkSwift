@@ -36,10 +36,10 @@ public extension Layoutable {
     static func horizontalCenterPoints(forItems items: [Layoutable], in rect: CGRect, verticalAlignment: UIControlContentVerticalAlignment = .center) -> [CGPoint] {
         if items.isEmpty {
             return []
-        }else if items.count == 1 {
+        } else if items.count == 1 {
             let cpoint = items[0].centerPoint(in: rect, verticalAlignment: verticalAlignment)
             return [cpoint]
-        }else {
+        } else {
             var cpoints: [CGPoint] = []
             let sumOfWidths = sum(ofItems: items) { $0.size.width }
             let numberOfSpacings = items.count - 1
@@ -60,10 +60,10 @@ public extension Layoutable {
     static func verticalCenterPoints(forItems items: [Layoutable], in rect: CGRect, horizontalAlignment: UIControlContentHorizontalAlignment = .center) -> [CGPoint] {
         if items.isEmpty {
             return []
-        }else if items.count == 1 {
+        } else if items.count == 1 {
             let cpoint = items[0].centerPoint(in: rect, horizontalAlignment: horizontalAlignment)
             return [cpoint]
-        }else {
+        } else {
             var cpoints: [CGPoint] = []
             let sumOfHeights = sum(ofItems: items) { $0.size.height }
             let numberOfSpacings = items.count - 1

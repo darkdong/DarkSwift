@@ -30,7 +30,7 @@ public extension URL {
         let extname: String
         if let ext = pathExtension, !ext.isEmpty {
             extname = "." + ext
-        }else {
+        } else {
             extname = ""
         }
         return URL.temporaryDirectory.appendingPathComponent(filename + extname)
@@ -43,8 +43,8 @@ public extension URL {
         }
         do {
             try manager.createDirectory(at: self, withIntermediateDirectories: withIntermediateDirectories, attributes: attributes)
-        }catch {
-            
+        } catch {
+            print(error)
         }
     }
     
@@ -63,8 +63,8 @@ public extension URL {
             for url in urls {
                 try manager.removeItem(at: url)
             }
-        }catch {
-            
+        } catch {
+            print(error)
         }
     }
 }

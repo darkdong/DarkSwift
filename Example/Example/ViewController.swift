@@ -98,7 +98,7 @@ class ViewController: UIViewController {
             for node in nodes {
                 scene.addChild(node)
             }
-        }else {
+        } else {
             view.backgroundColor = UIColor.darkGray
             
             let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
