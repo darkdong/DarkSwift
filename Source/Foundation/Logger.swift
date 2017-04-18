@@ -6,8 +6,6 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-import Foundation
-
 public class Logger {
     public var isEnabled = true
 
@@ -17,19 +15,9 @@ public class Logger {
         shared.log(format, args)
     }
     
-    public static func print<T>(_ object: T) {
-        shared.print(object)
-    }
-    
     public func log(_ format: String, _ args: CVarArg = []) {
         if isEnabled {
             NSLog(format, args)
-        }
-    }
-    
-    public func print<T>(_ object: T) {
-        if isEnabled {
-            Swift.print(object)
         }
     }
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-import Foundation
-
 public protocol Layoutable {
     var coordinateSystemOrigin: CoordinateSystemOrigin { get }
     var size: CGSize { get }

@@ -36,6 +36,16 @@ public extension URL {
         return URL.temporaryDirectory.appendingPathComponent(filename + extname)
     }
     
+    var fileSize: UInt64 {
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: path)
+            return attributes[FileAttributeKey.size] as! UInt64
+        } catch {
+            print(error)
+            return 0
+        }
+    }
+    
     func checkToCreateDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
         let manager = FileManager.default
         guard !manager.fileExists(atPath: path) else {

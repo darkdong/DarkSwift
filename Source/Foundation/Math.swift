@@ -6,8 +6,6 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-import Foundation
-
 public struct Math {
     //find bit 1 from right to left
     // bitPositions(13) -> [1, 2, 4]
