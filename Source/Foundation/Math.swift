@@ -25,5 +25,5 @@ public struct Math {
         }else {
             return []
         }
-    }
+    }    
 }

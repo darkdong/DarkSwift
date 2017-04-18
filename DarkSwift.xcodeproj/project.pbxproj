@@ -10,6 +10,8 @@
 		423FC4B61E908CEF009E1008 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B51E908CEF009E1008 /* Layout.swift */; };
 		423FC4B81E908D60009E1008 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B71E908D60009E1008 /* UIView.swift */; };
 		4289CC001E9211250026DE71 /* SKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4289CBFF1E9211250026DE71 /* SKNode.swift */; };
+		4299B24A1EA5E70900335CB9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299B2491EA5E70900335CB9 /* UIImage.swift */; };
+		4299B24C1EA5ED6B00335CB9 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299B24B1EA5ED6B00335CB9 /* Collection.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
 		42CE79D11E8DEB3A00834C18 /* DarkSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79D01E8DEB3A00834C18 /* DarkSwiftTests.swift */; };
 		42CE79D31E8DEB3A00834C18 /* DarkSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 42CE79C51E8DEB3A00834C18 /* DarkSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,6 +50,8 @@
 		423FC4B51E908CEF009E1008 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		423FC4B71E908D60009E1008 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4289CBFF1E9211250026DE71 /* SKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNode.swift; sourceTree = "<group>"; };
+		4299B2491EA5E70900335CB9 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		4299B24B1EA5ED6B00335CB9 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE79C51E8DEB3A00834C18 /* DarkSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkSwift.h; sourceTree = "<group>"; };
 		42CE79C61E8DEB3A00834C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				42CE79F31E8DF44A00834C18 /* UIButton.swift */,
 				42CE79F41E8DF44A00834C18 /* UIColor.swift */,
 				42DB4BD61E9932DE00243EC4 /* URL.swift */,
+				4299B2491EA5E70900335CB9 /* UIImage.swift */,
+				4299B24B1EA5ED6B00335CB9 /* Collection.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -334,7 +340,9 @@
 				42CE79F71E8DF44A00834C18 /* String.swift in Sources */,
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
 				42CE7A021E8DFED300834C18 /* Timer.swift in Sources */,
+				4299B24C1EA5ED6B00335CB9 /* Collection.swift in Sources */,
 				42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */,
+				4299B24A1EA5E70900335CB9 /* UIImage.swift in Sources */,
 				42DB4BD71E9932DE00243EC4 /* URL.swift in Sources */,
 				42CE79F51E8DF44A00834C18 /* CoreGraphics.swift in Sources */,
 				42F43DC41E926BAE00F30C95 /* Foundation.swift in Sources */,
