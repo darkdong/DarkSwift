@@ -26,38 +26,24 @@ public extension UIImage {
     convenience init(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: CGPoint.zero, size: size)
         UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(color.cgColor)
-        context?.fill(rect)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         self.init(cgImage: image.cgImage!)
     }
     
-    //NOTE: rawData may be dealloced in ARC, set shouldCopyData = true to prevent it
-    //If you assure that rawData won't be dealloced in image's life, just set shouldCopyData = false to prevent copy
-    convenience init?(rawData: NSData, bitmapInfo: CGBitmapInfo, shouldCopyData: Bool, width: Int, height: Int) {
+    convenience init?(rawData: NSData, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
         let numberOfComponents = 4
-        let dataProvider: CGDataProvider?
-        
-        if shouldCopyData {
-            let newBuf = UnsafeMutablePointer<UInt8>.allocate(capacity: rawData.length)
-            (rawData as Data).copyBytes(to: newBuf, count: rawData.length)
-            let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataInfo, _, size) in
-                print("dataProvider is deallocated, we can deallocate memory used by dataProvider safely")
-                if let buf = dataInfo?.bindMemory(to: UInt8.self, capacity: size) {
-                    print("deallocate memory \(buf) size \(size)")
-                    buf.deallocate(capacity: size)
-                }
-            }
-            dataProvider = CGDataProvider(dataInfo: newBuf, data: newBuf, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
-        } else {
-            let releaseDataCallback: CGDataProviderReleaseDataCallback = { (_, _, _) in
-                print("dataProvider is deallocated, no memory needs to free")
-            }
-            dataProvider = CGDataProvider(dataInfo: nil, data: (rawData as NSData).bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
+        let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataOpaquePointer, _, _) in
+            //release rawData to prevent leak
+            print("dataProvider is deallocated, release rawData")
+            Unmanaged<NSData>.fromOpaque(UnsafeRawPointer(dataOpaquePointer!)).release()
         }
-        
+        //dataProvider doesn't retain rawData, so it may be dealloced while this image is using
+        //we must retain rawData until dataProvider is released
+        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(rawData).toOpaque(), data: rawData.bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
         let bitsPerComponent = 8
         
         if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
@@ -66,94 +52,25 @@ public extension UIImage {
             return nil
         }
     }
-
     
-//    convenience init?(rawData: Data, bitmapInfo: CGBitmapInfo, shouldCopyData: Bool, width: Int, height: Int) {
-//        let numberOfComponents = 4
-//        let dataProvider: CGDataProvider?
-//        
-//        if shouldCopyData {
-//            //dataProvider depend on rawData, and rawData may be deallocated when the image is being used
-//            //so we must allocate a new memory for dataProvider and deallocate it when dataProvider is deallocated
-//            
-//            let newBuf = UnsafeMutablePointer<UInt8>.allocate(capacity: rawData.count)
-//            rawData.copyBytes(to: newBuf, count: rawData.count)
-//            let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataInfo, _, size) in
-//                print("dataProvider is deallocated, we can deallocate memory used by dataProvider safely")
-//                if let buf = dataInfo?.bindMemory(to: UInt8.self, capacity: size) {
-//                    print("deallocate memory \(buf) size \(size)")
-//                    buf.deallocate(capacity: size)
-//                }
-//            }
-//            dataProvider = CGDataProvider(dataInfo: newBuf, data: newBuf, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
-//        } else {
-//            //            let _: NSData = rawData as NSData
-//            //            dataProvider = rawData.withUnsafeBytes({ (pointer: UnsafePointer<UInt8>) -> CGDataProvider? in
-//            //                return CGDataProvider(dataInfo: nil, data: pointer, size: width * height * numberOfComponents, releaseData: {_,_,_ in})
-//            //            })
-//            let releaseDataCallback: CGDataProviderReleaseDataCallback = { (_, _, _) in
-//                print("dataProvider is deallocated, we can deallocate memory used by dataProvider safely")
-//            }
-//            dataProvider = CGDataProvider(dataInfo: nil, data: (rawData as NSData).bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
-//        }
-//        
-//        let bitsPerComponent = 8
-//        
-//        if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
-//            self.init(cgImage: cgImage, scale: 1, orientation: .up)
-//        } else {
-//            return nil
-//        }
-//    }
-    
-//    convenience init?(rawData: Data, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
-//        //dataProvider depend on rawData, and rawData may be deallocated when the image is being used
-//        //so we must allocate a new memory for dataProvider and deallocate it when dataProvider is deallocated
-//        let newBuf = UnsafeMutablePointer<UInt8>.allocate(capacity: rawData.count)
-//        rawData.copyBytes(to: newBuf, count: rawData.count)
-//        let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataInfo, _, size) in
-//            print("dataProvider is deallocated, we can deallocate memory used by dataProvider safely")
-//            if let buf = dataInfo?.bindMemory(to: UInt8.self, capacity: size) {
-//                print("deallocate memory \(buf) size \(size)")
-//                buf.deallocate(capacity: size)
-//            }
-//        }
-//        let numberOfComponents = 4
-//        
-//        let dataProvider = CGDataProvider(dataInfo: newBuf, data: newBuf, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
-//        
-//        let bitsPerComponent = 8
-//        
-//        if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
-//            self.init(cgImage: cgImage, scale: 1, orientation: .up)
-//        } else {
-//            return nil
-//        }
-//    }
-    
-//    convenience init?(rawNSData: NSData, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
-//        let rawData = rawNSData as Data
-//        let newBuf = UnsafeMutablePointer<UInt8>.allocate(capacity: rawData.count)
-//        rawData.copyBytes(to: newBuf, count: rawData.count)
-//        
-//        let numberOfComponents = 4
-//        let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataInfo, _, size) in
-//            print("dataProvider is deallocated, we can deallocate memory used by dataProvider safely")
-//            if let buf = dataInfo?.bindMemory(to: UInt8.self, capacity: size) {
-//                print("deallocate memory \(buf) size \(size)")
-//                buf.deallocate(capacity: size)
-//            }
-//        }
-//        let dataProvider = CGDataProvider(dataInfo: newBuf, data: newBuf, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
-//        
-//        let bitsPerComponent = 8
-//        
-//        if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
-//            self.init(cgImage: cgImage, scale: 1, orientation: .up)
-//        } else {
-//            return nil
-//        }
-//    }
+    static func originalLutImage(cubeLength: Int = 16) -> UIImage {
+        let len = cubeLength
+        var data = Data(capacity: len * len * len)
+        
+        for g in 0..<len {
+            for b in 0..<len {
+                for r in 0..<len {
+                    let rValue = UInt8(r * len + r)
+                    let gValue = UInt8(g * len + g)
+                    let bValue = UInt8(b * len + b)
+//                    let pixel = Data(bytes: [rValue, gValue, bValue, 0]) // RGBA big endian
+                    let pixel = Data(bytes: [0, bValue, gValue, rValue]) // RGBA little endian
+                    data.append(pixel)
+                }
+            }
+        }
+        return UIImage(rawData: data as NSData, bitmapInfo: .byteOrder32Little, width: len * len, height: len)!
+    }
     
     func resizableImage(topInset: CGFloat? = nil, leftInset: CGFloat? = nil) -> UIImage {
         let top: CGFloat

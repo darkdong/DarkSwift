@@ -144,21 +144,7 @@ class ViewController: UIViewController {
             btn.addTarget(self, action: #selector(test), for: .touchUpInside)
             view.addSubview(btn)
             
-            let w = 16, h = 16
-            let pixel = Data(bytes: [255, 255, 0, 0]) // R G B A
-            
-            var data = Data()
-            for _ in 0..<w*h {
-                data.append(pixel)
-            }
-            print("data count \(data.count)")
-            let nsdata = NSData(data: data)
-//            data.append("\x12", count: 4)
-//            print(data.hexString())
-            let image = UIImage(rawData: nsdata, bitmapInfo: .byteOrder32Big, shouldCopyData: true, width: w, height: h)
-//            let image = UIImage(rawNSData: nsdata, bitmapInfo: .byteOrder32Big, width: w, height: h)
-//            let image = UIImage(rawRawData: data, bitmapInfo: .byteOrder32Big, width: w, height: h)
-
+            let image = UIImage.originalLutImage()
             let imageView = UIImageView(image: image)
             imageView.tag = 666
             imageView.center = view.frame.size.center
