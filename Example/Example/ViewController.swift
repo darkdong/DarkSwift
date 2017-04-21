@@ -11,15 +11,17 @@ import SpriteKit
 import DarkSwift
 
 class ViewController: UIViewController {
-
-    override func loadView() {
-        let skview = SKView(frame: UIScreen.main.bounds)
-        skview.isMultipleTouchEnabled = false
-//        skview.showsFPS = true
-//        skview.showsNodeCount = true
-        skview.ignoresSiblingOrder = true
-        view = skview
-    }
+    var data: Data!
+    var nsdata: NSData!
+    
+//    override func loadView() {
+//        let skview = SKView(frame: UIScreen.main.bounds)
+//        skview.isMultipleTouchEnabled = false
+////        skview.showsFPS = true
+////        skview.showsNodeCount = true
+//        skview.ignoresSiblingOrder = true
+//        view = skview
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,40 +101,68 @@ class ViewController: UIViewController {
                 scene.addChild(node)
             }
         } else {
-            view.backgroundColor = UIColor.darkGray
+            view.backgroundColor = UIColor.white
             
-            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
-            container.backgroundColor = UIColor.purple
-            view.addSubview(container)
-            let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            let rect = container.frame.bounds.rect(byInsets: insets)
-            let v1 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
-            v1.backgroundColor = UIColor.cyan
-            let v2 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 100))
-            v2.backgroundColor = UIColor.magenta
-            let v3 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-            v3.backgroundColor = UIColor.yellow
+//            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
+//            container.backgroundColor = UIColor.purple
+//            view.addSubview(container)
+//            let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            let rect = container.frame.bounds.rect(byInsets: insets)
+//            let v1 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+//            v1.backgroundColor = UIColor.cyan
+//            let v2 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 100))
+//            v2.backgroundColor = UIColor.magenta
+//            let v3 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+//            v3.backgroundColor = UIColor.yellow
+//            
+//            let views: [UIView] = [v1, v2, v3]
+////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
+////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.top), in: rect)
+//            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.bottom), insets: insets)
+//
+////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.center), in: rect)
+////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.left), in: rect)
+////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.right), in: rect)
+//
+////            let v4: UIView! = v3.clone()
+////            let v5: UIView! = v2.clone()
+////            let v6: UIView! = v1.clone()
+////            let views: [UIView] = [v1, v2, v3, v4, v5, v6]
+////            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 80, height: 80))
+////            container.layoutSubviews(views, alignment: tabAlign, in: rect)
+////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
+//            
+//            for v in views {
+//                container.addSubview(v)
+//            }
             
-            let views: [UIView] = [v1, v2, v3]
-//            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
-//            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.top), in: rect)
-            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.bottom), insets: insets)
-
-//            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.center), in: rect)
-//            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.left), in: rect)
-//            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.right), in: rect)
-
-//            let v4: UIView! = v3.clone()
-//            let v5: UIView! = v2.clone()
-//            let v6: UIView! = v1.clone()
-//            let views: [UIView] = [v1, v2, v3, v4, v5, v6]
-//            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 80, height: 80))
-//            container.layoutSubviews(views, alignment: tabAlign, in: rect)
-//            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
+//            let btn = UIButton(title: "test", target: self, action: #selector(test))
+            let btn = UIButton()
+            btn.frame.size = CGSize(width: 100, height: 40)
+            btn.setTitle("test", for: .normal)
+            btn.backgroundColor = UIColor.blue
+            btn.addTarget(self, action: #selector(test), for: .touchUpInside)
+            view.addSubview(btn)
             
-            for v in views {
-                container.addSubview(v)
+            let w = 16, h = 16
+            let pixel = Data(bytes: [255, 255, 0, 0]) // R G B A
+            
+            var data = Data()
+            for _ in 0..<w*h {
+                data.append(pixel)
             }
+            print("data count \(data.count)")
+            let nsdata = NSData(data: data)
+//            data.append("\x12", count: 4)
+//            print(data.hexString())
+            let image = UIImage(rawData: nsdata, bitmapInfo: .byteOrder32Big, shouldCopyData: true, width: w, height: h)
+//            let image = UIImage(rawNSData: nsdata, bitmapInfo: .byteOrder32Big, width: w, height: h)
+//            let image = UIImage(rawRawData: data, bitmapInfo: .byteOrder32Big, width: w, height: h)
+
+            let imageView = UIImageView(image: image)
+            imageView.tag = 666
+            imageView.center = view.frame.size.center
+            view.addSubview(imageView)
         }
     }
 
@@ -141,6 +171,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func test() {
+        print("test")
+        view.viewWithTag(666)?.removeFromSuperview()
+    }
+    
+    
 }
 
