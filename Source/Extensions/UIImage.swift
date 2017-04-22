@@ -54,25 +54,6 @@ public extension UIImage {
         }
     }
     
-    static func standardLutImage(cubeEdgeLength: Int = 16) -> UIImage {
-        let len = cubeEdgeLength
-        var data = Data(capacity: len * len * len)
-        
-        for g in 0..<len {
-            for b in 0..<len {
-                for r in 0..<len {
-                    let rValue = UInt8(r * len + r)
-                    let gValue = UInt8(g * len + g)
-                    let bValue = UInt8(b * len + b)
-//                    let pixel = Data(bytes: [rValue, gValue, bValue, 0]) // RGBA big endian
-                    let pixel = Data(bytes: [0, bValue, gValue, rValue]) // RGBA little endian
-                    data.append(pixel)
-                }
-            }
-        }
-        return UIImage(pixelsData: data as NSData, bitmapInfo: .byteOrder32Little, width: len * len, height: len)!
-    }
-    
     func resizableImage(topInset: CGFloat? = nil, leftInset: CGFloat? = nil) -> UIImage {
         let top: CGFloat
         if let topInset = topInset {

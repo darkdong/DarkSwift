@@ -144,11 +144,11 @@ class ViewController: UIViewController {
             btn.addTarget(self, action: #selector(test), for: .touchUpInside)
             view.addSubview(btn)
             
-            let image = UIImage.standardLutImage()
-            let imageView = UIImageView(image: image)
-            imageView.tag = 666
-            imageView.center = view.frame.size.center
-            view.addSubview(imageView)
+//            let image = UIImage.standardLutImage()
+//            let imageView = UIImageView(image: image)
+//            imageView.tag = 666
+//            imageView.center = view.frame.size.center
+//            view.addSubview(imageView)
         }
     }
 
