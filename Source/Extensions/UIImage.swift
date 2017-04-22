@@ -34,16 +34,17 @@ public extension UIImage {
         self.init(cgImage: image.cgImage!)
     }
     
-    convenience init?(rawData: NSData, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
+    convenience init?(pixelsData: NSData, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
         let numberOfComponents = 4
-        let releaseDataCallback: CGDataProviderReleaseDataCallback = { (dataOpaquePointer, _, _) in
-            //release rawData to prevent leak
-            print("dataProvider is deallocated, release rawData")
-            Unmanaged<NSData>.fromOpaque(UnsafeRawPointer(dataOpaquePointer!)).release()
+        let releaseDataCallback: CGDataProviderReleaseDataCallback = { (pixelsDataPointer, _, _) in
+            //release underlying data to prevent memory leak
+            print("CGDataProvider is deallocated, we can release pixelsData now")
+            Unmanaged<NSData>.fromOpaque(UnsafeRawPointer(pixelsDataPointer!)).release()
         }
-        //dataProvider doesn't retain rawData, so it may be dealloced while this image is using
-        //we must retain rawData until dataProvider is released
-        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(rawData).toOpaque(), data: rawData.bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
+        // CGDataProvider just "access" underlying data and doesn't retain it
+        // Underlying data may be dealloced while this image is using
+        // We must retain underlying data until CGDataProvider is released
+        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(pixelsData).toOpaque(), data: pixelsData.bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
         let bitsPerComponent = 8
         
         if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
@@ -53,8 +54,8 @@ public extension UIImage {
         }
     }
     
-    static func originalLutImage(cubeLength: Int = 16) -> UIImage {
-        let len = cubeLength
+    static func standardLutImage(cubeEdgeLength: Int = 16) -> UIImage {
+        let len = cubeEdgeLength
         var data = Data(capacity: len * len * len)
         
         for g in 0..<len {
@@ -69,7 +70,7 @@ public extension UIImage {
                 }
             }
         }
-        return UIImage(rawData: data as NSData, bitmapInfo: .byteOrder32Little, width: len * len, height: len)!
+        return UIImage(pixelsData: data as NSData, bitmapInfo: .byteOrder32Little, width: len * len, height: len)!
     }
     
     func resizableImage(topInset: CGFloat? = nil, leftInset: CGFloat? = nil) -> UIImage {
