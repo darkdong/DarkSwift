@@ -68,7 +68,14 @@ extension UIView: Layoutable {
         return nil
     }
     
-    public func clone() -> Any {
-        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as Any
+    func capturedImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
     }
+//    public func clone() -> Any {
+//        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as Any
+//    }
 }

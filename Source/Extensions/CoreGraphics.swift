@@ -9,12 +9,35 @@
 import CoreGraphics
 
 public extension CGPoint {
+    static func distance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
+        return sqrt(distance2(p1, p2))
+    }
+    
+    static func distance2(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {
+        let dx = p2.x - p1.x
+        let dy = p2.y - p1.y
+        return dx * dx + dy * dy
+    }
+    
     static func + (point1: CGPoint, point2: CGPoint) -> CGPoint {
         return CGPoint(x: point1.x + point2.x, y: point1.y + point2.y)
     }
     
+    static func - (point1: CGPoint, point2: CGPoint) -> CGPoint {
+        return CGPoint(x: point1.x - point2.x, y: point1.y - point2.y)
+    }
+    
     static func * (point: CGPoint, scale: CGFloat) -> CGPoint {
-        return CGPoint(x: point.x * scale, y: point.y * scale)
+        let t = CGAffineTransform(scaleX: scale, y: scale)
+        return point.applying(t)
+    }
+    
+    static func center(point1: CGPoint, point2: CGPoint) -> CGPoint {
+        return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
+    }
+    
+    func flipped(by height: CGFloat) -> CGPoint {
+        return CGPoint(x: x, y: height - y)
     }
 }
 
@@ -24,7 +47,8 @@ public extension CGSize {
     }
     
     static func * (size: CGSize, scale: CGFloat) -> CGSize {
-        return CGSize(width: size.width * scale, height: size.height * scale)
+        let t = CGAffineTransform(scaleX: scale, y: scale)
+        return size.applying(t)
     }
     
     var center: CGPoint {
@@ -33,6 +57,11 @@ public extension CGSize {
 }
 
 public extension CGRect {
+    static func * (rect: CGRect, scale: CGFloat) -> CGRect {
+        let t = CGAffineTransform(scaleX: scale, y: scale)
+        return rect.applying(t)
+    }
+    
     init(center: CGPoint, size: CGSize) {
         self = CGRect(origin: center, size: CGSize.zero).insetBy(dx: -size.width / 2, dy: -size.height / 2)
     }

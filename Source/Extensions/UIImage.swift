@@ -75,7 +75,7 @@ public extension UIImage {
         return resizableImage(withCapInsets: insets)
     }
     
-    func imageByBlending(image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
+    func blending(by image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
         let pos = position ?? CGPoint(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2)
         UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale)
         draw(at: CGPoint.zero)
@@ -83,5 +83,15 @@ public extension UIImage {
         let blendedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return blendedImage
+    }
+    
+    func cropping(to rect: CGRect) -> UIImage? {
+        let t = CGAffineTransform(scaleX: scale, y: scale)
+        let pixelRect = rect.applying(t)
+        if let cgImage = cgImage?.cropping(to: pixelRect) {
+            return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
+        } else {
+            return nil
+        }
     }
 }
