@@ -8,8 +8,8 @@
 
 public struct Math {
     //find bit 1 from right to left
-    // bitPositions(13) -> [1, 2, 4]
-    public func bitmaskPositions(_ bitsRepresentation: UInt) -> [Int] {
+    // bitPositions(13) -> 0x00001101 -> [1, 3, 4] 
+    public static func bitmaskPositions(_ bitsRepresentation: UInt) -> [Int] {
         if bitsRepresentation != 0 {
             var bits = bitsRepresentation
             var positions: [Int] = []

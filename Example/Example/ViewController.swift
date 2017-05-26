@@ -27,6 +27,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let a = Math.bitmaskPositions(13)
+        print("aaaa", a)
+        
         if let skview = view as? SKView {
             let scene = SKScene(size: skview.frame.size)
             scene.backgroundColor = UIColor.darkGray
