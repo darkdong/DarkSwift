@@ -11,8 +11,8 @@ import ImageIO
 import CoreImage
 
 public extension UIImage {
-    convenience init?(contentsOfFilename name: String, inDirectory directoryURL: URL? = Bundle.main.resourceURL) {
-        if let imageURL = directoryURL?.appendingPathComponent(name) {
+    convenience init?(contentsOfFilename name: String, bundle: URL? = Bundle.main.resourceURL) {
+        if let imageURL = bundle?.appendingPathComponent(name) {
             //demo@2x~ipad.png
             //init contentsOfFile will look for image name with proper modifier such as: @2x, @3x, ~ipad, ~iphone, etc
             //system use "png" in case insensitive as default extension, if extension does not exists
