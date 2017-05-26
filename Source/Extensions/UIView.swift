@@ -8,6 +8,61 @@
 
 import UIKit
 
+public extension UIView {
+    var centerX: CGFloat {
+        get {
+            return center.x
+        }
+        set {
+            center = CGPoint(x: newValue, y: center.y)
+        }
+    }
+    
+    var centerY: CGFloat {
+        get {
+            return center.y
+        }
+        set {
+            center = CGPoint(x: center.x, y: newValue)
+        }
+    }
+    
+    func setHeightFromBottom(_ newHeight: CGFloat) {
+        frame.origin.y += frame.height - newHeight
+        frame.size.height = newHeight
+    }
+    
+    var viewController: UIViewController? {
+        var v: UIView? = self
+        while v != nil {
+            if let vc = v?.next as? UIViewController {
+                return vc
+            } else {
+                v = v?.superview
+            }
+        }
+        return nil
+    }
+    
+    func capturedImage() -> UIImage? {
+        if let context = UIGraphicsGetCurrentContext() {
+            UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
+            layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        } else {
+            return nil
+        }
+    }
+    
+    func clips(to path: UIBezierPath) {
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        layer.mask = maskLayer
+    }
+}
+
 extension UIView: Layoutable {
     public var coordinateSystemOrigin: CoordinateSystemOrigin {
         return .upperLeft
@@ -32,60 +87,4 @@ extension UIView: Layoutable {
         let rect = bounds.rect(byInsets: insets)
         UIView.layoutViews(views, alignment: alignment, in: rect)
     }
-    
-    public var centerX: CGFloat {
-        get {
-            return center.x
-        }
-        set {
-            center = CGPoint(x: newValue, y: center.y)
-        }
-    }
-    
-    public var centerY: CGFloat {
-        get {
-            return center.y
-        }
-        set {
-            center = CGPoint(x: center.x, y: newValue)
-        }
-    }
-
-    public func setHeightFromBottom(_ newHeight: CGFloat) {
-        frame.origin.y += frame.height - newHeight
-        frame.size.height = newHeight
-    }
-    
-    public var viewController: UIViewController? {
-        var v: UIView? = self
-        while v != nil {
-            if let vc = v?.next as? UIViewController {
-                return vc
-            } else {
-                v = v?.superview
-            }
-        }
-        return nil
-    }
-    
-    func capturedImage() -> UIImage? {
-        if let context = UIGraphicsGetCurrentContext() {
-            UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
-            layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
-        } else {
-            return nil
-        }
-    }
-        
-    func clips(to path: UIBezierPath) {
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        self.layer.mask = maskLayer
-    }
-//    public func clone() -> Any {
-//        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as Any
-//    }
 }

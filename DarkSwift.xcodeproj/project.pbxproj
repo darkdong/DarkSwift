@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42369F561ED81A5E001069D8 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42369F551ED81A5E001069D8 /* NSObject.swift */; };
 		423FC4B61E908CEF009E1008 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B51E908CEF009E1008 /* Layout.swift */; };
 		423FC4B81E908D60009E1008 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B71E908D60009E1008 /* UIView.swift */; };
 		4289CC001E9211250026DE71 /* SKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4289CBFF1E9211250026DE71 /* SKNode.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42369F551ED81A5E001069D8 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		423FC4B51E908CEF009E1008 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		423FC4B71E908D60009E1008 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4289CBFF1E9211250026DE71 /* SKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNode.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				423FC4B71E908D60009E1008 /* UIView.swift */,
 				4289CBFF1E9211250026DE71 /* SKNode.swift */,
+				42369F551ED81A5E001069D8 /* NSObject.swift */,
 				42CE79F01E8DF44A00834C18 /* CoreGraphics.swift */,
 				42CE79F11E8DF44A00834C18 /* Data.swift */,
 				42CE79F21E8DF44A00834C18 /* String.swift */,
@@ -341,6 +344,7 @@
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
 				42CE7A021E8DFED300834C18 /* Timer.swift in Sources */,
 				4299B24C1EA5ED6B00335CB9 /* Collection.swift in Sources */,
+				42369F561ED81A5E001069D8 /* NSObject.swift in Sources */,
 				42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */,
 				4299B24A1EA5E70900335CB9 /* UIImage.swift in Sources */,
 				42DB4BD71E9932DE00243EC4 /* URL.swift in Sources */,
