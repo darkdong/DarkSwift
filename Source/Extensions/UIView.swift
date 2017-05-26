@@ -45,8 +45,8 @@ public extension UIView {
     }
     
     func capturedImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
         if let context = UIGraphicsGetCurrentContext() {
-            UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
             layer.render(in: context)
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
