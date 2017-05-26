@@ -68,12 +68,22 @@ extension UIView: Layoutable {
         return nil
     }
     
-    func capturedImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
+    func capturedImage() -> UIImage? {
+        if let context = UIGraphicsGetCurrentContext() {
+            UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
+            layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        } else {
+            return nil
+        }
+    }
+        
+    func clips(to path: UIBezierPath) {
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        self.layer.mask = maskLayer
     }
 //    public func clone() -> Any {
 //        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as Any
