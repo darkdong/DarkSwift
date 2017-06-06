@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension MutableCollection where Indices.Iterator.Element == Index {
+public extension MutableCollection where Indices.Iterator.Element == Index {
     /// Shuffles the contents of this collection.
     mutating func shuffle() {
         let c = count
@@ -23,7 +23,7 @@ extension MutableCollection where Indices.Iterator.Element == Index {
     }
 }
 
-extension Sequence {
+public extension Sequence {
     /// Returns an array with the contents of this sequence, shuffled.
     func shuffled() -> [Iterator.Element] {
         var result = Array(self)
@@ -32,7 +32,7 @@ extension Sequence {
     }
 }
 
-extension Array {
+public extension Array {
     var randomIndex: Int {
         return Int(arc4random_uniform(UInt32(count)))
     }
@@ -52,12 +52,12 @@ extension Array {
         return results
     }
     
-    func loopIndex(before i: Int) -> Int {
+    func loopedIndex(before i: Int) -> Int {
         let prevIndex = index(before: i)
         return prevIndex < startIndex ? endIndex - 1 : prevIndex
     }
     
-    func loopIndex(after i: Int) -> Int {
+    func loopedIndex(after i: Int) -> Int {
         let nextIndex = index(after: i)
         return nextIndex >= endIndex ? startIndex : nextIndex
     }
@@ -103,7 +103,7 @@ extension Array {
     }
 }
 
-extension Array where Element: Equatable, Element: Comparable {
+public extension Array where Element: Equatable, Element: Comparable {
     func repeatablePermutation(_ length: Int? = nil, processor: (([Element]) -> Void)? = nil) -> [[Element]] {
         var allPermutations: [[Element]] = []
         func _repeatablePermutation(_ lengthToGo: Int, remainder: inout [Element], aPermutation: inout [Element]) {
@@ -149,7 +149,7 @@ extension Array where Element: Equatable, Element: Comparable {
     }
 }
 
-extension Set {
+public extension Set {
     //if processor is presented, return empty combinations
     //if processor is not presented, return all combinations
     func combination(_ length: Int? = nil, processor: ((Set<Element>) -> Void)? = nil) -> Set<Set<Element>> {
