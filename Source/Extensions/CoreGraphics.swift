@@ -75,6 +75,33 @@ public extension CGRect {
         }
     }
     
+    var topRight: CGPoint {
+        get {
+            return CGPoint(x: maxX, y: minY)
+        }
+        set {
+            origin = CGPoint(x: newValue.x - width, y: newValue.y)
+        }
+    }
+    
+    var bottomLeft: CGPoint {
+        get {
+            return CGPoint(x: minX, y: maxY)
+        }
+        set {
+            origin = CGPoint(x: newValue.x, y: newValue.y - height)
+        }
+    }
+    
+    var bottomRight: CGPoint {
+        get {
+            return CGPoint(x: maxX, y: maxY)
+        }
+        set {
+            origin = CGPoint(x: newValue.x - width, y: newValue.y - height)
+        }
+    }
+    
     var bounds: CGRect {
         return CGRect(origin: CGPoint.zero, size: size)
     }
