@@ -27,9 +27,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let a = Math.bitmaskPositions(13)
-        print("aaaa", a)
-        
         if let skview = view as? SKView {
             let scene = SKScene(size: skview.frame.size)
             scene.backgroundColor = UIColor.darkGray
@@ -104,7 +101,7 @@ class ViewController: UIViewController {
                 scene.addChild(node)
             }
         } else {
-            view.backgroundColor = UIColor.white
+            view.backgroundColor = UIColor.black
             
 //            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
 //            container.backgroundColor = UIColor.purple
@@ -140,13 +137,16 @@ class ViewController: UIViewController {
 //            }
             
 //            let btn = UIButton(title: "test", target: self, action: #selector(test))
-            let btn = UIButton()
-            btn.frame.size = CGSize(width: 100, height: 40)
-            btn.setTitle("test", for: .normal)
-            btn.backgroundColor = UIColor.blue
-            btn.addTarget(self, action: #selector(test), for: .touchUpInside)
+            let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 140, height: 100)))
+            btn.backgroundColor = UIColor.purple
+            btn.setImage(UIImage(named: "Alipay"), for: .normal)
+            btn.setTitle("哈哈哈", for: .normal)
+//            btn.sizeToFit()
+            btn.layoutContentVertically(spacing: 10)
+//            btn.layoutContentLeftmost(leading: 10)
+//            btn.layoutContentRightmost(trailing: 10)
+
             view.addSubview(btn)
-            
 //            let image = UIImage.standardLutImage()
 //            let imageView = UIImageView(image: image)
 //            imageView.tag = 666
