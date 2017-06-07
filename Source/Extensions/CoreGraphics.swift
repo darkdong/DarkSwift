@@ -19,12 +19,12 @@ public extension CGPoint {
         return dx * dx + dy * dy
     }
     
-    static func + (point1: CGPoint, point2: CGPoint) -> CGPoint {
-        return CGPoint(x: point1.x + point2.x, y: point1.y + point2.y)
+    static func + (left: CGPoint, right: CGPoint) -> CGPoint {
+        return CGPoint(x: left.x + right.x, y: left.y + right.y)
     }
     
-    static func - (point1: CGPoint, point2: CGPoint) -> CGPoint {
-        return CGPoint(x: point1.x - point2.x, y: point1.y - point2.y)
+    static func - (left: CGPoint, right: CGPoint) -> CGPoint {
+        return CGPoint(x: left.x - right.x, y: left.y - right.y)
     }
     
     static func * (point: CGPoint, scale: CGFloat) -> CGPoint {
@@ -42,8 +42,8 @@ public extension CGPoint {
 }
 
 public extension CGSize {
-    static func + (size1: CGSize, size2: CGSize) -> CGSize {
-        return CGSize(width: size1.width + size2.width, height: size1.height + size2.height)
+    static func + (left: CGSize, right: CGSize) -> CGSize {
+        return CGSize(width: left.width + right.width, height: left.height + right.height)
     }
     
     static func * (size: CGSize, scale: CGFloat) -> CGSize {
@@ -108,5 +108,15 @@ public extension CGRect {
     
     func rect(byInsets insets: UIEdgeInsets) -> CGRect {
         return CGRect(x: origin.x + insets.left, y: origin.y + insets.top, width: width - insets.left - insets.right, height: height - insets.top - insets.bottom)
+    }
+}
+
+public extension UIEdgeInsets {
+    static func + (left: UIEdgeInsets, right: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets(top: left.top + right.top, left: left.left + right.left, bottom: left.bottom + right.bottom, right: left.right + right.right)
+    }
+    
+    static func += (left: inout UIEdgeInsets, right: UIEdgeInsets) {
+        left = left + right
     }
 }

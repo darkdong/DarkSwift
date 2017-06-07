@@ -141,13 +141,20 @@ class ViewController: UIViewController {
             btn.backgroundColor = UIColor.purple
             btn.setImage(UIImage(named: "Alipay"), for: .normal)
             btn.setTitle("哈哈哈", for: .normal)
-//            btn.setImageTitleSpacing(60)
-            btn.sizeToFit()
+            
+            let insets = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 10)
+            btn.setHorizontalSpacing(10)
+//            btn.setVerticalSpacing(10)
+
+//            btn.contentEdgeInsets += insets
+            
+            //            btn.setImageTitleSpacing(10)
 //            btn.layoutContentVertically(spacing: 10)
-//            btn.layoutContentLeftmost(leading: 10)
+//            btn.layoutContentLeftmost(leading: 0)
 //            btn.layoutContentRightmost(trailing: 10)
 //            let dw: CGFloat = 20
 //            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -dw, bottom: 0, right: -dw)
+//            btn.sizeToFit()
 
             view.addSubview(btn)
 //            let image = UIImage.standardLutImage()
