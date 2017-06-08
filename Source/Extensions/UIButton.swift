@@ -12,12 +12,12 @@ public extension UIButton {
     //titleEdgeInsets, imageEdgeInsets: to move title or image, make value and -value for the two opposite edges
     //contentEdgeInsets: positive value enlarge button, negative value shrink button
     
-    func setHorizontalSpacing(_ spacing: CGFloat) {
+    func setContentHorizontally(spacing: CGFloat) {
         titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
     }
     
-    func setVerticalSpacing(_ spacing: CGFloat = 0) {
+    func setContentVertically(spacing: CGFloat = 0) {
         if let imageSize = imageView?.frame.size, let textSize = titleLabel?.frame.size {
             let imageDx = textSize.width / 2
             let imageDy = (textSize.height + spacing) / 2
@@ -33,26 +33,33 @@ public extension UIButton {
         }
     }
     
-    private var contentWidth: CGFloat {
-        var width: CGFloat = 0
-        
-        if let imageWidth = imageView?.frame.width {
-            width += imageWidth
-        }
-        if let textWidth = titleLabel?.frame.width {
-            width += textWidth
-        }
-        return width
-    }
-    
-    func contentEdgeInsetsToLeftmost() -> UIEdgeInsets {
-        let contentDx = (frame.width - contentWidth) / 2
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: contentDx)
-    }
-    
-    
-    func contentEdgeInsetsToRightmost() -> UIEdgeInsets {
-        let contentDx = (frame.width - contentWidth) / 2
-        return UIEdgeInsets(top: 0, left: contentDx, bottom: 0, right: 0)
-    }
+//    func setContentLeftmost() {
+//        contentEdgeInsets = contentEdgeInsetsForLeftmost()
+//    }
+//    
+//    func setContentRightmost() {
+//        contentEdgeInsets = contentEdgeInsetsForRightmost()
+//    }
+//    
+//    private var contentWidth: CGFloat {
+//        var width: CGFloat = 0
+//        
+//        if let imageWidth = imageView?.frame.width {
+//            width += imageWidth
+//        }
+//        if let textWidth = titleLabel?.frame.width {
+//            width += textWidth
+//        }
+//        return width
+//    }
+//    
+//    func contentEdgeInsetsForLeftmost() -> UIEdgeInsets {
+//        let contentDx = frame.width - contentWidth
+//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: contentDx)
+//    }
+//    
+//    func contentEdgeInsetsForRightmost() -> UIEdgeInsets {
+//        let contentDx = frame.width - contentWidth
+//        return UIEdgeInsets(top: 0, left: contentDx, bottom: 0, right: 0)
+//    }
 }
