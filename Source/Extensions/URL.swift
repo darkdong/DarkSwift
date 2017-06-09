@@ -46,7 +46,7 @@ public extension URL {
         }
     }
     
-    func checkToCreateDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
+    func createDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
         let manager = FileManager.default
         guard !manager.fileExists(atPath: path) else {
             return
@@ -62,7 +62,7 @@ public extension URL {
         return deletingPathExtension().appendingPathExtension(pathExtension)
     }
     
-    func clearContents(_ options: FileManager.DirectoryEnumerationOptions = .skipsHiddenFiles) {
+    func removeItems(_ options: FileManager.DirectoryEnumerationOptions = .skipsHiddenFiles) {
         let manager = FileManager.default
         var isDirectory: ObjCBool = false
         guard manager.fileExists(atPath: path, isDirectory: &isDirectory) && isDirectory.boolValue else {
