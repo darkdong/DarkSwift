@@ -94,4 +94,74 @@ public extension UIImage {
             return nil
         }
     }
+    
+    func resize(to newSize: CGSize, quality: CGInterpolationQuality = .default) -> UIImage {
+        var drawTransposed = false
+        switch imageOrientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            drawTransposed = true
+        default:
+            break
+        }
+        let transform = transformForSize(newSize)
+        return resizedImage(size: newSize, transform: transform, drawTransposed: drawTransposed, quality: quality)
+    }
+    
+    //MARK:- private
+    private func transformForSize(_ size: CGSize) -> CGAffineTransform {
+        var transform = CGAffineTransform.identity
+        
+        switch imageOrientation {
+        case .down, // EXIF = 3
+        .downMirrored: // EXIF = 4
+            transform = transform.translatedBy(x: size.width, y: size.height)
+            transform = transform.rotated(by: .pi)
+        case .left, // EXIF = 6
+        .leftMirrored: // EXIF = 5
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.rotated(by: .pi / 2)
+        case .right, // EXIF = 8
+        .rightMirrored: // EXIF = 7
+            transform = transform.translatedBy(x: 0, y: size.height)
+            transform = transform.rotated(by: .pi / -2)
+        default:
+            break
+        }
+        
+        switch imageOrientation {
+        case .upMirrored, // EXIF = 2
+        .downMirrored: // EXIF = 4
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, // EXIF = 5
+        .rightMirrored: // EXIF = 7
+            transform = transform.translatedBy(x: size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        default:
+            break
+        }
+        
+        return transform
+    }
+    
+    private func resizedImage(size: CGSize, transform: CGAffineTransform, drawTransposed: Bool, quality: CGInterpolationQuality = CGInterpolationQuality.default) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width * scale, height: size.height * scale).integral
+        let transposedRect = CGRect(x: 0, y: 0, width: rect.height, height: rect.width)
+        
+        let bitmapInfo = CGBitmapInfo(rawValue: CGBitmapInfo().rawValue | CGImageAlphaInfo.premultipliedLast.rawValue)
+        let bitmap: CGContext = CGContext(data: nil, width: Int(rect.width), height: Int(rect.height), bitsPerComponent: 8, bytesPerRow: Int(rect.width) * 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo.rawValue)!
+        
+        bitmap.concatenate(transform)
+        
+        // Set the quality level to use when rescaling
+        bitmap.interpolationQuality = quality
+        
+        // Draw into the context; this scales the image
+        bitmap.draw(cgImage!, in: drawTransposed ? transposedRect : rect)
+        
+        // Get the resized image from the context and a UIImage
+        let resizedCGImage = bitmap.makeImage()
+        
+        return UIImage(cgImage: resizedCGImage!, scale: scale, orientation: .up)
+    }
 }
