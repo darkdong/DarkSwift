@@ -51,6 +51,10 @@ public extension CGSize {
         return size.applying(t)
     }
     
+    static func / (size: CGSize, scale: CGFloat) -> CGSize {
+        return size * (1 / scale)
+    }
+    
     var center: CGPoint {
         return CGPoint(x: width / 2, y: height / 2)
     }
