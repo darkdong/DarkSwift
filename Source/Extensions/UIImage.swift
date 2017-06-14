@@ -157,7 +157,13 @@ public extension UIImage {
         bitmap.interpolationQuality = quality
         
         // Draw into the context; this scales the image
-        bitmap.draw(cgImage!, in: drawTransposed ? transposedRect : rect)
+        if let cgImage = cgImage {
+            bitmap.draw(cgImage, in: drawTransposed ? transposedRect : rect)
+        } else if let ciImage = ciImage {
+            let ciContext = CIContext(options: nil)
+            let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)
+            bitmap.draw(cgImage!, in: drawTransposed ? transposedRect : rect)
+        }
         
         // Get the resized image from the context and a UIImage
         let resizedCGImage = bitmap.makeImage()
