@@ -8,8 +8,19 @@
 
 import Foundation
 
+private var associatedObjectKey = 0
+
 public extension NSObject {
     func clone() -> AnyObject {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as AnyObject
+    }
+    
+    var associatedObject: Any! {
+        get {
+            return objc_getAssociatedObject(self, &associatedObjectKey)
+        }
+        set {
+            objc_setAssociatedObject(self, &associatedObjectKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
     }
 }

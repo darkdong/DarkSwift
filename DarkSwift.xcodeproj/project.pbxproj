@@ -10,6 +10,7 @@
 		42369F561ED81A5E001069D8 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42369F551ED81A5E001069D8 /* NSObject.swift */; };
 		423FC4B61E908CEF009E1008 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B51E908CEF009E1008 /* Layout.swift */; };
 		423FC4B81E908D60009E1008 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B71E908D60009E1008 /* UIView.swift */; };
+		428385B11EF26604003D938F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428385B01EF26604003D938F /* UINavigationController.swift */; };
 		4289CC001E9211250026DE71 /* SKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4289CBFF1E9211250026DE71 /* SKNode.swift */; };
 		4299B24A1EA5E70900335CB9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299B2491EA5E70900335CB9 /* UIImage.swift */; };
 		4299B24C1EA5ED6B00335CB9 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4299B24B1EA5ED6B00335CB9 /* Collection.swift */; };
@@ -51,6 +52,7 @@
 		42369F551ED81A5E001069D8 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		423FC4B51E908CEF009E1008 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		423FC4B71E908D60009E1008 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		428385B01EF26604003D938F /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		4289CBFF1E9211250026DE71 /* SKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNode.swift; sourceTree = "<group>"; };
 		4299B2491EA5E70900335CB9 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		4299B24B1EA5ED6B00335CB9 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				423FC4B71E908D60009E1008 /* UIView.swift */,
 				4289CBFF1E9211250026DE71 /* SKNode.swift */,
 				42369F551ED81A5E001069D8 /* NSObject.swift */,
+				428385B01EF26604003D938F /* UINavigationController.swift */,
 				42CE79F01E8DF44A00834C18 /* CoreGraphics.swift */,
 				42CE79F11E8DF44A00834C18 /* Data.swift */,
 				42CE79F21E8DF44A00834C18 /* String.swift */,
@@ -353,6 +356,7 @@
 				42CE79F61E8DF44A00834C18 /* Data.swift in Sources */,
 				423FC4B61E908CEF009E1008 /* Layout.swift in Sources */,
 				42CE79F81E8DF44A00834C18 /* UIButton.swift in Sources */,
+				428385B11EF26604003D938F /* UINavigationController.swift in Sources */,
 				42CE7A011E8DFED300834C18 /* Logger.swift in Sources */,
 				42CE79F91E8DF44A00834C18 /* UIColor.swift in Sources */,
 			);
