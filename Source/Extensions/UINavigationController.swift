@@ -11,15 +11,19 @@ import UIKit
 public extension UINavigationController {
     func save() {
         associatedObject = [
-            isNavigationBarHidden,
-            isToolbarHidden
+            NSStringFromSelector(#selector(getter: isNavigationBarHidden)): isNavigationBarHidden,
+            NSStringFromSelector(#selector(getter: isToolbarHidden)): isToolbarHidden,
         ]
     }
     
     func restore() {
-        if let oldValues = associatedObject as? [Any] {
-            isNavigationBarHidden = oldValues[0] as! Bool
-            isToolbarHidden = oldValues[1] as! Bool
+        if let dic = associatedObject as? [String: Any] {
+            if let value = dic[NSStringFromSelector(#selector(getter: isNavigationBarHidden))] as? Bool {
+                isNavigationBarHidden = value
+            }
+            if let value = dic[NSStringFromSelector(#selector(getter: isToolbarHidden))] as? Bool {
+                isToolbarHidden = value
+            }
         }
     }
 }
