@@ -137,14 +137,16 @@ class ViewController: UIViewController {
 //            }
             
 //            let btn = UIButton(title: "test", target: self, action: #selector(test))
-            let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 120, height: 100)))
+            let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 120, height: 120)))
             btn.backgroundColor = UIColor.purple
             btn.setImage(UIImage(named: "Alipay"), for: .normal)
             btn.setTitle("哈哈哈", for: .normal)
+            btn.contentHorizontalAlignment = .right
+            btn.contentVerticalAlignment = .bottom
             
 //            let insets = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 10)
 //            btn.setContentHorizontally(spacing: 10)
-//            btn.setContentVertically(spacing: 10)
+            btn.setContentVertically(spacing: 10)
 //            btn.setContentLeftmost()
 //            btn.setContentRightmost()
             
@@ -156,7 +158,7 @@ class ViewController: UIViewController {
 //            btn.layoutContentRightmost(trailing: 10)
 //            let dw: CGFloat = 20
 //            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -dw, bottom: 0, right: -dw)
-            btn.sizeToFit()
+//            btn.sizeToFit()
 
             view.addSubview(btn)
 //            let image = UIImage.standardLutImage()
