@@ -110,8 +110,8 @@ public extension CGRect {
         return CGRect(origin: CGPoint.zero, size: size)
     }
     
-    func rect(byInsets insets: UIEdgeInsets) -> CGRect {
-        return CGRect(x: origin.x + insets.left, y: origin.y + insets.top, width: width - insets.left - insets.right, height: height - insets.top - insets.bottom)
+    func insetBy(edgeInsets: UIEdgeInsets) -> CGRect {
+        return CGRect(x: origin.x + edgeInsets.left, y: origin.y + edgeInsets.top, width: width - edgeInsets.left - edgeInsets.right, height: height - edgeInsets.top - edgeInsets.bottom)
     }
 }
 

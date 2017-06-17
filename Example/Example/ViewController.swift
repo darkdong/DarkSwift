@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             print("scene anchor \(scene.anchorPoint) cnode anchor \(cnode.anchorPoint)")
             
             let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            let rect = bgrect.rect(byInsets: insets)
+            let rect = bgrect.insetBy(edgeInsets: insets)
 
             func createSpriteNode(color: UIColor, size: CGSize) -> SKNode {
                 let node = SKSpriteNode(color: color, size: size)
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
 //            scene.layoutChildren(nodes, alignment: tabAlign, in: rect)
 
             let crect = CGRect(center: CGPoint.zero, size: CGSize(width: 320, height: 320))
-            let crect2 = crect.rect(byInsets: insets)
+            let crect2 = crect.insetBy(edgeInsets: insets)
 
             let nodes = [n1, n2, n3]
 //            container.layoutChildren(nodes, alignment: .horizontal(.bottom), insets: insets)

@@ -138,7 +138,7 @@ extension UIView: Layoutable {
     }
     
     public func layoutSubviews(_ views: [UIView], alignment: Alignment, insets: UIEdgeInsets = UIEdgeInsets.zero) {
-        let rect = bounds.rect(byInsets: insets)
+        let rect = bounds.insetBy(edgeInsets: insets)
         UIView.layoutViews(views, alignment: alignment, in: rect)
     }
 }
