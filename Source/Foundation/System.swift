@@ -17,7 +17,7 @@
 //}
 
 public class System: NSObject {
-    static var currentQueueName: String? {
+    public static var currentQueueName: String? {
         let name = __dispatch_queue_get_label(nil)
         return String(cString: name, encoding: .utf8)
     }
