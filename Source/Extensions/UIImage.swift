@@ -54,6 +54,15 @@ public extension UIImage {
         }
     }
     
+    convenience init?(ciImage: CIImage, ciContext: CIContext? = nil) {
+        let context = ciContext ?? CIContext()
+        if let cgImage = context.createCGImage(ciImage, from: ciImage.extent) {
+            self.init(cgImage: cgImage, scale: UIScreen.main.scale, orientation: .up)
+        } else {
+            return nil
+        }
+    }
+    
     func resizableImage(topInset: CGFloat? = nil, leftInset: CGFloat? = nil) -> UIImage {
         let top: CGFloat
         if let topInset = topInset {

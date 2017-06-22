@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-public struct Math {
+public class Math: NSObject {
     //find bit 1 from right to left
     // bitPositions(13) -> 0x00001101 -> [1, 3, 4] 
     public static func bitmaskPositions(_ bitsRepresentation: UInt) -> [Int] {

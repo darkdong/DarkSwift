@@ -46,6 +46,10 @@ public extension CGSize {
         return CGSize(width: left.width + right.width, height: left.height + right.height)
     }
     
+    static func - (left: CGSize, right: CGSize) -> CGSize {
+        return CGSize(width: left.width - right.width, height: left.height - right.height)
+    }
+    
     static func * (size: CGSize, scale: CGFloat) -> CGSize {
         let t = CGAffineTransform(scaleX: scale, y: scale)
         return size.applying(t)

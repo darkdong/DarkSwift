@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct Screen {
+public class Screen: NSObject {
     public struct Height {
         public static let statusBar: CGFloat = 20
         public static let navigationBar: CGFloat = 44
