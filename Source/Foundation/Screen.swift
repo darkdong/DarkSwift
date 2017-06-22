@@ -9,7 +9,7 @@
 import UIKit
 
 public class Screen: NSObject {
-    public struct Height {
+    public class Height {
         public static let statusBar: CGFloat = 20
         public static let navigationBar: CGFloat = 44
         public static let tabBar: CGFloat  = 49
@@ -20,7 +20,7 @@ public class Screen: NSObject {
         }
     }
     
-    public struct DevicePortraitSize {
+    public class DevicePortraitSize {
         public static let phone4 = CGSize(width: 320, height: 480) // @2x:  640 x  960
         public static let phone5 = CGSize(width: 320, height: 568) // @2x:  640 x 1136
         public static let phone6 = CGSize(width: 375, height: 667) // @2x:  750 x 1334
@@ -30,7 +30,7 @@ public class Screen: NSObject {
         public static let padPro = CGSize(width: 1024, height: 1366) // @2x: 2048 x 2732
     }
     
-    public struct DesignPortraitWidth {
+    public class DesignPortraitWidth {
         public static var phone = DevicePortraitSize.phone6.width
         public static var pad = DevicePortraitSize.pad.width
         public static var universal = DevicePortraitSize.pad.width
