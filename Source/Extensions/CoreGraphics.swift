@@ -36,7 +36,7 @@ public extension CGPoint {
         return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
     }
     
-    func flipped(by height: CGFloat) -> CGPoint {
+    func flipped(height: CGFloat) -> CGPoint {
         return CGPoint(x: x, y: height - y)
     }
 }

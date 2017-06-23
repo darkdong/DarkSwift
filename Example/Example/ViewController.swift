@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         
         if let skview = view as? SKView {
             let scene = SKScene(size: skview.frame.size)
-            scene.backgroundColor = UIColor.darkGray
+            scene.backgroundColor = .darkGray
             skview.presentScene(scene)
             
             let cnode = SKNode()
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
                 scene.addChild(node)
             }
         } else {
-            view.backgroundColor = UIColor.black
+            view.backgroundColor = .black
             
 //            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
 //            container.backgroundColor = UIColor.purple
@@ -138,7 +138,7 @@ class ViewController: UIViewController {
             
 //            let btn = UIButton(title: "test", target: self, action: #selector(test))
             let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 120, height: 120)))
-            btn.backgroundColor = UIColor.purple
+            btn.backgroundColor = .purple
             btn.setImage(UIImage(named: "Alipay"), for: .normal)
             btn.setTitle("哈哈哈", for: .normal)
             btn.contentHorizontalAlignment = .right
