@@ -84,7 +84,18 @@ public extension UIImage {
         return resizableImage(withCapInsets: insets)
     }
     
-    func blending(by image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
+    func tinted(by color: UIColor = UIColor(white: 0, alpha: 0.3)) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let rect = CGRect(origin: CGPoint.zero, size: size)
+        draw(in: rect)
+        color.set()
+        UIRectFillUsingBlendMode(rect, .sourceAtop)
+        let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return tintedImage
+    }
+    
+    func blended(by image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
         let pos = position ?? CGPoint(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2)
         UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale)
         draw(at: CGPoint.zero)

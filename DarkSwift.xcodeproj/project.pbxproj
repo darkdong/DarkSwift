@@ -28,6 +28,7 @@
 		42CE7A021E8DFED300834C18 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE7A001E8DFED300834C18 /* Timer.swift */; };
 		42DB4BD71E9932DE00243EC4 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DB4BD61E9932DE00243EC4 /* URL.swift */; };
 		42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DB4BDE1E9C6BBE00243EC4 /* Math.swift */; };
+		42E262271F023135001924AF /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E262261F023135001924AF /* CALayer.swift */; };
 		42F43DC41E926BAE00F30C95 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F43DC31E926BAE00F30C95 /* System.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		42CE7A001E8DFED300834C18 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		42DB4BD61E9932DE00243EC4 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		42DB4BDE1E9C6BBE00243EC4 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		42E262261F023135001924AF /* CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		42F43DC31E926BAE00F30C95 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				423FC4B71E908D60009E1008 /* UIView.swift */,
+				42E262261F023135001924AF /* CALayer.swift */,
 				4289CBFF1E9211250026DE71 /* SKNode.swift */,
 				42369F551ED81A5E001069D8 /* NSObject.swift */,
 				428385B01EF26604003D938F /* UINavigationController.swift */,
@@ -344,6 +347,7 @@
 				4289CC001E9211250026DE71 /* SKNode.swift in Sources */,
 				423FC4B81E908D60009E1008 /* UIView.swift in Sources */,
 				42CE79F71E8DF44A00834C18 /* String.swift in Sources */,
+				42E262271F023135001924AF /* CALayer.swift in Sources */,
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
 				42CE7A021E8DFED300834C18 /* Timer.swift in Sources */,
 				4299B24C1EA5ED6B00335CB9 /* Collection.swift in Sources */,
