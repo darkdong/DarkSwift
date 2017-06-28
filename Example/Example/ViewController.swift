@@ -139,14 +139,32 @@ class ViewController: UIViewController {
 //            let btn = UIButton(title: "test", target: self, action: #selector(test))
             let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 120, height: 120)))
             btn.backgroundColor = .purple
-            btn.setImage(UIImage(named: "Alipay"), for: .normal)
+            btn.setImage(UIImage(named: "fb"), for: .normal)
             btn.setTitle("哈哈哈", for: .normal)
-            btn.contentHorizontalAlignment = .right
-            btn.contentVerticalAlignment = .bottom
+            btn.imageView?.backgroundColor = .green
+            btn.titleLabel?.backgroundColor = .blue
+            
+            btn.align(.horizontalImageText, spacing: nil)
+//            btn.align(.horizontalTextImage, spacing: nil)
+
+            
+            let o2 = CGPoint(x: 100, y: 250)
+            let btn2 = UIButton(frame: CGRect(origin: o2, size: CGSize(width: 120, height: 120)))
+            btn2.backgroundColor = .purple
+            btn2.setImage(UIImage(named: "fb"), for: .normal)
+            btn2.setTitle("哈哈哈", for: .normal)
+            btn2.imageView?.backgroundColor = .green
+            btn2.titleLabel?.backgroundColor = .blue
+            
+//            btn2.align(.horizontalImageText, spacing: nil)
+            btn2.align(.verticalTextImage, spacing: 10)
+            
+//            btn.contentHorizontalAlignment = .right
+//            btn.contentVerticalAlignment = .bottom
             
 //            let insets = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 10)
 //            btn.setContentHorizontally(spacing: 10)
-            btn.setContentVertically(spacing: 10)
+//            btn.setContentVertically(spacing: 10)
 //            btn.setContentLeftmost()
 //            btn.setContentRightmost()
             
@@ -159,8 +177,11 @@ class ViewController: UIViewController {
 //            let dw: CGFloat = 20
 //            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -dw, bottom: 0, right: -dw)
 //            btn.sizeToFit()
-
+//            btn2.sizeToFit()
+            
             view.addSubview(btn)
+            view.addSubview(btn2)
+
 //            let image = UIImage.standardLutImage()
 //            let imageView = UIImageView(image: image)
 //            imageView.tag = 666
