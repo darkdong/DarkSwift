@@ -144,8 +144,8 @@ class ViewController: UIViewController {
             btn.imageView?.backgroundColor = .green
             btn.titleLabel?.backgroundColor = .blue
             
-            btn.align(.horizontalImageText, spacing: nil)
-//            btn.align(.horizontalTextImage, spacing: nil)
+//            btn.align(.horizontalImageText, spacing: nil)
+            btn.align(.horizontalTextImage, spacing: nil)
 
             
             let o2 = CGPoint(x: 100, y: 250)
@@ -157,8 +157,8 @@ class ViewController: UIViewController {
             btn2.titleLabel?.backgroundColor = .blue
             
 //            btn2.align(.horizontalImageText, spacing: nil)
-            btn2.align(.verticalTextImage, spacing: 10)
-            
+            btn2.align(.verticalTextImage, spacing: nil)
+            btn2.contentEdgeInsets += UIEdgeInsetsMake(10, 10, 10, 10)
 //            btn.contentHorizontalAlignment = .right
 //            btn.contentVerticalAlignment = .bottom
             
@@ -177,7 +177,7 @@ class ViewController: UIViewController {
 //            let dw: CGFloat = 20
 //            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -dw, bottom: 0, right: -dw)
 //            btn.sizeToFit()
-//            btn2.sizeToFit()
+            btn2.sizeToFit()
             
             view.addSubview(btn)
             view.addSubview(btn2)

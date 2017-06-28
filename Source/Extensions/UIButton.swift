@@ -15,31 +15,30 @@ public extension UIButton {
         case verticalImageText
         case verticalTextImage
     }
+    //When you want spacing between an image and a title, without causing either to be crushed, you need to set four different insets, two on each of the image and title. That's because you don't want to change the sizes of those elements' frames, but just their positions.
     //titleEdgeInsets, imageEdgeInsets: to move title or image, make value and -value for the two opposite edges
-    //contentEdgeInsets: positive value enlarge button, negative value shrink button
+    //contentEdgeInsets: positive value expand content, negative value shrink content
     
-    private func move(imageDx: CGFloat, titleDx: CGFloat, contentDx: CGFloat) {
-        imageEdgeInsets += UIEdgeInsets(top: 0, left: imageDx, bottom: 0, right: -imageDx)
-        titleEdgeInsets += UIEdgeInsets(top: 0, left: titleDx, bottom: 0, right: -titleDx)
-        contentEdgeInsets += UIEdgeInsets(top: 0, left: contentDx, bottom: 0, right: contentDx)
+    private func moveBy(imageOffset: CGPoint, titleOffset: CGPoint, contentOffset: CGPoint) {
+        func makeOffset(_ offset: CGPoint, on insets: inout UIEdgeInsets, isContent: Bool) {
+            insets += UIEdgeInsets(top: offset.y, left: offset.x, bottom: isContent ? offset.y : -offset.y, right: isContent ? offset.x : -offset.x)
+        }
+        makeOffset(imageOffset, on: &imageEdgeInsets, isContent: false)
+        makeOffset(titleOffset, on: &titleEdgeInsets, isContent: false)
+        makeOffset(contentOffset, on: &contentEdgeInsets, isContent: true)
     }
     
-    private func move(imageDy: CGFloat, titleDy: CGFloat, contentDy: CGFloat) {
-        imageEdgeInsets += UIEdgeInsets(top: imageDy, left: 0, bottom: -imageDy, right: 0)
-        titleEdgeInsets += UIEdgeInsets(top: titleDy, left: 0, bottom: -titleDy, right: 0)
-        contentEdgeInsets += UIEdgeInsets(top: contentDy, left: 0, bottom: contentDy, right: 0)
-    }
-
+    // spacing is nil means max
     func align(_ alignment: Alignment, spacing: CGFloat? = 0) {
         if let imageSize = imageView?.frame.size, let textSize = titleLabel?.frame.size {
-            func offsetX() -> CGFloat {
+            func xspacing() -> CGFloat {
                 if let spacing = spacing {
                     return spacing / 2
                 } else {
                     return (frame.width - imageSize.width - textSize.width) / 2
                 }
             }
-            func offsetY() -> CGFloat {
+            func yspacing() -> CGFloat {
                 if let spacing = spacing {
                     return spacing / 2
                 } else {
@@ -48,97 +47,54 @@ public extension UIButton {
             }
             switch alignment {
             case .horizontalImageText:
-                let dx = offsetX()
-                move(imageDx: -dx, titleDx: dx, contentDx: dx)
+                // 1. calculate horizontal spacing
+                let x = xspacing()
+                
+                // 2. take into acount spacing, image will be more left, title will be more right, expand content on x
+                moveBy(imageOffset: CGPoint(x: -x, y: 0), titleOffset: CGPoint(x: x, y: 0), contentOffset: CGPoint(x: x, y: 0))
             case .horizontalTextImage:
-                let dx = offsetX()
-                //swap image and title
-                move(imageDx: textSize.width, titleDx: -imageSize.width, contentDx: 0)
-                //almost same to horizontalImageText, but in opposite direction
-                move(imageDx: dx, titleDx: -dx, contentDx: dx)
-            case .verticalImageText:
-                //move by x to center image and title
-                let contentDx = (textSize.width/2 + imageSize.width/2) / 2
-                move(imageDx: textSize.width/2, titleDx: -imageSize.width/2, contentDx: -contentDx)
-                //move by y to make spacing = 0
-                let contentDy = min(imageSize.height, textSize.height) / 2
-                move(imageDy: -textSize.height/2, titleDy: imageSize.height/2, contentDy: contentDy)
-                //move by y to spacing
-                let dy = offsetY()
-                move(imageDy: -dy, titleDy: dy, contentDy: dy)
-            case .verticalTextImage:
-                //move by x to center image and title
-                let contentDx = (textSize.width/2 + imageSize.width/2) / 2
-                move(imageDx: textSize.width/2, titleDx: -imageSize.width/2, contentDx: -contentDx)
-                //move by y to make spacing = 0
-                let contentDy = min(imageSize.height, textSize.height) / 2
-                move(imageDy: textSize.height/2, titleDy: -imageSize.height/2, contentDy: contentDy)
-                //move by y to spacing
-                let dy = offsetY()
-                move(imageDy: dy, titleDy: -dy, contentDy: dy)
-            }
-            
-        }
-    }
-    
-    func setContentHorizontally(spacing: CGFloat) {
-        titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
-        contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
-    }
-    
-    func setContentVertically(spacing: CGFloat = 0) {
-        if let imageSize = imageView?.frame.size, let textSize = titleLabel?.frame.size {
-            let imageDx = textSize.width / 2
-            let imageDy = (textSize.height + spacing) / 2
-            imageEdgeInsets = UIEdgeInsets(top: -imageDy, left: imageDx, bottom: imageDy, right: -imageDx)
-            
-            let titleDx = imageSize.width / 2
-            let titleDy = (imageSize.height + spacing) / 2
-            titleEdgeInsets = UIEdgeInsets(top: titleDy, left: -titleDx, bottom: -titleDy, right: titleDx)
+                // 1. swap image and title position, keep content
+                let idx = textSize.width
+                let tdx = -imageSize.width
 
-            let contentDx = (imageSize.width + textSize.width - max(imageSize.width, textSize.width)) / 2
-            let contentDy = (imageSize.height + textSize.height + spacing - max(imageSize.height, textSize.height)) / 2
-            contentEdgeInsets = UIEdgeInsets(top: contentDy, left: -contentDx, bottom: contentDy, right: -contentDx)
+                // 2. calculate horizontal spacing
+                let x = xspacing()
+
+                // 3. take into acount spacing, image will be more right, title will be more left, expand content on x
+                moveBy(imageOffset: CGPoint(x: idx + x, y: 0), titleOffset: CGPoint(x: tdx - x, y: 0), contentOffset: CGPoint(x: x, y: 0))
+            case .verticalImageText:
+                // 1. center image and title (overlapped), shrink content on x
+                let idx = textSize.width / 2
+                let tdx = -imageSize.width / 2
+                let cdx = -(idx-tdx) / 2
+                
+                // 2. make image up and title down to keep spacing = 0, expand content on y
+                let idy = -textSize.height / 2
+                let tdy = imageSize.height / 2
+                let cdy = min(imageSize.height, textSize.height) / 2
+                
+                // 3. calculate vertical spacing
+                let y = yspacing()
+                
+                // 4. take into acount spacing, image will be more up, title will be more down, expand content on y
+                moveBy(imageOffset: CGPoint(x: idx, y: idy - y), titleOffset: CGPoint(x: tdx, y: tdy + y), contentOffset: CGPoint(x: cdx, y: cdy + y))
+            case .verticalTextImage:
+                // 1. center image and title (overlapped), shrink content on x
+                let idx = textSize.width / 2
+                let tdx = -imageSize.width / 2
+                let cdx = -(idx-tdx) / 2
+                
+                // 2. make image down and title up to keep spacing = 0, expand content on y
+                let idy = textSize.height / 2
+                let tdy = -imageSize.height / 2
+                let cdy = min(imageSize.height, textSize.height) / 2
+                
+                // 3. calculate vertical spacing
+                let y = yspacing()
+                
+                // 4. take into acount spacing, image will be more down, title will be more up, expand content on y
+                moveBy(imageOffset: CGPoint(x: idx, y: idy + y), titleOffset: CGPoint(x: tdx, y: tdy - y), contentOffset: CGPoint(x: cdx, y: cdy + y))
+            }
         }
     }
-    
-    func setContentVerticalEnds() {
-        if let imageSize = imageView?.frame.size, let textSize = titleLabel?.frame.size {
-            contentHorizontalAlignment = .left
-            contentVerticalAlignment = .top
-            imageEdgeInsets = UIEdgeInsetsMake(0, frame.width/2 - imageSize.width/2, 0, 0)
-            let dx = frame.width/2 - textSize.width/2 - imageSize.width
-            titleEdgeInsets = UIEdgeInsetsMake(frame.height - textSize.height, dx, 0, -dx)
-        }
-    }
-    
-//    func setContentLeftmost() {
-//        contentEdgeInsets = contentEdgeInsetsForLeftmost()
-//    }
-//    
-//    func setContentRightmost() {
-//        contentEdgeInsets = contentEdgeInsetsForRightmost()
-//    }
-//    
-//    private var contentWidth: CGFloat {
-//        var width: CGFloat = 0
-//        
-//        if let imageWidth = imageView?.frame.width {
-//            width += imageWidth
-//        }
-//        if let textWidth = titleLabel?.frame.width {
-//            width += textWidth
-//        }
-//        return width
-//    }
-//    
-//    func contentEdgeInsetsForLeftmost() -> UIEdgeInsets {
-//        let contentDx = frame.width - contentWidth
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: contentDx)
-//    }
-//    
-//    func contentEdgeInsetsForRightmost() -> UIEdgeInsets {
-//        let contentDx = frame.width - contentWidth
-//        return UIEdgeInsets(top: 0, left: contentDx, bottom: 0, right: 0)
-//    }
 }
