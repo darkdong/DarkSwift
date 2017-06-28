@@ -96,6 +96,7 @@ public extension UIImage {
     }
     
     func blended(by image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
+        //FIXME: both self and image should use size with scale 1
         let pos = position ?? CGPoint(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2)
         UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale)
         draw(at: CGPoint.zero)
