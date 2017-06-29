@@ -16,8 +16,8 @@ public extension UIButton {
         case verticalTextImage
     }
     //When you want spacing between an image and a title, without causing either to be crushed, you need to set four different insets, two on each of the image and title. That's because you don't want to change the sizes of those elements' frames, but just their positions.
-    //titleEdgeInsets, imageEdgeInsets: to move title or image, make value and -value for the two opposite edges
-    //contentEdgeInsets: positive value expand content, negative value shrink content
+    // To move image/title on certain direction, set imageEdgeInsets/titleEdgeInsets on two same directional edges with +value and -value respectively.
+    // To expand or shrink content on certain direction, set contentEdgeInsets on two same directional edges with +value or -value respectively.
     
     private func moveBy(imageOffset: CGPoint, titleOffset: CGPoint, contentOffset: CGPoint) {
         func makeOffset(_ offset: CGPoint, on insets: inout UIEdgeInsets, isContent: Bool) {
