@@ -33,6 +33,19 @@ public extension Sequence {
 }
 
 public extension Array {
+    init(json: Any?, constructor: (Any?) -> Element?) {
+        self.init()
+        
+        if let jsonArray = json as? [Any?] {
+            reserveCapacity(jsonArray.count)
+            for json in jsonArray {
+                if let element = constructor(json) {
+                    append(element)
+                }
+            }
+        }
+    }
+    
     var randomIndex: Int {
         return Int(arc4random_uniform(UInt32(count)))
     }
