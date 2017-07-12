@@ -97,4 +97,22 @@ public extension UIButton {
             }
         }
     }
+    
+    func setSelectedImage(tintedColor: UIColor = UIColor(white: 0, alpha: 0.3)) {
+        if let image = backgroundImage(for: [.normal]) {
+            setBackgroundImage(image.tinted(by: tintedColor)?.resizableImage(withCapInsets: image.capInsets), for: .highlighted)
+        }
+        
+        if let image = backgroundImage(for: [.selected]) {
+            setBackgroundImage(image.tinted(by: tintedColor)?.resizableImage(withCapInsets: image.capInsets), for: [.selected, .highlighted])
+        }
+        
+        if let image = image(for: [.normal]) {
+            setImage(image.tinted(by: tintedColor), for: .highlighted)
+        }
+        
+        if let image = image(for: [.selected]) {
+            setImage(image.tinted(by: tintedColor), for: [.selected, .highlighted])
+        }
+    }
 }
