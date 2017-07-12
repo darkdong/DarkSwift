@@ -56,6 +56,10 @@ public struct Chooser<T> where T: Equatable, T: Selectable {
         }
     }
     
+    public init() {
+        
+    }
+    
     public mutating func select(_ newSelected: T?) {
         if let newSelected = newSelected {
             indexOfSelected = candidates.index(of: newSelected)
