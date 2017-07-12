@@ -100,11 +100,21 @@ public extension UIButton {
     
     func setSelectedImage(tintedColor: UIColor = UIColor(white: 0, alpha: 0.3)) {
         if let image = backgroundImage(for: [.normal]) {
-            setBackgroundImage(image.tinted(by: tintedColor)?.resizableImage(withCapInsets: image.capInsets), for: .highlighted)
+            let tinted = image.tinted(by: tintedColor)
+            if UIEdgeInsetsEqualToEdgeInsets(image.capInsets, UIEdgeInsets.zero) {
+                setBackgroundImage(tinted, for: .highlighted)
+            } else {
+                setBackgroundImage(tinted?.resizableImage(withCapInsets: image.capInsets), for: .highlighted)
+            }
         }
         
         if let image = backgroundImage(for: [.selected]) {
-            setBackgroundImage(image.tinted(by: tintedColor)?.resizableImage(withCapInsets: image.capInsets), for: [.selected, .highlighted])
+            let tinted = image.tinted(by: tintedColor)
+            if UIEdgeInsetsEqualToEdgeInsets(image.capInsets, UIEdgeInsets.zero) {
+                setBackgroundImage(tinted, for: [.selected, .highlighted])
+            } else {
+                setBackgroundImage(tinted?.resizableImage(withCapInsets: image.capInsets), for: [.selected, .highlighted])
+            }
         }
         
         if let image = image(for: [.normal]) {
