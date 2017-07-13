@@ -10,13 +10,13 @@ import UIKit
 
 open class TransitionViewController: UIViewController {
     public struct Transition {
-        var duration: TimeInterval = 0.3
-        var delay: TimeInterval = 0
-        var dampingRatio: CGFloat = 1
-        var velocity: CGFloat = 0
-        var options: UIViewAnimationOptions = []
-        var animation: (() -> Void) = {}
-        var completion: ((Bool) -> Void)?
+        public var duration: TimeInterval = 0.3
+        public var delay: TimeInterval = 0
+        public var dampingRatio: CGFloat = 1
+        public var velocity: CGFloat = 0
+        public var options: UIViewAnimationOptions = []
+        public var animation: (() -> Void) = {}
+        public var completion: ((Bool) -> Void)?
     }
 
     public var presentTransition = Transition()
