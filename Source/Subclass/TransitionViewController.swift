@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TransitionViewController: UIViewController {
+open class TransitionViewController: UIViewController {
     struct Transition {
         var duration: TimeInterval = 0.3
         var delay: TimeInterval = 0
@@ -24,7 +24,7 @@ public class TransitionViewController: UIViewController {
 
     var shouldPresent = true
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         presentTransition.animation = { [unowned self] in
@@ -38,7 +38,7 @@ public class TransitionViewController: UIViewController {
         }
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if shouldPresent {
@@ -60,7 +60,7 @@ public class TransitionViewController: UIViewController {
     func didPresent() {
     }
     
-    public func dismiss(completion: (() -> Void)? = nil) {
+    func dismiss(completion: (() -> Void)? = nil) {
         willDismiss()
         
         UIView.animate(withDuration: dismissTransition.duration, delay: dismissTransition.delay, usingSpringWithDamping: dismissTransition.dampingRatio, initialSpringVelocity: dismissTransition.velocity, options: dismissTransition.options, animations: dismissTransition.animation, completion: { [weak self] _ in
