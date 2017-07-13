@@ -12,35 +12,35 @@ public protocol Selectable {
     var isSelected: Bool {get set}
 }
 
-public struct Chooser<T> where T: Equatable, T: Selectable {
+public struct ExclusiveSelection<T> where T: Equatable, T: Selectable {
     public var candidates: [T] = [] {
         didSet {
             if !allowsEmptySelection, !candidates.isEmpty {
-                indexOfSelected = 0
+                selectedIndex = 0
             }
         }
     }
-    public var indexOfSelected: Int? {
+    public var selectedIndex: Int? {
         didSet {
-            if let i = indexOfSelected {
+            if let i = selectedIndex {
                 if i < candidates.startIndex {
-                    indexOfSelected = 0
+                    selectedIndex = 0
                 }
                 if i >= candidates.endIndex {
-                    indexOfSelected = candidates.endIndex - 1
+                    selectedIndex = candidates.endIndex - 1
                 }
             } else {
                 if !allowsEmptySelection {
-                    indexOfSelected = 0
+                    selectedIndex = 0
                 }
             }
             
-            if indexOfSelected != oldValue {
+            if selectedIndex != oldValue {
                 if let oldIndex = oldValue {
                     var oldSelected = candidates[oldIndex]
                     oldSelected.isSelected = false
                 }
-                if let newIndex = indexOfSelected {
+                if let newIndex = selectedIndex {
                     var newSelected = candidates[newIndex]
                     newSelected.isSelected = true
                 }
@@ -49,7 +49,7 @@ public struct Chooser<T> where T: Equatable, T: Selectable {
     }
     public var allowsEmptySelection = false
     public var selected: T? {
-        if let index = indexOfSelected {
+        if let index = selectedIndex {
             return candidates[index]
         } else {
             return nil
@@ -62,9 +62,9 @@ public struct Chooser<T> where T: Equatable, T: Selectable {
     
     public mutating func select(_ newSelected: T?) {
         if let newSelected = newSelected {
-            indexOfSelected = candidates.index(of: newSelected)
+            selectedIndex = candidates.index(of: newSelected)
         } else {
-            indexOfSelected = nil
+            selectedIndex = nil
         }
     }
 }

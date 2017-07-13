@@ -22,7 +22,7 @@
 		42256D581F16FFED0043BD5A /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D4A1F16FFED0043BD5A /* URL.swift */; };
 		42256D5A1F1700000043BD5A /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D591F1700000043BD5A /* TransitionViewController.swift */; };
 		423FC4B61E908CEF009E1008 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FC4B51E908CEF009E1008 /* Layout.swift */; };
-		42C225841F11C91E002AC779 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C225831F11C91E002AC779 /* Selection.swift */; };
+		42C225841F11C91E002AC779 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C225831F11C91E002AC779 /* Selectable.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
 		42CE79D11E8DEB3A00834C18 /* DarkSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79D01E8DEB3A00834C18 /* DarkSwiftTests.swift */; };
 		42CE79D31E8DEB3A00834C18 /* DarkSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 42CE79C51E8DEB3A00834C18 /* DarkSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -66,7 +66,7 @@
 		42256D4A1F16FFED0043BD5A /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		42256D591F1700000043BD5A /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		423FC4B51E908CEF009E1008 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
-		42C225831F11C91E002AC779 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		42C225831F11C91E002AC779 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE79C51E8DEB3A00834C18 /* DarkSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkSwift.h; sourceTree = "<group>"; };
 		42CE79C61E8DEB3A00834C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				42CE79FD1E8DFB2E00834C18 /* Screen.swift */,
 				42CE79FF1E8DFED300834C18 /* Logger.swift */,
 				423FC4B51E908CEF009E1008 /* Layout.swift */,
-				42C225831F11C91E002AC779 /* Selection.swift */,
+				42C225831F11C91E002AC779 /* Selectable.swift */,
 			);
 			name = Foundation;
 			path = Source/Foundation;
@@ -369,7 +369,7 @@
 				42256D551F16FFED0043BD5A /* UIImage.swift in Sources */,
 				42256D511F16FFED0043BD5A /* SKNode.swift in Sources */,
 				42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */,
-				42C225841F11C91E002AC779 /* Selection.swift in Sources */,
+				42C225841F11C91E002AC779 /* Selectable.swift in Sources */,
 				42256D531F16FFED0043BD5A /* UIButton.swift in Sources */,
 				42CE7A011E8DFED300834C18 /* Logger.swift in Sources */,
 				42256D561F16FFED0043BD5A /* UINavigationController.swift in Sources */,

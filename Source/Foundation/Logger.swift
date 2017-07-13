@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-// As of Xcode 8 and swift 3, print no longer outputs in Device Console but does in debugger console.
+// Since Xcode 8 and swift 3, print no longer outputs in Device Console but does in debugger console.
 public class Logger {
     public var isEnabled = true
 

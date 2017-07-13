@@ -98,7 +98,7 @@ public extension UIButton {
         }
     }
     
-    func setImageForSelected(by tintedColor: UIColor = UIColor(white: 0, alpha: 0.3)) {
+    func adjustSelectedImage(by tintedColor: UIColor = UIColor(white: 0, alpha: 0.3)) {
         if let image = backgroundImage(for: [.normal]) {
             let tinted = image.tinted(by: tintedColor)
             if UIEdgeInsetsEqualToEdgeInsets(image.capInsets, UIEdgeInsets.zero) {
