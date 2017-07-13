@@ -51,7 +51,7 @@ open class TransitionViewController: UIViewController {
         }
     }
     
-    func willPresent() {
+    public func willPresent() {
     }
     
     func willDismiss() {
@@ -60,7 +60,7 @@ open class TransitionViewController: UIViewController {
     func didPresent() {
     }
     
-    func dismiss(completion: (() -> Void)? = nil) {
+    public func dismiss(completion: (() -> Void)? = nil) {
         willDismiss()
         
         UIView.animate(withDuration: dismissTransition.duration, delay: dismissTransition.delay, usingSpringWithDamping: dismissTransition.dampingRatio, initialSpringVelocity: dismissTransition.velocity, options: dismissTransition.options, animations: dismissTransition.animation, completion: { [weak self] _ in
