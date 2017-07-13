@@ -40,29 +40,54 @@ public class Screen: NSObject {
         return CGSize(width: UIScreen.main.nativeBounds.width / UIScreen.main.nativeScale, height: UIScreen.main.nativeBounds.height / UIScreen.main.nativeScale)
     }
     
+    public static var isPhone4: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.phone4.height
+    }
+    
+    public static var isPhone5: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.phone5.height
+    }
+    
+    public static var isPhone6: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.phone6.height
+    }
+    
+    public static var isPhone6Plus: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.phone6Plus.height
+    }
+    
+    public static var isPad: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.pad.height
+    }
+    
+    public static var isPadPro: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.padPro.height
+    }
+    
     //use scale if we have two layouts: phone and pad
     public static var scale: CGFloat = {
+        
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            switch devicePortraitSize.height {
-            case DevicePortraitSize.phone4.height:
-                return DevicePortraitSize.phone4.width / DesignPortraitWidth.phone
-            case DevicePortraitSize.phone5.height:
-                return DevicePortraitSize.phone5.width / DesignPortraitWidth.phone
-            case DevicePortraitSize.phone6.height:
-                return DevicePortraitSize.phone6.width / DesignPortraitWidth.phone
-            case DevicePortraitSize.phone6Plus.height:
-                return DevicePortraitSize.phone6Plus.width / DesignPortraitWidth.phone
-            default:
+            let w = DesignPortraitWidth.phone
+            if isPhone4 {
+                return DevicePortraitSize.phone4.width / w
+            } else if isPhone5 {
+                return DevicePortraitSize.phone5.width / w
+            } else if isPhone6 {
+                return DevicePortraitSize.phone6.width / w
+            } else if isPhone6Plus {
+                return DevicePortraitSize.phone6Plus.width / w
+            } else {
                 return 1
             }
         case .pad:
-            switch devicePortraitSize.height {
-            case DevicePortraitSize.pad.height:
-                return DevicePortraitSize.pad.width / DesignPortraitWidth.pad
-            case DevicePortraitSize.padPro.height:
-                return DevicePortraitSize.padPro.width / DesignPortraitWidth.pad
-            default:
+            let w = DesignPortraitWidth.pad
+            if isPad {
+                return DevicePortraitSize.pad.width / w
+            } else if isPadPro {
+                return DevicePortraitSize.padPro.width / w
+            } else {
                 return 1
             }
         default:
