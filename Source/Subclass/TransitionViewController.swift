@@ -9,7 +9,7 @@
 import UIKit
 
 open class TransitionViewController: UIViewController {
-    struct Transition {
+    public struct Transition {
         var duration: TimeInterval = 0.3
         var delay: TimeInterval = 0
         var dampingRatio: CGFloat = 1
@@ -19,8 +19,8 @@ open class TransitionViewController: UIViewController {
         var completion: ((Bool) -> Void)?
     }
 
-    var presentTransition = Transition()
-    var dismissTransition = Transition()
+    public var presentTransition = Transition()
+    public var dismissTransition = Transition()
 
     var shouldPresent = true
     
@@ -51,9 +51,11 @@ open class TransitionViewController: UIViewController {
         }
     }
     
+    //Subclass should override this method to customize animation for presenting
     open func willPresent() {
     }
     
+    //Subclass should override this method to customize animation for dismissing
     open func willDismiss() {
     }
 
