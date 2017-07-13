@@ -51,13 +51,13 @@ open class TransitionViewController: UIViewController {
         }
     }
     
-    public func willPresent() {
+    open func willPresent() {
     }
     
-    func willDismiss() {
+    open func willDismiss() {
     }
 
-    func didPresent() {
+    open func didPresent() {
     }
     
     public func dismiss(completion: (() -> Void)? = nil) {
