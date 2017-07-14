@@ -12,6 +12,8 @@ public protocol Selectable {
     var isSelected: Bool {get set}
 }
 
+extension UIButton: Selectable {}
+
 public struct ExclusiveSelection<T> where T: Equatable, T: Selectable {
     public var candidates: [T] = [] {
         didSet {
