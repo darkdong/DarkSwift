@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421BDDA11F1F9B30003976B7 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421BDDA01F1F9B30003976B7 /* Bundle.swift */; };
+		421BDDA31F1F9D5A003976B7 /* MultiContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421BDDA21F1F9D5A003976B7 /* MultiContentButton.swift */; };
 		42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D3E1F16FFED0043BD5A /* CALayer.swift */; };
 		42256D4D1F16FFED0043BD5A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D3F1F16FFED0043BD5A /* Collection.swift */; };
 		42256D4E1F16FFED0043BD5A /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D401F16FFED0043BD5A /* CoreGraphics.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		421BDDA01F1F9B30003976B7 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		421BDDA21F1F9D5A003976B7 /* MultiContentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiContentButton.swift; sourceTree = "<group>"; };
 		42256D3E1F16FFED0043BD5A /* CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		42256D3F1F16FFED0043BD5A /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		42256D401F16FFED0043BD5A /* CoreGraphics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				42256D481F16FFED0043BD5A /* UINavigationController.swift */,
 				42256D491F16FFED0043BD5A /* UIView.swift */,
 				42256D4A1F16FFED0043BD5A /* URL.swift */,
+				421BDDA01F1F9B30003976B7 /* Bundle.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 		42256D4B1F16FFED0043BD5A /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
+				421BDDA21F1F9D5A003976B7 /* MultiContentButton.swift */,
 				42256D591F1700000043BD5A /* TransitionViewController.swift */,
 			);
 			path = Subclass;
@@ -356,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
+				421BDDA11F1F9B30003976B7 /* Bundle.swift in Sources */,
 				42256D521F16FFED0043BD5A /* String.swift in Sources */,
 				42256D501F16FFED0043BD5A /* NSObject.swift in Sources */,
 				42256D5A1F1700000043BD5A /* TransitionViewController.swift in Sources */,
@@ -369,6 +376,7 @@
 				42256D551F16FFED0043BD5A /* UIImage.swift in Sources */,
 				42256D511F16FFED0043BD5A /* SKNode.swift in Sources */,
 				42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */,
+				421BDDA31F1F9D5A003976B7 /* MultiContentButton.swift in Sources */,
 				42C225841F11C91E002AC779 /* Selectable.swift in Sources */,
 				42256D531F16FFED0043BD5A /* UIButton.swift in Sources */,
 				42CE7A011E8DFED300834C18 /* Logger.swift in Sources */,
