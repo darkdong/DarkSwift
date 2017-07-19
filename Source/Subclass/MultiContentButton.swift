@@ -18,15 +18,9 @@ open class MultiContentButton: UIButton {
     public typealias StateContent = [UIControlState: Content]
     
     public struct Content {
-        var text: String?
-        var textColor: UIColor?
-        var image: UIImage?
-        
-        init(text: String?, textColor: UIColor?, image: UIImage?) {
-            self.text = text
-            self.textColor = textColor
-            self.image = image
-        }
+        public var text: String?
+        public var textColor: UIColor?
+        public var image: UIImage?
     }
     
     public var stateContentList: [StateContent] = [] {
