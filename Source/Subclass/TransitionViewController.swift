@@ -1,9 +1,9 @@
 //
 //  TransitionViewController.swift
-//  Duola
+//  DarkSwift
 //
 //  Created by Dark Dong on 2017/7/11.
-//  Copyright © 2017年 Dora Technology. All rights reserved.
+//  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
 import UIKit

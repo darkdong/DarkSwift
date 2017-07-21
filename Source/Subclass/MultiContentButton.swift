@@ -1,6 +1,6 @@
 //
-//  DDButton.swift
-//  DoraPrint
+//  MultiContentButton.swift
+//  DarkSwift
 //
 //  Created by Dark Dong on 2017/5/27.
 //  Copyright © 2017年 Dark Dong. All rights reserved.
