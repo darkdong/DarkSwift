@@ -9,19 +9,22 @@
 import UIKit
 
 public extension UINavigationController {
+    static let keyIsNavigationBarHidden = NSStringFromSelector(#selector(getter: isNavigationBarHidden))
+    static let keyIsToolbarHidden = NSStringFromSelector(#selector(getter: isToolbarHidden))
+
     func save() {
         associatedObject = [
-            NSStringFromSelector(#selector(getter: isNavigationBarHidden)): isNavigationBarHidden,
-            NSStringFromSelector(#selector(getter: isToolbarHidden)): isToolbarHidden,
+            UINavigationController.keyIsNavigationBarHidden: isNavigationBarHidden,
+            UINavigationController.keyIsToolbarHidden: isToolbarHidden,
         ]
     }
     
     func restore() {
         if let dic = associatedObject as? [String: Any] {
-            if let value = dic[NSStringFromSelector(#selector(getter: isNavigationBarHidden))] as? Bool {
+            if let value = dic[UINavigationController.keyIsNavigationBarHidden] as? Bool {
                 isNavigationBarHidden = value
             }
-            if let value = dic[NSStringFromSelector(#selector(getter: isToolbarHidden))] as? Bool {
+            if let value = dic[UINavigationController.keyIsToolbarHidden] as? Bool {
                 isToolbarHidden = value
             }
         }

@@ -15,7 +15,7 @@ public extension NSObject {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as AnyObject
     }
     
-    var associatedObject: Any! {
+    var associatedObject: Any? {
         get {
             return objc_getAssociatedObject(self, &associatedObjectKey)
         }
