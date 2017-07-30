@@ -8,6 +8,19 @@
 
 import UIKit
 
+public protocol SaveRestore {
+    func save()
+    func restore()
+}
+
+extension UIToolbar: SaveRestore {
+    public func save() {
+    }
+    
+    public func restore() {
+    }
+}
+
 public extension UINavigationBar {
     static let keyIsTranslucent = NSStringFromSelector(#selector(getter: isTranslucent))
     static let keyBackgroundImage = NSStringFromSelector(#selector(backgroundImage(for:)))
