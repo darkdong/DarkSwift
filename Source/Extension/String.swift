@@ -9,6 +9,27 @@
 import Foundation
 
 public extension String {
+    var version: OperatingSystemVersion {
+        let versions = components(separatedBy: ".")
+        
+        var major = 0
+        if versions.count > 0 {
+            major = (versions[0] as NSString).integerValue
+        }
+        
+        var minor = 0
+        if versions.count > 1 {
+            minor = (versions[1] as NSString).integerValue
+        }
+        
+        var patch = 0
+        if versions.count > 2 {
+            patch = (versions[2] as NSString).integerValue
+        }
+        
+        return OperatingSystemVersion(majorVersion: major, minorVersion: minor, patchVersion: patch)
+    }
+    
     func hash(algorithm: Data.DigestAlgorithm, lowercase: Bool = true) -> String {
         return data(using: .utf8)!.hash(algorithm: algorithm, lowercase: lowercase)
     }
