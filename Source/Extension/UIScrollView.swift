@@ -24,3 +24,23 @@ public extension UIScrollView {
         }
     }
 }
+
+public extension UITableView {
+    func clearsSelection(animated: Bool) {
+        if let indexPaths = indexPathsForSelectedRows {
+            for indexPath in indexPaths {
+                deselectRow(at: indexPath, animated: animated)
+            }
+        }
+    }
+}
+
+public extension UICollectionView {
+    func clearsSelection(animated: Bool) {
+        if let indexPaths = indexPathsForSelectedItems {
+            for indexPath in indexPaths {
+                deselectItem(at: indexPath, animated: animated)
+            }
+        }
+    }
+}
