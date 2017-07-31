@@ -15,22 +15,30 @@ public extension UIFont {
         public static var italic = "PingFangSC-Thin"
     }
     
-    public struct FallbackFontName {
-        public static var regular = "Helvetica"
-        public static var bold = "Helvetica-Bold"
-        public static var italic = "Helvetica-Oblique"
-    }
+    static private let size: CGFloat = 17
+    static private var font: UIFont = {
+        let fd = UIFontDescriptor(name: DefaultFontName.regular, size: size)
+        return UIFont(descriptor: fd, size: size)
+    }()
+    static private var boldFont: UIFont = {
+        let fd = UIFontDescriptor(name: DefaultFontName.bold, size: size)
+        return UIFont(descriptor: fd, size: size)
+    }()
+    static private var italicFont: UIFont = {
+        let fd = UIFontDescriptor(name: DefaultFontName.italic, size: size)
+        return UIFont(descriptor: fd, size: size)
+    }()
     
     class func defaultFont(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: DefaultFontName.regular, size: size) ?? UIFont(name: FallbackFontName.regular, size: size)!
+        return font.withSize(size)
     }
     
     class func boldDefaultFont(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: DefaultFontName.bold, size: size) ?? UIFont(name: FallbackFontName.bold, size: size)!
+        return boldFont.withSize(size)
     }
     
     class func italicDefaultFont(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: DefaultFontName.italic, size: size) ?? UIFont(name: FallbackFontName.italic, size: size)!
+        return italicFont.withSize(size)
     }
     
     convenience init(myCoder aDecoder: NSCoder) {
@@ -47,13 +55,13 @@ public extension UIFont {
                 default:
                     fontName = DefaultFontName.regular
                 }
-                self.init(name: fontName, size: fontDescriptor.pointSize)!
-            }
-            else {
+                let size = fontDescriptor.pointSize
+                let fd = UIFontDescriptor(name: fontName, size: size)
+                self.init(descriptor: fd, size: size)
+            } else {
                 self.init(myCoder: aDecoder)
             }
-        }
-        else {
+        } else {
             self.init(myCoder: aDecoder)
         }
     }
