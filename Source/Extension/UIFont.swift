@@ -9,10 +9,10 @@
 import UIKit
 
 public extension UIFont {
-    public struct DefaultFontName {
-        public static var regular = "PingFangSC-Regular"
-        public static var bold = "PingFangSC-Medium"
-        public static var italic = "PingFangSC-Thin"
+    struct DefaultFontName {
+        static var regular = "PingFangSC-Regular"
+        static var bold = "PingFangSC-Medium"
+        static var italic = "PingFangSC-Thin"
     }
     
     static private let size: CGFloat = 17
@@ -29,19 +29,19 @@ public extension UIFont {
         return UIFont(descriptor: fd, size: size)
     }()
     
-    class func defaultFont(ofSize size: CGFloat) -> UIFont {
+    class func swizzledSystemFont(ofSize size: CGFloat) -> UIFont {
         return font.withSize(size)
     }
     
-    class func boldDefaultFont(ofSize size: CGFloat) -> UIFont {
+    class func swizzledBoldSystemFont(ofSize size: CGFloat) -> UIFont {
         return boldFont.withSize(size)
     }
     
-    class func italicDefaultFont(ofSize size: CGFloat) -> UIFont {
+    class func swizzledItalicSystemFont(ofSize size: CGFloat) -> UIFont {
         return italicFont.withSize(size)
     }
     
-    convenience init(myCoder aDecoder: NSCoder) {
+    convenience init(swizzledCoder aDecoder: NSCoder) {
         if let fontDescriptor = aDecoder.decodeObject(forKey: "UIFontDescriptor") as? UIFontDescriptor {
             if let fontAttribute = fontDescriptor.fontAttributes["NSCTFontUIUsageAttribute"] as? String {
                 var fontName = ""
@@ -59,29 +59,30 @@ public extension UIFont {
                 let fd = UIFontDescriptor(name: fontName, size: size)
                 self.init(descriptor: fd, size: size)
             } else {
-                self.init(myCoder: aDecoder)
+                self.init(swizzledCoder: aDecoder)
             }
         } else {
-            self.init(myCoder: aDecoder)
+            self.init(swizzledCoder: aDecoder)
         }
     }
     
-    class func overrideInitialize() {
+    class func swizzle() {
         if self == UIFont.self {
             let systemFontMethod = class_getClassMethod(self, #selector(systemFont(ofSize:)))
-            let myFontMethod = class_getClassMethod(self, #selector(defaultFont(ofSize:)))
+            let myFontMethod = class_getClassMethod(self, #selector(swizzledSystemFont(ofSize:)))
             method_exchangeImplementations(systemFontMethod, myFontMethod)
             
             let boldSystemFontMethod = class_getClassMethod(self, #selector(boldSystemFont(ofSize:)))
-            let myBoldFontMethod = class_getClassMethod(self, #selector(boldDefaultFont(ofSize:)))
+            let myBoldFontMethod = class_getClassMethod(self, #selector(swizzledBoldSystemFont(ofSize:)))
             method_exchangeImplementations(boldSystemFontMethod, myBoldFontMethod)
             
             let italicSystemFontMethod = class_getClassMethod(self, #selector(italicSystemFont(ofSize:)))
-            let myItalicFontMethod = class_getClassMethod(self, #selector(italicDefaultFont(ofSize:)))
+            let myItalicFontMethod = class_getClassMethod(self, #selector(swizzledItalicSystemFont(ofSize:)))
             method_exchangeImplementations(italicSystemFontMethod, myItalicFontMethod)
             
-            let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:))) // Trick to get over the lack of UIFont.init(coder:))
-            let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(myCoder:)))
+            //borrow init(coder:) from UIFontDescriptor
+            let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:)))
+            let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(swizzledCoder:)))
             method_exchangeImplementations(initCoderMethod, myInitCoderMethod)
         }
     }
