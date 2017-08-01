@@ -8,6 +8,9 @@
 
 import UIKit
 
+// call UIFont.xxxSystemFont or create font UI elements from storyboard, but using specified font instead of system font
+// default is PingFangSC
+
 public extension UIFont {
     struct DefaultFontName {
         static var regular = "PingFangSC-Regular"
@@ -66,7 +69,7 @@ public extension UIFont {
         }
     }
     
-    class func swizzle() {
+    class func overrideSystemFontMethods() {
         if self == UIFont.self {
             let systemFontMethod = class_getClassMethod(self, #selector(systemFont(ofSize:)))
             let myFontMethod = class_getClassMethod(self, #selector(swizzledSystemFont(ofSize:)))
@@ -80,7 +83,7 @@ public extension UIFont {
             let myItalicFontMethod = class_getClassMethod(self, #selector(swizzledItalicSystemFont(ofSize:)))
             method_exchangeImplementations(italicSystemFontMethod, myItalicFontMethod)
             
-            //borrow init(coder:) from UIFontDescriptor
+            //init form storyboard: borrow signature from UIFontDescriptor.init(coder:)
             let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:)))
             let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(swizzledCoder:)))
             method_exchangeImplementations(initCoderMethod, myInitCoderMethod)
