@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MobileCoreServices
 
 public extension URL {
     static func directory(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask = .userDomainMask) -> URL {
@@ -44,6 +45,25 @@ public extension URL {
             print(error)
             return 0
         }
+    }
+    
+    //uniform type identifier (UTI)
+    func conformToUTI(_ uti: String) -> Bool {
+        if let values = try? resourceValues(forKeys: [.typeIdentifierKey]), let type = values.typeIdentifier {
+            return UTTypeConformsTo(type as CFString, uti as CFString)
+        }
+        return false
+    }
+    
+    //assume url as base URL, return path = self.path - base
+    func pathComponentRelativeTo(_ url: URL) -> String? {
+        let stdPath = standardizedFileURL.path
+        let relativeStdPath = url.standardizedFileURL.path
+        if stdPath.hasPrefix(relativeStdPath) {
+            let index = relativeStdPath.index(relativeStdPath.startIndex, offsetBy: relativeStdPath.characters.count)
+            return stdPath.substring(from: index)
+        }
+        return nil
     }
     
     func createDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
