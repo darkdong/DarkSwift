@@ -19,6 +19,26 @@ import AVFoundation
 //}
 
 public class System: NSObject {
+    public static var tabBarController: UITabBarController? {
+        if let vc = UIApplication.shared.delegate?.window??.rootViewController {
+            if let tc = vc as? UITabBarController {
+                return tc
+            }
+        }
+        return nil
+    }
+    
+    public static var rootNavigationController: UINavigationController? {
+        if let vc = UIApplication.shared.delegate?.window??.rootViewController {
+            if let tc = vc as? UITabBarController {
+                return tc.selectedViewController as? UINavigationController
+            } else {
+                return vc as? UINavigationController
+            }
+        }
+        return nil
+    }
+    
     public static var currentQueueName: String? {
         let name = __dispatch_queue_get_label(nil)
         return String(cString: name, encoding: .utf8)
