@@ -39,6 +39,11 @@ public class System: NSObject {
         return nil
     }
     
+    public static func delay(_ delay: TimeInterval, execute work: @escaping (() -> Void)) {
+        let time = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: time, execute: work)
+    }
+    
     public static var currentQueueName: String? {
         let name = __dispatch_queue_get_label(nil)
         return String(cString: name, encoding: .utf8)
