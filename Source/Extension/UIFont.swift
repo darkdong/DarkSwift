@@ -69,7 +69,7 @@ public extension UIFont {
         }
     }
     
-    class func overrideSystemFontMethods() {
+    class func swizzleSystemFontMethods() {
         if self == UIFont.self {
             let systemFontMethod = class_getClassMethod(self, #selector(systemFont(ofSize:)))
             let myFontMethod = class_getClassMethod(self, #selector(swizzledSystemFont(ofSize:)))
