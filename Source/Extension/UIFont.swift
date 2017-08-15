@@ -14,7 +14,7 @@ import UIKit
 public extension UIFont {
     struct DefaultFontName {
         static var regular = "PingFangSC-Regular"
-        static var bold = "PingFangSC-Medium"
+        static var bold = "PingFangSC-Semibold"
         static var italic = "PingFangSC-Thin"
     }
     
