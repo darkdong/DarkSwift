@@ -19,17 +19,12 @@ import AVFoundation
 //}
 
 public class System: NSObject {
-    public static var tabBarController: UITabBarController? {
-        if let vc = UIApplication.shared.delegate?.window??.rootViewController {
-            if let tc = vc as? UITabBarController {
-                return tc
-            }
-        }
-        return nil
+    public static var rootViewController: UIViewController? {
+        return UIApplication.shared.delegate?.window??.rootViewController
     }
     
     public static var rootNavigationController: UINavigationController? {
-        if let vc = UIApplication.shared.delegate?.window??.rootViewController {
+        if let vc = rootViewController {
             if let tc = vc as? UITabBarController {
                 return tc.selectedViewController as? UINavigationController
             } else {
