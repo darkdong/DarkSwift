@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
     class func swizzleViewDidLoad() {
         let method = class_getInstanceMethod(self, #selector(viewDidLoad))
         let swizzledMethod = class_getInstanceMethod(self, #selector(swizzledViewDidLoad))
