@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIViewController {
-    class func swizzleViewDidLoad() {
+    class func setNavigationBarBackItemImageOnly() {
         let method = class_getInstanceMethod(self, #selector(viewDidLoad))
         let swizzledMethod = class_getInstanceMethod(self, #selector(swizzledViewDidLoad))
         method_exchangeImplementations(method, swizzledMethod)
