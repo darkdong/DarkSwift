@@ -9,6 +9,11 @@
 import UIKit
 
 open class TransitionViewController: UIViewController {
+    public enum BackgroundStyle {
+        case effect(UIVisualEffect, UIImage?)
+        case color(UIColor?)
+    }
+    
     public struct Transition {
         public var duration: TimeInterval = 0.3
         public var delay: TimeInterval = 0
@@ -19,6 +24,8 @@ open class TransitionViewController: UIViewController {
         public var completion: ((Bool) -> Void)?
     }
 
+    public var backgroundStyle = BackgroundStyle.color(UIColor(white: 0, alpha: 0.66))
+
     public var presentTransition = Transition()
     public var dismissTransition = Transition()
 
@@ -27,14 +34,29 @@ open class TransitionViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        presentTransition.animation = { [unowned self] in
-            self.view.backgroundColor = UIColor(white: 0, alpha: 0.66)
-            self.view.layoutIfNeeded()
-        }
-        
-        dismissTransition.animation = { [unowned self] in
-            self.view.backgroundColor = nil
-            self.view.layoutIfNeeded()
+        switch backgroundStyle {
+        case let .effect(effect, image):
+            let blurView = UIVisualEffectView(effect: effect)
+            blurView.frame = view.bounds
+            view.insertSubview(blurView, at: 0)
+            
+            let snapshotView = UIImageView(frame: view.bounds)
+            snapshotView.image = image
+            view.insertSubview(snapshotView, aboveSubview: blurView)
+            
+            presentTransition.animation = {
+                snapshotView.alpha = 0
+            }
+            dismissTransition.animation = {
+                snapshotView.alpha = 1
+            }
+        case let .color(color):
+            presentTransition.animation = {
+                self.view.backgroundColor = color
+            }
+            dismissTransition.animation = {
+                self.view.backgroundColor = nil
+            }
         }
     }
     
@@ -44,8 +66,8 @@ open class TransitionViewController: UIViewController {
         if shouldPresent {
             willPresent()
             UIView.animate(withDuration: presentTransition.duration, delay: presentTransition.delay, usingSpringWithDamping: presentTransition.dampingRatio, initialSpringVelocity: presentTransition.velocity, options: presentTransition.options, animations: presentTransition.animation, completion: {
-                [weak self] _ in
-                self?.didPresent()
+                _ in
+                self.didPresent()
             })
             shouldPresent = false
         }
@@ -65,8 +87,8 @@ open class TransitionViewController: UIViewController {
     public func dismiss(completion: (() -> Void)? = nil) {
         willDismiss()
         
-        UIView.animate(withDuration: dismissTransition.duration, delay: dismissTransition.delay, usingSpringWithDamping: dismissTransition.dampingRatio, initialSpringVelocity: dismissTransition.velocity, options: dismissTransition.options, animations: dismissTransition.animation, completion: { [weak self] _ in
-            self?.dismiss(animated: false, completion: completion)
+        UIView.animate(withDuration: dismissTransition.duration, delay: dismissTransition.delay, usingSpringWithDamping: dismissTransition.dampingRatio, initialSpringVelocity: dismissTransition.velocity, options: dismissTransition.options, animations: dismissTransition.animation, completion: { _ in
+            self.dismiss(animated: false, completion: completion)
         })
     }
 }
