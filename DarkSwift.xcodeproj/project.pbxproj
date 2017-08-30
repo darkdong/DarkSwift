@@ -27,6 +27,7 @@
 		4265F5661F2F239200B68078 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F5651F2F239200B68078 /* UIFont.swift */; };
 		4293EE1A1F46B32500B56F3F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4293EE191F46B32500B56F3F /* UIViewController.swift */; };
 		4295CC011F25F08B005238CE /* SaveRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4295CC001F25F08B005238CE /* SaveRestore.swift */; };
+		42ABD1E21F5672C20006A194 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABD1E11F5672C20006A194 /* UINavigationBar.swift */; };
 		42C225841F11C91E002AC779 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C225831F11C91E002AC779 /* Selectable.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
 		42CE79D11E8DEB3A00834C18 /* DarkSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79D01E8DEB3A00834C18 /* DarkSwiftTests.swift */; };
@@ -76,6 +77,7 @@
 		4265F5651F2F239200B68078 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		4293EE191F46B32500B56F3F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4295CC001F25F08B005238CE /* SaveRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveRestore.swift; sourceTree = "<group>"; };
+		42ABD1E11F5672C20006A194 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		42C225831F11C91E002AC779 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE79C51E8DEB3A00834C18 /* DarkSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkSwift.h; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				4265F5651F2F239200B68078 /* UIFont.swift */,
 				42256D471F16FFED0043BD5A /* UIImage.swift */,
 				4295CC001F25F08B005238CE /* SaveRestore.swift */,
+				42ABD1E11F5672C20006A194 /* UINavigationBar.swift */,
 				42256D491F16FFED0043BD5A /* UIView.swift */,
 				4293EE191F46B32500B56F3F /* UIViewController.swift */,
 				4265F5421F2C474A00B68078 /* UIScrollView.swift */,
@@ -371,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
+				42ABD1E21F5672C20006A194 /* UINavigationBar.swift in Sources */,
 				421BDDA11F1F9B30003976B7 /* Bundle.swift in Sources */,
 				42256D521F16FFED0043BD5A /* String.swift in Sources */,
 				42256D501F16FFED0043BD5A /* NSObject.swift in Sources */,

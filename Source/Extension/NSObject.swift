@@ -11,6 +11,10 @@ import Foundation
 private var associatedObjectKey = 0
 
 public extension NSObject {
+    func trace(funcname: String = #function, _ items: Any...) {
+        print(type(of: self), funcname, items)
+    }
+
     func clone() -> AnyObject {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as AnyObject
     }
