@@ -39,16 +39,16 @@ public struct ExclusiveSelection<T> where T: Equatable, T: Selectable {
             
             if selectedIndex != oldValue {
                 if let oldIndex = oldValue {
-                    var oldSelected = candidates[oldIndex]
-                    oldSelected.isSelected = false
+                    candidates[oldIndex].isSelected = false
                 }
                 if let newIndex = selectedIndex {
-                    var newSelected = candidates[newIndex]
-                    newSelected.isSelected = true
+                    candidates[newIndex].isSelected = true
                 }
+                didSelectHandler?(oldValue, selectedIndex)
             }
         }
     }
+    public var didSelectHandler: ((_ deselectedIndex: Int?, _ selectedIndex: Int?) -> Void)?
     public var allowsEmptySelection = false
     public var selected: T? {
         if let index = selectedIndex {

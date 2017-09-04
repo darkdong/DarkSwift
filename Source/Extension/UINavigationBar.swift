@@ -9,6 +9,7 @@
 import UIKit
 
 public extension UINavigationBar {
+    // the magic key string
     private static let keyHidesShadow = "hidesShadow"
     var isHairlineHidden: Bool {
         get {
