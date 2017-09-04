@@ -9,31 +9,41 @@
 import UIKit
 
 public extension UINavigationController {
-    func pushToPresent(viewController: UIViewController, shouldReplaceLastViewController: Bool, transition: CATransition? = nil) {
-        if shouldReplaceLastViewController {
-            popViewController(animated: false)
-        }
+    func pushViewController(_ viewController: UIViewController, onViewController targetViewController: UIViewController, by transition: CATransition? = nil) {
+        popToViewController(targetViewController, animated: false)
         let transition = transition ?? transitionToPresent
         view.layer.add(transition, forKey: nil)
         pushViewController(viewController, animated: false)
     }
     
-    func popToDismiss(transition: CATransition? = nil) {
-        let transition = transition ?? transitionToDismiss
-        view.layer.add(transition, forKey: nil)
-        popViewController(animated: false)
+    func pushViewController(_ viewController: UIViewController, onIndexedViewController index: Int, by transition: CATransition? = nil) {
+        pushViewController(viewController, onViewController: viewControllerAtIndex(index), by: transition)
     }
     
-    func popToDismissUntilViewController(_ viewController: UIViewController, transition: CATransition? = nil) {
+    func popToViewController(_ viewController: UIViewController, by transition: CATransition? = nil) {
         let transition = transition ?? transitionToDismiss
         view.layer.add(transition, forKey: nil)
         popToViewController(viewController, animated: false)
     }
-    
-    func popToDismissUntilRootViewController(transition: CATransition? = nil) {
-        let transition = transition ?? transitionToDismiss
-        view.layer.add(transition, forKey: nil)
-        popToRootViewController(animated: false)
+
+    func popToIndexedViewController(_ index: Int, by transition: CATransition? = nil) {
+        let targetVC: UIViewController
+        if index < 0 {
+            // -1 is the last, -2 is the prev to last and so on
+            targetVC = viewControllers[viewControllers.endIndex + index]
+        } else {
+            targetVC = viewControllers[index]
+        }
+        popToViewController(targetVC, by: transition)
+    }
+
+    private func viewControllerAtIndex(_ index: Int) -> UIViewController {
+        if index < 0 {
+            // -1 is the last, -2 is the prev to last and so on
+            return viewControllers[viewControllers.endIndex + index]
+        } else {
+            return viewControllers[index]
+        }
     }
     
     private var transitionToPresent: CATransition {
