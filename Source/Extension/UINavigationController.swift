@@ -10,33 +10,45 @@ import UIKit
 
 public extension UINavigationController {
     func pushToPresent(viewController: UIViewController, shouldReplaceLastViewController: Bool, transition: CATransition? = nil) {
-        let trans: CATransition
-        if let transition = transition {
-            trans = transition
-        } else {
-            trans = CATransition()
-            trans.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            trans.type = kCATransitionMoveIn
-            trans.subtype = kCATransitionFromTop
-        }
         if shouldReplaceLastViewController {
             popViewController(animated: false)
         }
-        view.layer.add(trans, forKey: nil)
+        let transition = transition ?? transitionToPresent
+        view.layer.add(transition, forKey: nil)
         pushViewController(viewController, animated: false)
     }
     
     func popToDismiss(transition: CATransition? = nil) {
-        let trans: CATransition
-        if let transition = transition {
-            trans = transition
-        } else {
-            trans = CATransition()
-            trans.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            trans.type = kCATransitionReveal
-            trans.subtype = kCATransitionFromBottom
-        }
-        view.layer.add(trans, forKey: nil)
+        let transition = transition ?? transitionToDismiss
+        view.layer.add(transition, forKey: nil)
         popViewController(animated: false)
+    }
+    
+    func popToDismissUntilViewController(_ viewController: UIViewController, transition: CATransition? = nil) {
+        let transition = transition ?? transitionToDismiss
+        view.layer.add(transition, forKey: nil)
+        popToViewController(viewController, animated: false)
+    }
+    
+    func popToDismissUntilRootViewController(transition: CATransition? = nil) {
+        let transition = transition ?? transitionToDismiss
+        view.layer.add(transition, forKey: nil)
+        popToRootViewController(animated: false)
+    }
+    
+    private var transitionToPresent: CATransition {
+        let transition = CATransition()
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromTop
+        return transition
+    }
+    
+    private var transitionToDismiss: CATransition {
+        let transition = CATransition()
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionReveal
+        transition.subtype = kCATransitionFromBottom
+        return transition
     }
 }
