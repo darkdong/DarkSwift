@@ -26,7 +26,7 @@ public extension UINavigationController {
         popToViewController(viewController, animated: false)
     }
 
-    func popToViewControllerAtIndex(_ index: Int = -2, by transition: CATransition? = nil) {
+    func popToViewController(atIndex index: Int = -2, by transition: CATransition? = nil) {
         popToViewController(viewControllerAtIndex(index), by: transition)
     }
 
