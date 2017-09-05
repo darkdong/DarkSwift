@@ -9,25 +9,23 @@
 import UIKit
 
 public extension UINavigationController {
-    func pushViewController(_ viewController: UIViewController, onViewController targetViewController: UIViewController, transition: CATransition? = nil) {
+    func pushLikePresentation(viewController: UIViewController, onViewController targetViewController: UIViewController) {
         popToViewController(targetViewController, animated: false)
-        let transition = transition ?? transitionToPresent
-        view.layer.add(transition, forKey: nil)
+        view.layer.add(transitionToPresent, forKey: nil)
         pushViewController(viewController, animated: false)
     }
     
-    func pushViewController(_ viewController: UIViewController, onViewControllerAtIndex index: Int = -1, transition: CATransition? = nil) {
-        pushViewController(viewController, onViewController: viewControllerAtIndex(index), transition: transition)
+    func pushLikePresentation(viewController: UIViewController, onViewControllerAtIndex index: Int = -1) {
+        pushLikePresentation(viewController: viewController, onViewController: viewControllerAtIndex(index))
     }
     
-    func popToViewController(_ viewController: UIViewController, transition: CATransition? = nil) {
-        let transition = transition ?? transitionToDismiss
-        view.layer.add(transition, forKey: nil)
-        popToViewController(viewController, animated: false)
+    func popLikeDismissal(toViewController vc: UIViewController) {
+        view.layer.add(transitionToDismiss, forKey: nil)
+        popToViewController(vc, animated: false)
     }
 
-    func popToViewController(atIndex index: Int = -2, transition: CATransition? = nil) {
-        popToViewController(viewControllerAtIndex(index), transition: transition)
+    func popLikeDismissal(toViewControllerAtIndex index: Int = -2) {
+        popLikeDismissal(toViewController: viewControllerAtIndex(index))
     }
 
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
