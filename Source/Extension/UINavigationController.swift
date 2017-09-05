@@ -9,25 +9,25 @@
 import UIKit
 
 public extension UINavigationController {
-    func pushViewController(_ viewController: UIViewController, onViewController targetViewController: UIViewController, by transition: CATransition? = nil) {
+    func pushViewController(_ viewController: UIViewController, onViewController targetViewController: UIViewController, transition: CATransition? = nil) {
         popToViewController(targetViewController, animated: false)
         let transition = transition ?? transitionToPresent
         view.layer.add(transition, forKey: nil)
         pushViewController(viewController, animated: false)
     }
     
-    func pushViewController(_ viewController: UIViewController, onViewControllerAtIndex index: Int = -1, by transition: CATransition? = nil) {
-        pushViewController(viewController, onViewController: viewControllerAtIndex(index), by: transition)
+    func pushViewController(_ viewController: UIViewController, onViewControllerAtIndex index: Int = -1, transition: CATransition? = nil) {
+        pushViewController(viewController, onViewController: viewControllerAtIndex(index), transition: transition)
     }
     
-    func popToViewController(_ viewController: UIViewController, by transition: CATransition? = nil) {
+    func popToViewController(_ viewController: UIViewController, transition: CATransition? = nil) {
         let transition = transition ?? transitionToDismiss
         view.layer.add(transition, forKey: nil)
         popToViewController(viewController, animated: false)
     }
 
-    func popViewController(toViewControllerAtIndex index: Int = -2, by transition: CATransition? = nil) {
-        popToViewController(viewControllerAtIndex(index), by: transition)
+    func popToViewController(atIndex index: Int = -2, transition: CATransition? = nil) {
+        popToViewController(viewControllerAtIndex(index), transition: transition)
     }
 
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
