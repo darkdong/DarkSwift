@@ -16,7 +16,7 @@ public extension UINavigationController {
         pushViewController(viewController, animated: false)
     }
     
-    func pushViewController(_ viewController: UIViewController, onIndexedViewController index: Int, by transition: CATransition? = nil) {
+    func pushViewController(_ viewController: UIViewController, onViewControllerAtIndex index: Int, by transition: CATransition? = nil) {
         pushViewController(viewController, onViewController: viewControllerAtIndex(index), by: transition)
     }
     
@@ -26,15 +26,8 @@ public extension UINavigationController {
         popToViewController(viewController, animated: false)
     }
 
-    func popToIndexedViewController(_ index: Int, by transition: CATransition? = nil) {
-        let targetVC: UIViewController
-        if index < 0 {
-            // -1 is the last, -2 is the prev to last and so on
-            targetVC = viewControllers[viewControllers.endIndex + index]
-        } else {
-            targetVC = viewControllers[index]
-        }
-        popToViewController(targetVC, by: transition)
+    func popToViewControllerAtIndex(_ index: Int, by transition: CATransition? = nil) {
+        popToViewController(viewControllerAtIndex(index), by: transition)
     }
 
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
