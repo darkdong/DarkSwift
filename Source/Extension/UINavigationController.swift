@@ -19,6 +19,14 @@ public extension UINavigationController {
         pushLikePresentation(viewController: viewController, onViewController: viewControllerAtIndex(index))
     }
     
+    func pushLikePresentationToReplace(viewController: UIViewController) {
+        pushLikePresentation(viewController: viewController, onViewControllerAtIndex: -2)
+    }
+    
+    func pushLikePresentationFromRoot(viewController: UIViewController) {
+        pushLikePresentation(viewController: viewController, onViewControllerAtIndex: 0)
+    }
+    
     func popLikeDismissal(toViewController vc: UIViewController) {
         view.layer.add(transitionToDismiss, forKey: nil)
         popToViewController(vc, animated: false)
@@ -26,6 +34,10 @@ public extension UINavigationController {
 
     func popLikeDismissal(toViewControllerAtIndex index: Int = -2) {
         popLikeDismissal(toViewController: viewControllerAtIndex(index))
+    }
+    
+    func popLikeDismissalToRoot() {
+        popLikeDismissal(toViewControllerAtIndex: 0)
     }
 
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
