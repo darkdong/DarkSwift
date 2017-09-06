@@ -38,11 +38,17 @@ public struct ExclusiveSelection<T> where T: Equatable, T: Selectable {
             }
             
             if selectedIndex != oldValue {
-                if let oldIndex = oldValue {
-                    candidates[oldIndex].isSelected = false
+                if let index = oldValue {
+                    // NOTE: set candidate directory will trigger [candidates didSet], i.e candidates[oldIndex].isSelected = false
+                    // To avoid triggering [candidates didSet], set element by using two steps
+                    var oldSelected = candidates[index]
+                    oldSelected.isSelected = false
                 }
-                if let newIndex = selectedIndex {
-                    candidates[newIndex].isSelected = true
+                if let index = selectedIndex {
+                    // NOTE: set candidate directory will trigger [candidates didSet], i.e candidates[newIndex].isSelected = true
+                    // To avoid triggering [candidates didSet], set element by using two steps
+                    var newSelected = candidates[index]
+                    newSelected.isSelected = true
                 }
                 didSelectHandler?(oldValue, selectedIndex)
             }
