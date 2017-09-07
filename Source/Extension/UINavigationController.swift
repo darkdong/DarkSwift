@@ -9,6 +9,9 @@
 import UIKit
 
 public extension UINavigationController {
+    
+    // MARK: - push
+
     func pushLikePresentation(viewController: UIViewController, onViewController targetViewController: UIViewController) {
         popToViewController(targetViewController, animated: false)
         view.layer.add(transitionToPresent, forKey: nil)
@@ -19,13 +22,24 @@ public extension UINavigationController {
         pushLikePresentation(viewController: viewController, onViewController: viewControllerAtIndex(index))
     }
     
-    func pushLikePresentationToReplace(viewController: UIViewController) {
+    func pushLikePresentationByReplacingTop(viewController: UIViewController) {
         pushLikePresentation(viewController: viewController, onViewControllerAtIndex: -2)
     }
     
-    func pushLikePresentationFromRoot(viewController: UIViewController) {
+    func pushLikePresentationOnRoot(viewController: UIViewController) {
         pushLikePresentation(viewController: viewController, onViewControllerAtIndex: 0)
     }
+    
+    func pushLikePresentation(viewController: UIViewController, onViewControllerType classType: UIViewController.Type) {
+        for vc in viewControllers.reversed() {
+            if type(of: vc) == classType {
+                pushLikePresentation(viewController: viewController, onViewController: vc)
+                return
+            }
+        }
+    }
+    
+    // MARK: - pop
     
     func popLikeDismissal(toViewController vc: UIViewController) {
         view.layer.add(transitionToDismiss, forKey: nil)
@@ -40,6 +54,15 @@ public extension UINavigationController {
         popLikeDismissal(toViewControllerAtIndex: 0)
     }
 
+    func popLikeDismissal(toViewControllerType classType: UIViewController.Type) {
+        for vc in viewControllers.reversed() {
+            if type(of: vc) == classType {
+                popLikeDismissal(toViewController: vc)
+                return
+            }
+        }
+    }
+    
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
         if index < 0 {
             // -1 is the last, -2 is the prev to last and so on
