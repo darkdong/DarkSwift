@@ -30,7 +30,7 @@ public extension UINavigationController {
         pushLikePresentation(viewController: viewController, onViewControllerAtIndex: 0)
     }
     
-    func pushLikePresentation(viewController: UIViewController, onViewControllerType classType: UIViewController.Type) {
+    func pushLikePresentation(viewController: UIViewController, onViewControllerClass classType: UIViewController.Type) {
         for vc in viewControllers.reversed() {
             if type(of: vc) == classType {
                 pushLikePresentation(viewController: viewController, onViewController: vc)
@@ -54,7 +54,7 @@ public extension UINavigationController {
         popLikeDismissal(toViewControllerAtIndex: 0)
     }
 
-    func popLikeDismissal(toViewControllerType classType: UIViewController.Type) {
+    func popLikeDismissal(toViewControllerClass classType: UIViewController.Type) {
         for vc in viewControllers.reversed() {
             if type(of: vc) == classType {
                 popLikeDismissal(toViewController: vc)
@@ -63,6 +63,8 @@ public extension UINavigationController {
         }
     }
     
+    // MARK: - private
+
     private func viewControllerAtIndex(_ index: Int) -> UIViewController {
         if index < 0 {
             // -1 is the last, -2 is the prev to last and so on
