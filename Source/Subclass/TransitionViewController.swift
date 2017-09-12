@@ -51,10 +51,10 @@ open class TransitionViewController: UIViewController {
                 snapshotView.alpha = 1
             }
         case let .color(color):
-            presentTransition.animation = {
+            presentTransition.animation = { [unowned self] in
                 self.view.backgroundColor = color
             }
-            dismissTransition.animation = {
+            dismissTransition.animation = { [unowned self] in
                 self.view.backgroundColor = nil
             }
         }
