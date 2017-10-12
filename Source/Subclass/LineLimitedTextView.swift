@@ -1,6 +1,6 @@
 //
-//  DDTextView.swift
-//  Dong
+//  AutoresizableTextView.swift
+//  DarkSwift
 //
 //  Created by Dark Dong on 2017/3/5.
 //  Copyright © 2017年 Dong. All rights reserved.
@@ -12,27 +12,33 @@ open class LineLimitedTextView: UITextView {
     public var minNumberOfLines = 1
     public var maxNumberOfLines = 3
     public var changeHeightFromBottom = false
+
+    public var textDidChangeHandler: ((LineLimitedTextView, Notification) -> Void)?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-        
-        if textContainer == nil {
-            self.textContainer.lineFragmentPadding = 0
-        }
+    private func commonInit() {
+        textContainer.lineFragmentPadding = 0
         textContainerInset = UIEdgeInsets.zero
         
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: .UITextViewTextDidChange, object: nil)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        
+        commonInit()
     }
     
-    public func calculateHeight() -> CGFloat {
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        commonInit()
+    }
+    
+    public func calculateFittingHeight() -> CGFloat {
         let size = CGSize(width: frame.width - textContainerInset.left - textContainerInset.right - textContainer.lineFragmentPadding, height: CGFloat.infinity)
         let boundingRect = attributedText.boundingRect(with: size, options: [.usesLineFragmentOrigin], context: nil)
         let lineSpacing: CGFloat
@@ -41,25 +47,39 @@ open class LineLimitedTextView: UITextView {
         } else {
             lineSpacing = 0
         }
-        let firstAttributedText = attributedText.attributedSubstring(from: NSMakeRange(0, 0))
-        let lineHeight = firstAttributedText.size().height + lineSpacing
-        let numberOfLines = Int(round(boundingRect.height / lineHeight))
+        let lineHeight = firstCharacterHeight + lineSpacing
+        let numberOfLines = Int(((boundingRect.height + lineSpacing) / lineHeight).rounded())
 
-        print(boundingRect, lineHeight, numberOfLines)
+//        print(boundingRect, "lineHeight", lineHeight, "lineSpacing", lineSpacing,  "numberOfLines", numberOfLines)
 
         let height: CGFloat
         if numberOfLines >= maxNumberOfLines {
-            height = lineHeight * CGFloat(maxNumberOfLines) - lineSpacing
+            height = lineHeight * CGFloat(maxNumberOfLines)
         } else if numberOfLines <= minNumberOfLines {
-            height = lineHeight * CGFloat(minNumberOfLines) - lineSpacing
+            height = lineHeight * CGFloat(minNumberOfLines)
         } else {
             height = boundingRect.height
         }
         return ceil(height)
     }
     
+    private var firstCharacterHeight: CGFloat {
+        if attributedText.length > 0 {
+            return attributedText.attributedSubstring(from: NSMakeRange(0, 1)).size().height
+        } else {
+            var attributes = [NSAttributedStringKey: Any]()
+            if let font = font {
+                attributes[.font] = font
+            }
+            if let color = textColor {
+                attributes[.foregroundColor] = color
+            }
+            return NSAttributedString(string: "", attributes: attributes).size().height
+        }
+    }
+    
     public func adjustHeight() {
-        let newHeight = calculateHeight()
+        let newHeight = calculateFittingHeight()
         if changeHeightFromBottom {
             setHeightFromBottom(newHeight)
         } else {
@@ -70,7 +90,14 @@ open class LineLimitedTextView: UITextView {
     // MARK: - UITextViewDelegate
 
     @objc func textDidChange(_ notification: Notification) {
-        adjustHeight()
-        scrollRangeToVisible(selectedRange)
+        guard let atv = notification.object as? LineLimitedTextView, atv == self else {
+            return
+        }
+        if let handler = textDidChangeHandler {
+            handler(self, notification)
+        } else {
+            adjustHeight()
+        }
+        //            scrollRangeToVisible(selectedRange)
     }
 }

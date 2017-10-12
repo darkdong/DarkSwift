@@ -11,6 +11,9 @@ import SpriteKit
 import DarkSwift
 
 class ViewController: UIViewController {
+    @IBOutlet var textView: LineLimitedTextView!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
+
     var data: Data!
     var nsdata: NSData!
     
@@ -18,21 +21,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        view.backgroundColor = .black
+        self.textView.textDidChangeHandler = { [weak self] (tv, _) in
+            let newHeight = tv.calculateFittingHeight()
+            print("newHeight", newHeight)
+            self?.heightConstraint.constant = newHeight
+        }
+        
+//        heightConstraint.constant = 80
+        
+//        view.backgroundColor = .black
         let text = "对常用设计模式有深刻认识此举"
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
-        
+
         var attributes = [NSAttributedStringKey: Any]()
         attributes[.paragraphStyle] = paragraphStyle
         attributes[.kern] = 0.3
-        
+
         let astring = NSMutableAttributedString(string: text, attributes: attributes)
         let rect = CGRect(center: view.frame.size.center, size: CGSize(width: 60, height: 20))
         let textView = LineLimitedTextView(frame: rect)
         textView.backgroundColor = .green
-        textView.attributedText = astring
-        textView.changeHeightFromBottom = true
+//        textView.attributedText = astring
+        textView.text = text
+        textView.font = UIFont.systemFont(ofSize: 20)
+//        textView.changeHeightFromBottom = true
         textView.adjustHeight()
         view.addSubview(textView)
 //
