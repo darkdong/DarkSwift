@@ -32,21 +32,22 @@ public extension UIFont {
         return UIFont(descriptor: fd, size: size)
     }()
     
-    class func swizzledSystemFont(ofSize size: CGFloat) -> UIFont {
+    @objc class func swizzledSystemFont(ofSize size: CGFloat) -> UIFont {
         return font.withSize(size)
     }
     
-    class func swizzledBoldSystemFont(ofSize size: CGFloat) -> UIFont {
+    @objc class func swizzledBoldSystemFont(ofSize size: CGFloat) -> UIFont {
         return boldFont.withSize(size)
     }
     
-    class func swizzledItalicSystemFont(ofSize size: CGFloat) -> UIFont {
+    @objc class func swizzledItalicSystemFont(ofSize size: CGFloat) -> UIFont {
         return italicFont.withSize(size)
     }
     
-    convenience init(swizzledCoder aDecoder: NSCoder) {
+    @objc convenience init(swizzledCoder aDecoder: NSCoder) {
         if let fontDescriptor = aDecoder.decodeObject(forKey: "UIFontDescriptor") as? UIFontDescriptor {
-            if let fontAttribute = fontDescriptor.fontAttributes["NSCTFontUIUsageAttribute"] as? String {
+            let key = UIFontDescriptor.AttributeName("NSCTFontUIUsageAttribute")
+            if let fontAttribute = fontDescriptor.fontAttributes[key] as? String {
                 var fontName = ""
                 switch fontAttribute {
                 case "CTFontRegularUsage":
@@ -73,20 +74,20 @@ public extension UIFont {
         if self == UIFont.self {
             let systemFontMethod = class_getClassMethod(self, #selector(systemFont(ofSize:)))
             let myFontMethod = class_getClassMethod(self, #selector(swizzledSystemFont(ofSize:)))
-            method_exchangeImplementations(systemFontMethod, myFontMethod)
+            method_exchangeImplementations(systemFontMethod!, myFontMethod!)
             
             let boldSystemFontMethod = class_getClassMethod(self, #selector(boldSystemFont(ofSize:)))
             let myBoldFontMethod = class_getClassMethod(self, #selector(swizzledBoldSystemFont(ofSize:)))
-            method_exchangeImplementations(boldSystemFontMethod, myBoldFontMethod)
+            method_exchangeImplementations(boldSystemFontMethod!, myBoldFontMethod!)
             
             let italicSystemFontMethod = class_getClassMethod(self, #selector(italicSystemFont(ofSize:)))
             let myItalicFontMethod = class_getClassMethod(self, #selector(swizzledItalicSystemFont(ofSize:)))
-            method_exchangeImplementations(italicSystemFontMethod, myItalicFontMethod)
+            method_exchangeImplementations(italicSystemFontMethod!, myItalicFontMethod!)
             
             //init form storyboard: borrow signature from UIFontDescriptor.init(coder:)
             let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:)))
             let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(swizzledCoder:)))
-            method_exchangeImplementations(initCoderMethod, myInitCoderMethod)
+            method_exchangeImplementations(initCoderMethod!, myInitCoderMethod!)
         }
     }
 }

@@ -73,7 +73,7 @@ extension UINavigationBar: SaveRestore {
             if let value = dic[UINavigationBar.keyTintColor] as? UIColor {
                 tintColor = value
             }
-            if let value = dic[UINavigationBar.keyTitleTextAttributes] as? [String: Any] {
+            if let value = dic[UINavigationBar.keyTitleTextAttributes] as? [NSAttributedStringKey: Any] {
                 titleTextAttributes = value
             }
             if let value = dic[UINavigationBar.keyShadowImage] as? UIImage {

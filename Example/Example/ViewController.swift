@@ -14,94 +14,35 @@ class ViewController: UIViewController {
     var data: Data!
     var nsdata: NSData!
     
-//    override func loadView() {
-//        let skview = SKView(frame: UIScreen.main.bounds)
-//        skview.isMultipleTouchEnabled = false
-////        skview.showsFPS = true
-////        skview.showsNodeCount = true
-//        skview.ignoresSiblingOrder = true
-//        view = skview
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let skview = view as? SKView {
-            let scene = SKScene(size: skview.frame.size)
-            scene.backgroundColor = .darkGray
-            skview.presentScene(scene)
-            
-            let cnode = SKNode()
-            cnode.position = scene.size.center
-            scene.addChild(cnode)
+        view.backgroundColor = .black
+        let text = "对常用设计模式有深刻认识此举"
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        
+        var attributes = [NSAttributedStringKey: Any]()
+        attributes[.paragraphStyle] = paragraphStyle
+        attributes[.kern] = 0.3
+        
+        let astring = NSMutableAttributedString(string: text, attributes: attributes)
+        let rect = CGRect(center: view.frame.size.center, size: CGSize(width: 60, height: 20))
+        let textView = LineLimitedTextView(frame: rect)
+        textView.backgroundColor = .green
+        textView.attributedText = astring
+        textView.changeHeightFromBottom = true
+        textView.adjustHeight()
+        view.addSubview(textView)
+//
+//            let s1 = "s1".attributedString().addUnderline(style: .styleSingle, color: .red)
+//
+////            let s1 = NSAttributedString(string: "s1")
+//            let s2 = NSAttributedString(string: "s2", attributes: [:])
+//            print(s1)
+//            print(s2)
 
-            let bgrect = CGRect(center: scene.size.center, size: CGSize(width: 320, height: 320))
-//            let bgrect = CGRect(origin: CGPoint.zero, size: CGSize(width: 320, height: 320))
-//            let container = SKShapeNode(rect: bgrect)
-            let container = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 320, height: 320))
-            container.position = scene.size.center
-            container.zPosition = -100
-//            container.strokeColor = UIColor.clear
-//            container.fillColor = UIColor.blue
-            scene.addChild(container)
-            
-            print("scene anchor \(scene.anchorPoint) cnode anchor \(cnode.anchorPoint)")
-            
-            let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            let rect = bgrect.inset(insets)
-
-            func createSpriteNode(color: UIColor, size: CGSize) -> SKNode {
-                let node = SKSpriteNode(color: color, size: size)
-                return node
-            }
-            
-            func createShapeNode(color: UIColor, size: CGSize) -> SKNode {
-//                let node = SKShapeNode(rectOf: size)
-                let node = SKShapeNode(rect: CGRect(center: CGPoint.zero, size: size))
-                node.strokeColor = UIColor.clear
-                node.fillColor = color
-                return node
-            }
-            
-            func createLabelNode(color: UIColor, size: CGSize) -> SKNode {
-                let node = createSpriteNode(color: color, size: size)
-                let label = SKLabelNode(text: "fg")
-                label.fontColor = UIColor.black
-                label.verticalAlignmentMode = .center
-                node.addChild(label)
-                return node
-            }
-            
-            let n1 = createSpriteNode(color: UIColor.cyan, size: CGSize(width: 80, height: 40))
-            let n2 = createShapeNode(color: UIColor.magenta, size: CGSize(width: 80, height: 100))
-            let n3 = createLabelNode(color: UIColor.yellow, size: CGSize(width: 80, height: 80))
-            print("sprite anchor \(n1.anchorPoint) shape anchor \(n2.anchorPoint)")
-
-//            let n1 = createLabelNode(text: "fg", fontSize: 40, vmode: .center)
-//            let n2 = createLabelNode(text: "fg", fontSize: 40, vmode: .top)
-//            let n3 = createLabelNode(text: "fg", fontSize: 40, vmode: .bottom)
-
-//            let n4: SKNode! = n3.clone()
-//            let n5: SKNode! = n2.clone()
-//            let n6: SKNode! = n1.clone()
-//            let nodes: [SKNode] = [n1, n2, n3, n4, n5, n6]
-//            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 40, height: 40))
-//            scene.layoutChildren(nodes, alignment: tabAlign, in: rect)
-
-            let crect = CGRect(center: CGPoint.zero, size: CGSize(width: 320, height: 320))
-            let crect2 = crect.inset(insets)
-
-            let nodes = [n1, n2, n3]
-//            container.layoutChildren(nodes, alignment: .horizontal(.bottom), insets: insets)
-            SKNode.layoutNodes(nodes, alignment: .horizontal(.bottom), in: rect)
-//            n3.position = CGPoint.zero
-            
-            for node in nodes {
-                scene.addChild(node)
-            }
-        } else {
-            view.backgroundColor = .black
             
 //            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
 //            container.backgroundColor = UIColor.purple
@@ -131,74 +72,10 @@ class ViewController: UIViewController {
 ////            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 80, height: 80))
 ////            container.layoutSubviews(views, alignment: tabAlign, in: rect)
 ////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
-//            
-//            for v in views {
-//                container.addSubview(v)
-//            }
-            
-//            let btn = UIButton(title: "test", target: self, action: #selector(test))
-            let btn = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 120, height: 120)))
-            btn.backgroundColor = .purple
-            btn.setImage(UIImage(named: "fb"), for: .normal)
-            btn.setTitle("哈哈哈", for: .normal)
-            btn.imageView?.backgroundColor = .green
-            btn.titleLabel?.backgroundColor = .blue
-            
-//            btn.align(.horizontalImageText, spacing: nil)
-            btn.align(.horizontalTextImage, spacing: nil)
-
-            
-            let o2 = CGPoint(x: 100, y: 250)
-            let btn2 = UIButton(frame: CGRect(origin: o2, size: CGSize(width: 120, height: 120)))
-            btn2.backgroundColor = .purple
-            btn2.setImage(UIImage(named: "fb"), for: .normal)
-            btn2.setTitle("哈哈哈", for: .normal)
-            btn2.imageView?.backgroundColor = .green
-            btn2.titleLabel?.backgroundColor = .blue
-            
-//            btn2.align(.horizontalImageText, spacing: nil)
-            btn2.align(.verticalTextImage, spacing: nil)
-            btn2.contentEdgeInsets += UIEdgeInsetsMake(10, 10, 10, 10)
-//            btn.contentHorizontalAlignment = .right
-//            btn.contentVerticalAlignment = .bottom
-            
-//            let insets = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 10)
-//            btn.setContentHorizontally(spacing: 10)
-//            btn.setContentVertically(spacing: 10)
-//            btn.setContentLeftmost()
-//            btn.setContentRightmost()
-//            btn.contentEdgeInsets += insets
-            
-            //            btn.setImageTitleSpacing(10)
-//            btn.layoutContentVertically(spacing: 10)
-//            btn.contentEdgeInsets = btn.contentEdgeInsetsToLeftmost()
-//            btn.layoutContentRightmost(trailing: 10)
-//            let dw: CGFloat = 20
-//            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -dw, bottom: 0, right: -dw)
-//            btn.sizeToFit()
-            btn2.sizeToFit()
-            
-            view.addSubview(btn)
-            view.addSubview(btn2)
-
-//            let image = UIImage.standardLutImage()
-//            let imageView = UIImageView(image: image)
-//            imageView.tag = 666
-//            imageView.center = view.frame.size.center
-//            view.addSubview(imageView)
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func test() {
         print("test")
-        view.viewWithTag(666)?.removeFromSuperview()
     }
-    
-    
 }
 

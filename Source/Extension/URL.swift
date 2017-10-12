@@ -61,12 +61,12 @@ public extension URL {
         let relativeStdPath = url.standardizedFileURL.path
         if stdPath.hasPrefix(relativeStdPath) {
             let index = relativeStdPath.index(relativeStdPath.startIndex, offsetBy: relativeStdPath.characters.count)
-            return stdPath.substring(from: index)
+            return String(stdPath[index...])
         }
         return nil
     }
     
-    func createDirectory(withIntermediateDirectories: Bool = true, attributes: [String: Any]? = nil) {
+    func createDirectory(withIntermediateDirectories: Bool = true, attributes: [FileAttributeKey: Any]? = nil) {
         let manager = FileManager.default
         guard !manager.fileExists(atPath: path) else {
             return

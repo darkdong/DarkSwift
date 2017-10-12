@@ -44,12 +44,11 @@ public class System: NSObject {
         return String(cString: name, encoding: .utf8)
     }
     
-    public static func captureDevice(mediaType: String, position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        if let devices = AVCaptureDevice.devices(withMediaType: mediaType) as? [AVCaptureDevice] {
-            for device in devices {
-                if device.position == position {
-                    return device
-                }
+    public static func captureDevice(mediaType: String, position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType))
+        for device in devices {
+            if device.position == position {
+                return device
             }
         }
         return nil

@@ -6,19 +6,8 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-public protocol FloatingType: Equatable, Comparable {
-    static func +(lhs: Self, rhs: Self) -> Self
-    static func -(lhs: Self, rhs: Self) -> Self
-    static func *(lhs: Self, rhs: Self) -> Self
-    static func /(lhs: Self, rhs: Self) -> Self
-    static func %(lhs: Self, rhs: Self) -> Self
-}
-extension CGFloat: FloatingType { }
-extension Double : FloatingType { }
-extension Float  : FloatingType { }
-
 public class Math: NSObject {
-    @inline(__always) public static func similarY< T: FloatingType >(x1: T, x: T, x2: T, y1: T, y2: T) -> T {
+    @inline(__always) public static func similarY< T: FloatingPoint >(x1: T, x: T, x2: T, y1: T, y2: T) -> T {
         return x1 == x2 ? y1 : y1 + (x - x1) * (y2 - y1) / (x2 - x1)
     }
     

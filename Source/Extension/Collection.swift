@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension MutableCollection where Indices.Iterator.Element == Index {
+public extension MutableCollection {
     /// Shuffles the contents of this collection.
     mutating func shuffle() {
         let c = count
@@ -18,7 +18,7 @@ public extension MutableCollection where Indices.Iterator.Element == Index {
             let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
             guard d != 0 else { continue }
             let i = index(firstUnshuffled, offsetBy: d)
-            swap(&self[firstUnshuffled], &self[i])
+            swapAt(firstUnshuffled, i)
         }
     }
 }
@@ -103,24 +103,7 @@ public extension Array {
     }
 }
 
-public extension Array where Element: Equatable {
-    func next(item: Element) -> Element? {
-        if let index = index(of: item), index + 1 <= count {
-            return index + 1 == count ? self[0] : self[index + 1]
-        }
-        return nil
-    }
-    
-    func prev(item: Element) -> Element? {
-        if let index = self.index(of: item), index >= 0 {
-            return index == 0 ? self.last : self[index - 1]
-        }
-        return nil
-    }
-}
-
-public extension Array where Element: Equatable, Element: Comparable {
-    
+public extension Array where Element: Comparable {
     func repeatablePermutation(_ length: Int? = nil, processor: (([Element]) -> Void)? = nil) -> [[Element]] {
         var allPermutations: [[Element]] = []
         func _repeatablePermutation(_ lengthToGo: Int, remainder: inout [Element], aPermutation: inout [Element]) {

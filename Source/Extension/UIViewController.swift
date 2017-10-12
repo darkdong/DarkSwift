@@ -12,10 +12,10 @@ public extension UIViewController {
     class func setNavigationBarBackItemImageOnly() {
         let method = class_getInstanceMethod(self, #selector(viewDidLoad))
         let swizzledMethod = class_getInstanceMethod(self, #selector(swizzledViewDidLoad))
-        method_exchangeImplementations(method, swizzledMethod)
+        method_exchangeImplementations(method!, swizzledMethod!)
     }
     
-    func swizzledViewDidLoad() {
+    @objc func swizzledViewDidLoad() {
         swizzledViewDidLoad()
         
         if navigationItem.backBarButtonItem == nil {

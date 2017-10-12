@@ -19,7 +19,7 @@ public extension UINavigationController {
     }
     
     func pushLikePresentation(viewController: UIViewController, onViewControllerAtIndex index: Int = -1) {
-        pushLikePresentation(viewController: viewController, onViewController: viewControllerAtIndex(index))
+        pushLikePresentation(viewController: viewController, onViewController: childViewController(at: index))
     }
     
     func pushLikePresentationByReplacingTop(viewController: UIViewController) {
@@ -47,7 +47,7 @@ public extension UINavigationController {
     }
 
     func popLikeDismissal(toViewControllerAtIndex index: Int = -2) {
-        popLikeDismissal(toViewController: viewControllerAtIndex(index))
+        popLikeDismissal(toViewController: childViewController(at: index))
     }
     
     func popLikeDismissalToRoot() {
@@ -63,9 +63,9 @@ public extension UINavigationController {
         }
     }
     
-    // MARK: - private
+    // MARK: - find
 
-    private func viewControllerAtIndex(_ index: Int) -> UIViewController {
+    func childViewController(at index: Int) -> UIViewController {
         if index < 0 {
             // -1 is the last, -2 is the prev to last and so on
             return viewControllers[viewControllers.endIndex + index]
@@ -74,6 +74,16 @@ public extension UINavigationController {
         }
     }
     
+    func findChildViewController<T>() -> T? where T: UIViewController {
+        for vc in viewControllers {
+            if vc is T {
+                return vc as? T
+            }
+        }
+        return nil
+    }
+    // MARK: - private
+
     private var transitionToPresent: CATransition {
         let transition = CATransition()
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
