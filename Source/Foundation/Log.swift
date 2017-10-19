@@ -7,7 +7,7 @@
 //
 
 // Since Xcode 8 and swift 3, print no longer outputs in Device Console but does in debugger console.
-public struct Log {
+public class Log {
     public var isEnabled = true
 
     public static let shared = Log()
