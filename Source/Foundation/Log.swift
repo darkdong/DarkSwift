@@ -8,11 +8,12 @@
 
 // Since Xcode 8 and swift 3, print no longer outputs in Device Console but does in debugger console.
 public class Log {
-    public var isEnabled = true
+    public var isEnabled: Bool
 
     public static let shared = Log()
     
-    public init() {
+    public init(isEnabled: Bool = true) {
+        self.isEnabled = isEnabled
     }
     
     public func log(_ format: String, _ args: CVarArg = []) {
