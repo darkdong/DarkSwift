@@ -12,6 +12,9 @@ public struct Log {
 
     public static let shared = Log()
     
+    public init() {
+    }
+    
     public func log(_ format: String, _ args: CVarArg = []) {
         if isEnabled {
             NSLog(format, args)
