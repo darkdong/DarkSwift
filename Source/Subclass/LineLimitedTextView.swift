@@ -50,7 +50,7 @@ open class LineLimitedTextView: UITextView {
         let lineHeight = firstCharacterHeight + lineSpacing
         let numberOfLines = Int(((boundingRect.height + lineSpacing) / lineHeight).rounded())
 
-//        print(boundingRect, "lineHeight", lineHeight, "lineSpacing", lineSpacing,  "numberOfLines", numberOfLines)
+        print(boundingRect, "lineHeight", lineHeight, "lineSpacing", lineSpacing,  "numberOfLines", numberOfLines)
 
         let height: CGFloat
         if numberOfLines >= maxNumberOfLines {

@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        Logger.shared.print("fffuck")
+        
         self.textView.textDidChangeHandler = { [weak self] (tv, _) in
             let newHeight = tv.calculateFittingHeight()
             print("newHeight", newHeight)
@@ -44,7 +46,7 @@ class ViewController: UIViewController {
         textView.backgroundColor = .green
 //        textView.attributedText = astring
         textView.text = text
-        textView.font = UIFont.systemFont(ofSize: 20)
+        textView.font = UIFont.systemFont(ofSize: 12)
 //        textView.changeHeightFromBottom = true
         textView.adjustHeight()
         view.addSubview(textView)
