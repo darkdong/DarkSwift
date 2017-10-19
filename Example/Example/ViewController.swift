@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        Logger.shared.print("fffuck")
+        Log.shared.print("fffuck")
         
         self.textView.textDidChangeHandler = { [weak self] (tv, _) in
             let newHeight = tv.calculateFittingHeight()
