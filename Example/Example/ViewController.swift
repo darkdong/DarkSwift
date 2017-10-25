@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        print("rawModel", UIDevice.rawModel)
+        
         let log = Log(isEnabled: false)
         
         self.textView.textDidChangeHandler = { [weak self] (tv, _) in

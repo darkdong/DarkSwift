@@ -29,6 +29,7 @@
 		4295CC011F25F08B005238CE /* SaveRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4295CC001F25F08B005238CE /* SaveRestore.swift */; };
 		42ABD1E21F5672C20006A194 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABD1E11F5672C20006A194 /* UINavigationBar.swift */; };
 		42B2C8321F5D5FC70015E756 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2C8311F5D5FC70015E756 /* UINavigationController.swift */; };
+		42BCF5D11FA044BA00AFBCE4 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCF5D01FA044BA00AFBCE4 /* UIDevice.swift */; };
 		42C225841F11C91E002AC779 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C225831F11C91E002AC779 /* Selectable.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
 		42CE79D11E8DEB3A00834C18 /* DarkSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE79D01E8DEB3A00834C18 /* DarkSwiftTests.swift */; };
@@ -81,6 +82,7 @@
 		4295CC001F25F08B005238CE /* SaveRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveRestore.swift; sourceTree = "<group>"; };
 		42ABD1E11F5672C20006A194 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		42B2C8311F5D5FC70015E756 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		42BCF5D01FA044BA00AFBCE4 /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		42C225831F11C91E002AC779 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE79C51E8DEB3A00834C18 /* DarkSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkSwift.h; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		42256D3D1F16FFED0043BD5A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				42BCF5D01FA044BA00AFBCE4 /* UIDevice.swift */,
 				42256D3E1F16FFED0043BD5A /* CALayer.swift */,
 				42256D3F1F16FFED0043BD5A /* Collection.swift */,
 				42256D401F16FFED0043BD5A /* CoreGraphics.swift */,
@@ -403,6 +406,7 @@
 				42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */,
 				421BDDA31F1F9D5A003976B7 /* MultiContentButton.swift in Sources */,
 				42C225841F11C91E002AC779 /* Selectable.swift in Sources */,
+				42BCF5D11FA044BA00AFBCE4 /* UIDevice.swift in Sources */,
 				4295CC011F25F08B005238CE /* SaveRestore.swift in Sources */,
 				42256D531F16FFED0043BD5A /* UIButton.swift in Sources */,
 				42CE7A011E8DFED300834C18 /* Log.swift in Sources */,

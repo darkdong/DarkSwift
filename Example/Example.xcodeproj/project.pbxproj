@@ -12,8 +12,45 @@
 		423FC4CC1E9125B0009E1008 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423FC4CA1E9125B0009E1008 /* Main.storyboard */; };
 		423FC4CE1E9125B0009E1008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 423FC4CD1E9125B0009E1008 /* Assets.xcassets */; };
 		423FC4D11E9125B0009E1008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423FC4CF1E9125B0009E1008 /* LaunchScreen.storyboard */; };
-		428147CF1F8F1FC5008B71A5 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4289CBFD1E9127D60026DE71 /* DarkSwift.framework */; };
+		428B2EE01FA0548500EC486F /* DarkSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428B2EDA1FA0546800EC486F /* DarkSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		428B2ED91FA0546800EC486F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42CE79C21E8DEB3A00834C18;
+			remoteInfo = DarkSwift;
+		};
+		428B2EDB1FA0546800EC486F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42CE79CB1E8DEB3A00834C18;
+			remoteInfo = DarkSwiftTests;
+		};
+		428B2EDD1FA0546800EC486F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42CE79E21E8DF0EE00834C18;
+			remoteInfo = CommonCrypto;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		428B2EDF1FA0547A00EC486F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				428B2EE01FA0548500EC486F /* DarkSwift.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		423FC4C31E9125B0009E1008 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,8 +60,7 @@
 		423FC4CD1E9125B0009E1008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		423FC4D01E9125B0009E1008 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		423FC4D21E9125B0009E1008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		423FC4D91E912739009E1008 /* DarkSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarkSwift.framework; path = "../build/Debug-iphoneos/DarkSwift.framework"; sourceTree = "<group>"; };
-		4289CBFD1E9127D60026DE71 /* DarkSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarkSwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/DarkSwift-fzctaemtszramogpcgalbjulknma/Build/Products/Debug-iphonesimulator/DarkSwift.framework"; sourceTree = "<group>"; };
+		428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DarkSwift.xcodeproj; path = ../DarkSwift.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				428147CF1F8F1FC5008B71A5 /* DarkSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +107,19 @@
 		423FC4D81E912738009E1008 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4289CBFD1E9127D60026DE71 /* DarkSwift.framework */,
-				423FC4D91E912739009E1008 /* DarkSwift.framework */,
+				428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		428B2ED41FA0546700EC486F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				428B2EDA1FA0546800EC486F /* DarkSwift.framework */,
+				428B2EDC1FA0546800EC486F /* DarkSwiftTests.xctest */,
+				428B2EDE1FA0546800EC486F /* CommonCrypto.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +132,7 @@
 				423FC4BF1E9125B0009E1008 /* Sources */,
 				423FC4C01E9125B0009E1008 /* Frameworks */,
 				423FC4C11E9125B0009E1008 /* Resources */,
+				428B2EDF1FA0547A00EC486F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -127,12 +172,42 @@
 			mainGroup = 423FC4BA1E9125B0009E1008;
 			productRefGroup = 423FC4C41E9125B0009E1008 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 428B2ED41FA0546700EC486F /* Products */;
+					ProjectRef = 428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				423FC4C21E9125B0009E1008 /* Example */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		428B2EDA1FA0546800EC486F /* DarkSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DarkSwift.framework;
+			remoteRef = 428B2ED91FA0546800EC486F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		428B2EDC1FA0546800EC486F /* DarkSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DarkSwiftTests.xctest;
+			remoteRef = 428B2EDB1FA0546800EC486F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		428B2EDE1FA0546800EC486F /* CommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommonCrypto.framework;
+			remoteRef = 428B2EDD1FA0546800EC486F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		423FC4C11E9125B0009E1008 /* Resources */ = {
@@ -294,7 +369,7 @@
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.darkdong.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darkdong.DarkSwift.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -309,7 +384,7 @@
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.darkdong.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darkdong.DarkSwift.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
