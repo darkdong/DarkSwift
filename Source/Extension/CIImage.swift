@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CIImage {
+public extension CIImage {
     var uiImage: UIImage {
         let context = CIContext()
         let cgImage =  context.createCGImage(self, from: extent)!
