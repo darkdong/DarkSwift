@@ -74,14 +74,6 @@ public extension UINavigationController {
         }
     }
     
-    func findChildViewController<T>() -> T? where T: UIViewController {
-        for vc in viewControllers {
-            if vc is T {
-                return vc as? T
-            }
-        }
-        return nil
-    }
     // MARK: - private
 
     private var transitionToPresent: CATransition {

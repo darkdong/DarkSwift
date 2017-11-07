@@ -10,6 +10,25 @@ import UIKit
 import SpriteKit
 import DarkSwift
 
+func standardLutImage(cubeEdgeLength: Int = 16) -> UIImage {
+    let len = cubeEdgeLength
+    var data = Data(capacity: len * len * len)
+    
+    for g in 0..<len {
+        for b in 0..<len {
+            for r in 0..<len {
+                let rValue = UInt8(r * len + r)
+                let gValue = UInt8(g * len + g)
+                let bValue = UInt8(b * len + b)
+                //                    let pixel = Data(bytes: [rValue, gValue, bValue, 0]) // RGBA big endian
+                let pixel = Data(bytes: [0, bValue, gValue, rValue]) // RGBA little endian
+                data.append(pixel)
+            }
+        }
+    }
+    return UIImage(data: data, bitmapInfo: .byteOrder32Little, width: len * len, height: len)!
+}
+
 class ViewController: UIViewController {
     @IBOutlet var textView: LineLimitedTextView!
     @IBOutlet var heightConstraint: NSLayoutConstraint!
@@ -20,75 +39,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        var image: UIImage!
+        let targetSize = CGSize(width: 100, height: 24)
+        image = standardLutImage()
+        print("image", image.size, image.scale)
+//        image = image.rotate(by: -3, scale: 3)
+        image = image.imageToFitSize(targetSize, paddingColor: .gray, scale: 2)
+//        image = image.imageToFillSize(targetSize, scale: 2)
+//        image = image.resize(to: targetSize)!
+        print("processed image", image.size, image.scale)
         
-        print("rawModel", UIDevice.rawModel)
+        let imageView = UIImageView(image: image)
+        imageView.center = view.frame.size.center
+        view.addSubview(imageView)
         
-        let log = Log(isEnabled: false)
-        
-        self.textView.textDidChangeHandler = { [weak self] (tv, _) in
-            let newHeight = tv.calculateFittingHeight()
-            print("newHeight", newHeight)
-            self?.heightConstraint.constant = newHeight
-        }
-        
-//        heightConstraint.constant = 80
-        
-//        view.backgroundColor = .black
-        let text = "对常用设计模式有深刻认识此举"
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 2
-
-        var attributes = [NSAttributedStringKey: Any]()
-        attributes[.paragraphStyle] = paragraphStyle
-        attributes[.kern] = 0.3
-
-        let astring = NSMutableAttributedString(string: text, attributes: attributes)
-        let rect = CGRect(center: view.frame.size.center, size: CGSize(width: 60, height: 20))
-        let textView = LineLimitedTextView(frame: rect)
-        textView.backgroundColor = .green
-//        textView.attributedText = astring
-        textView.text = text
-        textView.font = UIFont.systemFont(ofSize: 12)
-//        textView.changeHeightFromBottom = true
-        textView.adjustHeight()
-        view.addSubview(textView)
-//
-//            let s1 = "s1".attributedString().addUnderline(style: .styleSingle, color: .red)
-//
-////            let s1 = NSAttributedString(string: "s1")
-//            let s2 = NSAttributedString(string: "s2", attributes: [:])
-//            print(s1)
-//            print(s2)
-
-            
-//            let container = UIView(frame: CGRect(center: view.frame.size.center, size: CGSize(width: 320, height: 320)))
-//            container.backgroundColor = UIColor.purple
-//            view.addSubview(container)
-//            let insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//            let rect = container.frame.bounds.rect(byInsets: insets)
-//            let v1 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
-//            v1.backgroundColor = UIColor.cyan
-//            let v2 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 100))
-//            v2.backgroundColor = UIColor.magenta
-//            let v3 = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-//            v3.backgroundColor = UIColor.yellow
-//            
-//            let views: [UIView] = [v1, v2, v3]
-////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
-////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.top), in: rect)
-//            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.bottom), insets: insets)
-//
-////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.center), in: rect)
-////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.left), in: rect)
-////            container.layoutSubviews([v1, v2, v3], alignment: .vertical(.right), in: rect)
-//
-////            let v4: UIView! = v3.clone()
-////            let v5: UIView! = v2.clone()
-////            let v6: UIView! = v1.clone()
-////            let views: [UIView] = [v1, v2, v3, v4, v5, v6]
-////            let tabAlign: Alignment = .tabular(2, 3, CGSize(width: 80, height: 80))
-////            container.layoutSubviews(views, alignment: tabAlign, in: rect)
-////            container.layoutSubviews([v1, v2, v3], alignment: .horizontal(.center), in: rect)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            imageView.removeFromSuperview()
+//        }
     }
 
     func test() {

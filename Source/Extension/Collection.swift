@@ -8,6 +8,17 @@
 
 import Foundation
 
+public extension Collection {
+    func find<T>() -> T? {
+        for e in self {
+            if e is T {
+                return e as? T
+            }
+        }
+        return nil
+    }
+}
+
 public extension MutableCollection {
     /// Shuffles the contents of this collection.
     mutating func shuffle() {

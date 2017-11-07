@@ -16,7 +16,7 @@ public extension UIImage {
             //demo@2x~ipad.png
             //init contentsOfFile will look for image name with proper modifier such as: @2x, @3x, ~ipad, ~iphone, etc
             //system use "png" in case insensitive as default extension, if extension does not exists
-            //You must use explicit extension if image is not "png", e.g. "mypic.jpg" and @nx still works like charm
+            //You must use explicit extension if image is not "png", e.g. "mypic.jpg" while @nx still works like charm
             self.init(contentsOfFile: imageURL.path)
         } else {
             return nil
@@ -25,7 +25,7 @@ public extension UIImage {
     
     convenience init(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: CGPoint.zero, size: size)
-        UIGraphicsBeginImageContext(rect.size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
         let context = UIGraphicsGetCurrentContext()!
         context.setFillColor(color.cgColor)
         context.fill(rect)
@@ -34,7 +34,7 @@ public extension UIImage {
         self.init(cgImage: image.cgImage!)
     }
     
-    convenience init?(pixelsData: NSData, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
+    convenience init?(data: Data, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
         let numberOfComponents = 4
         let releaseDataCallback: CGDataProviderReleaseDataCallback = { (pixelsDataPointer, _, _) in
             //release underlying data to prevent memory leak
@@ -44,9 +44,9 @@ public extension UIImage {
         // CGDataProvider just "access" underlying data and doesn't retain it
         // Underlying data may be dealloced while this image is using
         // We must retain underlying data until CGDataProvider is released
-        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(pixelsData).toOpaque(), data: pixelsData.bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
+        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(data as NSData).toOpaque(), data: (data as NSData).bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
         let bitsPerComponent = 8
-        
+
         if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
             self.init(cgImage: cgImage, scale: 1, orientation: .up)
         } else {
@@ -88,7 +88,7 @@ public extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         let rect = CGRect(origin: CGPoint.zero, size: size)
         draw(in: rect)
-        color.set()
+        color.setFill()
         UIRectFillUsingBlendMode(rect, .sourceAtop)
         let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -116,99 +116,69 @@ public extension UIImage {
         }
     }
     
-    func resize(to newSize: CGSize, quality: CGInterpolationQuality = .default) -> UIImage {
-        var drawTransposed = false
-        switch imageOrientation {
-        case .left, .leftMirrored, .right, .rightMirrored:
-            drawTransposed = true
-        default:
-            break
-        }
-        let transform = transformForSize(newSize)
-        return resizedImage(size: newSize, transform: transform, drawTransposed: drawTransposed, quality: quality)
+    func resize(to newSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? self.scale
+        UIGraphicsBeginImageContextWithOptions(newSize, false, newScale)
+        draw(in: CGRect(origin: CGPoint.zero, size: newSize))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
     }
     
-    func rotate(by radius: CGFloat) -> UIImage {
+    func rotate(by radius: CGFloat, scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? self.scale
         //Calculate the size of the rotated view's containing box for our drawing space
-        let rotatedViewBox = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let rotatedViewBox = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
         rotatedViewBox.transform = CGAffineTransform(rotationAngle: radius)
         let rotatedSize = rotatedViewBox.frame.size
         //Create the bitmap context
-        UIGraphicsBeginImageContext(rotatedSize)
-        let bitmap = UIGraphicsGetCurrentContext()!
+        UIGraphicsBeginImageContextWithOptions(rotatedSize, false, newScale)
+        let context = UIGraphicsGetCurrentContext()!
         //Move the origin to the middle of the image so we will rotate and scale around the center.
-        bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+        context.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
         //Rotate the image context
-        bitmap.rotate(by: radius)
+        context.rotate(by: radius)
         //Now, draw the rotated/scaled image into the context
-        bitmap.scaleBy(x: 1.0, y: -1.0)
-        bitmap.draw(cgImage!, in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.draw(cgImage!, in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
+        let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return rotatedImage
     }
     
-    //MARK:- private
-    private func transformForSize(_ size: CGSize) -> CGAffineTransform {
-        var transform = CGAffineTransform.identity
-        
-        switch imageOrientation {
-        case .down, // EXIF = 3
-        .downMirrored: // EXIF = 4
-            transform = transform.translatedBy(x: size.width, y: size.height)
-            transform = transform.rotated(by: .pi)
-        case .left, // EXIF = 6
-        .leftMirrored: // EXIF = 5
-            transform = transform.translatedBy(x: size.width, y: 0)
-            transform = transform.rotated(by: .pi / 2)
-        case .right, // EXIF = 8
-        .rightMirrored: // EXIF = 7
-            transform = transform.translatedBy(x: 0, y: size.height)
-            transform = transform.rotated(by: .pi / -2)
-        default:
-            break
-        }
-        
-        switch imageOrientation {
-        case .upMirrored, // EXIF = 2
-        .downMirrored: // EXIF = 4
-            transform = transform.translatedBy(x: size.width, y: 0)
-            transform = transform.scaledBy(x: -1, y: 1)
-        case .leftMirrored, // EXIF = 5
-        .rightMirrored: // EXIF = 7
-            transform = transform.translatedBy(x: size.height, y: 0)
-            transform = transform.scaledBy(x: -1, y: 1)
-        default:
-            break
-        }
-        
-        return transform
+    func imageToFillSize(_ targetSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? self.scale
+        let scaleX = targetSize.width / size.width
+        let scaleY = targetSize.height / size.height
+        let maxScale = max(scaleX, scaleY)
+        let scaledSize = size * maxScale
+        let scaledImage = resize(to: scaledSize, scale: newScale)
+        let x = (scaledSize.width - targetSize.width) / 2
+        let y = (scaledSize.height - targetSize.height) / 2
+        let rect = CGRect(origin: CGPoint(x: x, y: y), size: targetSize)
+        return scaledImage?.crop(to: rect)
     }
     
-    private func resizedImage(size: CGSize, transform: CGAffineTransform, drawTransposed: Bool, quality: CGInterpolationQuality = CGInterpolationQuality.default) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: size.width * scale, height: size.height * scale).integral
-        let transposedRect = CGRect(x: 0, y: 0, width: rect.height, height: rect.width)
-        
-        let bitmapInfo = CGBitmapInfo(rawValue: CGBitmapInfo().rawValue | CGImageAlphaInfo.premultipliedLast.rawValue)
-        let bitmap: CGContext = CGContext(data: nil, width: Int(rect.width), height: Int(rect.height), bitsPerComponent: 8, bytesPerRow: Int(rect.width) * 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo.rawValue)!
-        
-        bitmap.concatenate(transform)
-        
-        // Set the quality level to use when rescaling
-        bitmap.interpolationQuality = quality
-        
-        // Draw into the context; this scales the image
-        if let cgImage = cgImage {
-            bitmap.draw(cgImage, in: drawTransposed ? transposedRect : rect)
-        } else if let ciImage = ciImage {
-            let ciContext = CIContext(options: nil)
-            let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)
-            bitmap.draw(cgImage!, in: drawTransposed ? transposedRect : rect)
+    func imageToFitSize(_ targetSize: CGSize, paddingColor: UIColor? = nil, scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? self.scale
+        if let color = paddingColor {
+            UIGraphicsBeginImageContextWithOptions(targetSize, true, newScale)
+            let context = UIGraphicsGetCurrentContext()!
+            context.setFillColor(color.cgColor)
+            context.fill(CGRect(origin: CGPoint.zero, size: targetSize))
+        } else {
+            UIGraphicsBeginImageContextWithOptions(targetSize, false, newScale)
         }
-        
-        // Get the resized image from the context and a UIImage
-        let resizedCGImage = bitmap.makeImage()
-        
-        return UIImage(cgImage: resizedCGImage!, scale: scale, orientation: .up)
+        let scaleX = targetSize.width / size.width
+        let scaleY = targetSize.height / size.height
+        let minScale = min(scaleX, scaleY)
+        let scaledSize = size * minScale
+        let scaledImage = resize(to: scaledSize, scale: newScale)
+        let x = (targetSize.width - scaledSize.width) / 2
+        let y = (targetSize.height - scaledSize.height) / 2
+        scaledImage?.draw(at: CGPoint(x: x, y: y))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

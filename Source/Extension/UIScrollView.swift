@@ -23,6 +23,17 @@ public extension UIScrollView {
             }
         }
     }
+    
+    func visibleContentImage(scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(bounds.size, true, newScale)
+        let context = UIGraphicsGetCurrentContext()!
+        context.translateBy(x: -contentOffset.x, y: -contentOffset.y)
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
 
 public extension UITableView {
