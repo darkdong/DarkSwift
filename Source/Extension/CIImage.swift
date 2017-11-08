@@ -15,7 +15,7 @@ public extension CIImage {
         return UIImage(cgImage: cgImage, scale: 1, orientation: .up)
     }
     
-    func applyingFilter(_ filter: CIFilterUtility?) -> CIImage {
+    func applyingFilter(_ filter: CIFilterWrapper?) -> CIImage {
         if let filter = filter {
             return applyingFilter(filter.name, parameters: filter.parameters)
         } else {
