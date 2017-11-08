@@ -156,6 +156,10 @@ public extension UIImage {
         }
     }
     
+    var data: Data? {
+        return cgImage?.dataProvider?.data as Data?
+    }
+    
     func filter(by filter: CIFilterWrapper?) -> UIImage? {
         return CIImage(image: self)?.applyingFilter(filter).uiImage.sameImageWithScale(scale)
     }

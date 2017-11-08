@@ -26,4 +26,41 @@ public final class CIFWColorCube: CIFilterWrapper {
         parameters["inputCubeDimension"] = cubeSize
         parameters["inputCubeData"] = cubeData
     }
+    
+    public static func generateCubeData(cubeSize: Int, isFloating: Bool) -> Data {
+        let components = 4
+        let capacity = cubeSize * cubeSize * cubeSize * components
+        
+        if isFloating {
+            var floats = [Float]()
+            floats.reserveCapacity(capacity)
+            for ib in 0..<cubeSize {
+                for ig in 0..<cubeSize {
+                    for ir in 0..<cubeSize {
+                        let r = Float(ir) / Float(cubeSize - 1)
+                        let g = Float(ig) / Float(cubeSize - 1)
+                        let b = Float(ib) / Float(cubeSize - 1)
+                        floats.append(r)
+                        floats.append(g)
+                        floats.append(b)
+                        floats.append(1)
+                    }
+                }
+            }
+            return Data(buffer: UnsafeBufferPointer(start: &floats, count: floats.count))
+        } else {
+            var data = Data(capacity: capacity)
+            for ib in 0..<cubeSize {
+                for ig in 0..<cubeSize {
+                    for ir in 0..<cubeSize {
+                        let r = UInt8(ir * cubeSize + ir)
+                        let g = UInt8(ig * cubeSize + ig)
+                        let b = UInt8(ib * cubeSize + ib)
+                        data.append(Data(bytes: [r, g, b, UInt8.max]))
+                    }
+                }
+            }
+            return data
+        }
+    }
 }
