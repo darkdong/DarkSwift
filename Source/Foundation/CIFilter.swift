@@ -20,43 +20,55 @@ public final class CIFWColorCube: CIFilterWrapper {
         return "CIColorCube"
     }
 
-    public init(cubeSize: Int, cubeData: Data) {
+    public init(cubeDimension: Int, cubeData: Data) {
         super.init()
         
-        parameters["inputCubeDimension"] = cubeSize
+        parameters["inputCubeDimension"] = cubeDimension
         parameters["inputCubeData"] = cubeData
     }
     
-    public static func standardCubeData(cubeSize: Int) -> Data {
+    public static func standardCubeData(dimension: Int) -> Data {
         let components = 4
-        let capacity = cubeSize * cubeSize * cubeSize * components
+        let capacity = dimension * dimension * dimension * components
         var data = Data(capacity: capacity)
-        for ib in 0..<cubeSize {
-            for ig in 0..<cubeSize {
-                for ir in 0..<cubeSize {
-                    let r = UInt8(ir * cubeSize + ir)
-                    let g = UInt8(ig * cubeSize + ig)
-                    let b = UInt8(ib * cubeSize + ib)
+        for ib in 0..<dimension {
+            for ig in 0..<dimension {
+                for ir in 0..<dimension {
+                    let r = UInt8(ir * dimension + ir)
+                    let g = UInt8(ig * dimension + ig)
+                    let b = UInt8(ib * dimension + ib)
                     data.append(Data(bytes: [r, g, b, UInt8.max]))
                 }
             }
         }
         return data
-//            var floats = [Float]()
-//            floats.reserveCapacity(capacity)
-//            for ib in 0..<cubeSize {
-//                for ig in 0..<cubeSize {
-//                    for ir in 0..<cubeSize {
-//                        let r = Float(ir) / Float(cubeSize - 1)
-//                        let g = Float(ig) / Float(cubeSize - 1)
-//                        let b = Float(ib) / Float(cubeSize - 1)
-//                        floats.append(r)
-//                        floats.append(g)
-//                        floats.append(b)
-//                        floats.append(1)
-//                    }
-//                }
-//            }
-//            return Data(buffer: UnsafeBufferPointer(start: &floats, count: floats.count))
+    }
+}
+
+public final class CIFWConvolution: CIFilterWrapper {
+    public enum Kind: String {
+        case CIConvolution3X3
+        case CIConvolution5X5
+        case CIConvolution7X7
+        case CIConvolution9Horizontal
+        case CIConvolution9Vertical
+        
+        var name: String {
+            return rawValue
+        }
+    }
+    
+    var kind: Kind
+    
+    override var name: String {
+        return kind.name
+    }
+    
+    public init(kind: Kind, weights: [Float], bias: Float = 0) {
+        self.kind = kind
+        super.init()
+        
+        parameters["inputWeights"] = weights
+        parameters["inputBias"] = bias
     }
 }

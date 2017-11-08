@@ -34,11 +34,11 @@ public extension UIImage {
         self.init(cgImage: image.cgImage!)
     }
     
-    convenience init?(data: Data, bitmapInfo: CGBitmapInfo, width: Int, height: Int) {
+    convenience init?(data: Data, width: Int, height: Int, bitmapInfo: CGBitmapInfo = CGBitmapInfo()) {
         let numberOfComponents = 4
         let releaseDataCallback: CGDataProviderReleaseDataCallback = { (pixelsDataPointer, _, _) in
             //release underlying data to prevent memory leak
-            print("CGDataProvider is deallocated, we can release pixelsData now")
+//            print("CGDataProvider is deallocated, we can release pixelsData now")
             Unmanaged<NSData>.fromOpaque(UnsafeRawPointer(pixelsDataPointer!)).release()
         }
         // CGDataProvider just "access" underlying data and doesn't retain it
