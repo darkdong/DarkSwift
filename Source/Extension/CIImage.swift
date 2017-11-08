@@ -9,10 +9,16 @@
 import Foundation
 
 public extension CIImage {
-    var uiImage: UIImage {
+    var uiImage: UIImage? {
+        guard !extent.isInfinite else {
+            return nil
+        }
         let context = CIContext()
-        let cgImage =  context.createCGImage(self, from: extent)!
-        return UIImage(cgImage: cgImage, scale: 1, orientation: .up)
+        if let cgImage =  context.createCGImage(self, from: extent) {
+            return UIImage(cgImage: cgImage, scale: 1, orientation: .up)
+        } else {
+            return nil
+        }
     }
     
     func applyingFilter(_ filter: CIFilterWrapper?) -> CIImage {

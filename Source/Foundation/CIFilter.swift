@@ -27,7 +27,7 @@ public final class CIFWColorCube: CIFilterWrapper {
         parameters["inputCubeData"] = cubeData
     }
     
-    public static func standardCubeData(dimension: Int) -> Data {
+    public static func standardColorCubeData(dimension: Int) -> Data {
         let components = 4
         let capacity = dimension * dimension * dimension * components
         var data = Data(capacity: capacity)
@@ -64,11 +64,12 @@ public final class CIFWConvolution: CIFilterWrapper {
         return kind.name
     }
     
-    public init(kind: Kind, weights: [Float], bias: Float = 0) {
+    //MARK: FIXME bias must be 0, or crash when convert CIImage to UIImage because CIImage's extent is infinite
+    public init(kind: Kind, weights: [CGFloat], bias: CGFloat = 0) {
         self.kind = kind
         super.init()
         
-        parameters["inputWeights"] = weights
+        parameters["inputWeights"] = CIVector(values: weights, count: weights.count)
         parameters["inputBias"] = bias
     }
 }

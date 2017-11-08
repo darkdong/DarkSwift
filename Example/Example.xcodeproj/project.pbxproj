@@ -13,8 +13,6 @@
 		423FC4CE1E9125B0009E1008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 423FC4CD1E9125B0009E1008 /* Assets.xcassets */; };
 		423FC4D11E9125B0009E1008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423FC4CF1E9125B0009E1008 /* LaunchScreen.storyboard */; };
 		428B2EE01FA0548500EC486F /* DarkSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428B2EDA1FA0546800EC486F /* DarkSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		42F23AE81FB2DDB100CBA016 /* pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F23AE41FB2DDB100CBA016 /* pic@2x.png */; };
-		42F23AEA1FB2DE7900CBA016 /* lut_path_country.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F23AE91FB2DE7900CBA016 /* lut_path_country.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,8 +61,6 @@
 		423FC4D01E9125B0009E1008 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		423FC4D21E9125B0009E1008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		428B2ED31FA0546700EC486F /* DarkSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DarkSwift.xcodeproj; path = ../DarkSwift.xcodeproj; sourceTree = "<group>"; };
-		42F23AE41FB2DDB100CBA016 /* pic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic@2x.png"; sourceTree = "<group>"; };
-		42F23AE91FB2DE7900CBA016 /* lut_path_country.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_path_country.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +94,6 @@
 		423FC4C51E9125B0009E1008 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				42F23AE41FB2DDB100CBA016 /* pic@2x.png */,
-				42F23AE91FB2DE7900CBA016 /* lut_path_country.png */,
 				423FC4C61E9125B0009E1008 /* AppDelegate.swift */,
 				423FC4C81E9125B0009E1008 /* ViewController.swift */,
 				423FC4CA1E9125B0009E1008 /* Main.storyboard */,
@@ -223,8 +217,6 @@
 				423FC4D11E9125B0009E1008 /* LaunchScreen.storyboard in Resources */,
 				423FC4CE1E9125B0009E1008 /* Assets.xcassets in Resources */,
 				423FC4CC1E9125B0009E1008 /* Main.storyboard in Resources */,
-				42F23AEA1FB2DE7900CBA016 /* lut_path_country.png in Resources */,
-				42F23AE81FB2DDB100CBA016 /* pic@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
