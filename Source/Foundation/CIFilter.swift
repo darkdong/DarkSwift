@@ -1,5 +1,5 @@
 //
-//  CIFilterWrapper.swift
+//  CIFilterUtility.swift
 //  DarkSwift
 //
 //  Created by Dark Dong on 2017/11/7.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class CIFilterWrapper {
+public class CIFilterUtility {
     var name: String {
         return ""
     }
     var parameters = [String: Any]()
 }
 
-public final class CIFilterWrapperColorCube: CIFilterWrapper {
+public final class CIFilterUtilityColorCube: CIFilterUtility {
     override var name: String {
         return "CIColorCube"
     }
