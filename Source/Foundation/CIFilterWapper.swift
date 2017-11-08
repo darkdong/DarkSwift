@@ -1,5 +1,5 @@
 //
-//  Filter.swift
+//  CIFilterWrapper.swift
 //  DarkSwift
 //
 //  Created by Dark Dong on 2017/11/7.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class ImageFilter {
+public class CIFilterWrapper {
     var name: String {
         return ""
     }
     var parameters = [String: Any]()
 }
 
-final class ColorCubeFilter: ImageFilter {
+public final class CIFilterWrapperColorCube: CIFilterWrapper {
     override var name: String {
         return "CIColorCube"
     }
