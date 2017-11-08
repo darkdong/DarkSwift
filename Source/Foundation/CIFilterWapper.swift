@@ -20,7 +20,7 @@ public final class CIFilterWrapperColorCube: CIFilterWrapper {
         return "CIColorCube"
     }
 
-    init(cubeSize: Int, cubeData: Data) {
+    public init(cubeSize: Int, cubeData: Data) {
         super.init()
         
         parameters["inputCubeDimension"] = cubeSize
