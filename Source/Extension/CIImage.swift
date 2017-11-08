@@ -14,4 +14,12 @@ public extension CIImage {
         let cgImage =  context.createCGImage(self, from: extent)!
         return UIImage(cgImage: cgImage, scale: 1, orientation: .up)
     }
+    
+    func applyingFilter(filter: ImageFilter?) -> CIImage {
+        if let filter = filter {
+            return applyingFilter(filter.name, parameters: filter.parameters)
+        } else {
+            return self
+        }
+    }
 }

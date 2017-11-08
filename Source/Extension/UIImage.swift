@@ -146,6 +146,20 @@ public extension UIImage {
         return rotatedImage
     }
     
+    func sameImageWithScale(_ scale: CGFloat) -> UIImage? {
+        if let cgImage = self.cgImage {
+            return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
+        } else if let ciImage = self.ciImage {
+            return UIImage.init(ciImage: ciImage, scale: scale, orientation: imageOrientation)
+        } else {
+            return nil
+        }
+    }
+    
+    func filter(by filter: ImageFilter?) -> UIImage? {
+        return CIImage(image: self)?.applyingFilter(filter: filter).uiImage.sameImageWithScale(scale)
+    }
+    
     func imageToFillSize(_ targetSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
         let newScale = scale ?? self.scale
         let scaleX = targetSize.width / size.width
