@@ -156,8 +156,8 @@ public extension UIImage {
         }
     }
     
-    func filter(by filter: ImageFilter?) -> UIImage? {
-        return CIImage(image: self)?.applyingFilter(filter: filter).uiImage.sameImageWithScale(scale)
+    func filter(by filterWrapper: CIFilterWrapper?) -> UIImage? {
+        return CIImage(image: self)?.applyingFilterWrapper(filterWrapper).uiImage.sameImageWithScale(scale)
     }
     
     func imageToFillSize(_ targetSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
