@@ -9,12 +9,15 @@
 import Foundation
 
 public extension CIImage {
-    var uiImage: UIImage? {
-        guard !extent.isInfinite else {
-            return nil
+    func uiImage(rectForInfinite: CGRect? = nil) -> UIImage? {
+        let ciImage: CIImage
+        if extent.isInfinite {
+            ciImage = cropped(to: rectForInfinite!)
+        } else {
+            ciImage = self
         }
         let context = CIContext()
-        if let cgImage =  context.createCGImage(self, from: extent) {
+        if let cgImage =  context.createCGImage(ciImage, from: ciImage.extent) {
             return UIImage(cgImage: cgImage, scale: 1, orientation: .up)
         } else {
             return nil

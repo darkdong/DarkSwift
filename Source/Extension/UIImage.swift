@@ -161,7 +161,8 @@ public extension UIImage {
     }
     
     func filter(by filter: CIFilterWrapper?) -> UIImage? {
-        return CIImage(image: self)?.applyingFilter(filter).uiImage?.sameImageWithScale(scale)
+        let rect = CGRect(origin: CGPoint.zero, size: size * scale)
+        return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImageWithScale(scale)
     }
     
     func imageToFillSize(_ targetSize: CGSize, scale: CGFloat? = nil) -> UIImage? {

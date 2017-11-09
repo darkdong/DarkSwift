@@ -27,16 +27,19 @@ public final class CIFWColorCube: CIFilterWrapper {
         parameters["inputCubeData"] = cubeData
     }
     
-    public static func standardColorCubeData(dimension: Int) -> Data {
+    // cubeDimension should be divided by 256
+    public static func standardColorCubeData(cubeDimension: Int) -> Data {
+        let dimension = UInt8(cubeDimension)
         let components = 4
-        let capacity = dimension * dimension * dimension * components
+        let capacity = cubeDimension * cubeDimension * cubeDimension * components
         var data = Data(capacity: capacity)
+        let step = UInt8.max / dimension
         for ib in 0..<dimension {
             for ig in 0..<dimension {
                 for ir in 0..<dimension {
-                    let r = UInt8(ir * dimension + ir)
-                    let g = UInt8(ig * dimension + ig)
-                    let b = UInt8(ib * dimension + ib)
+                    let r = ir * step + Math.similarY(x1: 0, x: ir, x2: dimension, y1: 0, y2: step)
+                    let g = ig * step + Math.similarY(x1: 0, x: ig, x2: dimension, y1: 0, y2: step)
+                    let b = ib * step + Math.similarY(x1: 0, x: ib, x2: dimension, y1: 0, y2: step)
                     data.append(Data(bytes: [r, g, b, UInt8.max]))
                 }
             }
@@ -64,7 +67,7 @@ public final class CIFWConvolution: CIFilterWrapper {
         return kind.name
     }
     
-    //MARK: FIXME bias must be 0, or crash when convert CIImage to UIImage because CIImage's extent is infinite
+    //MARK: FIXME bias must be 0, or crash when converting CIImage to UIImage because CIImage's extent is infinite
     public init(kind: Kind, weights: [CGFloat], bias: CGFloat = 0) {
         self.kind = kind
         super.init()

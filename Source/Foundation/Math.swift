@@ -6,11 +6,15 @@
 //  Copyright © 2017年 Dark Dong. All rights reserved.
 //
 
-public class Math: NSObject {
+public struct Math {
     @inline(__always) public static func similarY< T: FloatingPoint >(x1: T, x: T, x2: T, y1: T, y2: T) -> T {
         return x1 == x2 ? y1 : y1 + (x - x1) * (y2 - y1) / (x2 - x1)
     }
-        
+    
+    @inline(__always) public static func similarY< T: BinaryInteger >(x1: T, x: T, x2: T, y1: T, y2: T) -> T {
+        return x1 == x2 ? y1 : y1 + (x - x1) * (y2 - y1) / (x2 - x1)
+    }
+    
     //find bit 1 from right to left
     // bitPositions(13) -> 0x00001101 -> [1, 3, 4] 
     public static func bitmaskPositions(_ bitsRepresentation: UInt) -> [Int] {
