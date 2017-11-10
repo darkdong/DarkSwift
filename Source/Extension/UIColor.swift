@@ -16,3 +16,35 @@ public extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+
+	func rgbToHSV() -> (CGFloat, CGFloat, CGFloat) {
+		let rgb = (ciColor.red, ciColor.green, ciColor.blue)
+		
+		var hsv: (CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0)
+		
+		let minV = min(rgb.0, rgb.1, rgb.2)
+		let maxV = max(rgb.0, rgb.1, rgb.2)
+		
+		let chroma = maxV - minV
+		hsv.2 = maxV
+		
+		if maxV != 0.0 {
+			hsv.1 = chroma / maxV
+		}
+		
+		if hsv.1 != 0.0 {
+			if rgb.0 == maxV {
+				hsv.0 = (rgb.1 - rgb.2) / chroma
+			} else if rgb.1 == maxV {
+				hsv.0 = 2.0 + (rgb.2 - rgb.0) / chroma
+			} else {
+				hsv.0 = 4.0 + (rgb.0 - rgb.1) / chroma
+			}
+			hsv.0 /= 6.0
+			if hsv.0 < 0.0 {
+				hsv.0 += 1.0
+			}
+		}
+		
+		return hsv
+	}
