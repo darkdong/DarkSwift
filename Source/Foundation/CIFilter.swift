@@ -133,3 +133,28 @@ public final class CIFWConvolution: CIFilterWrapper {
         return kind.name
     }
 }
+
+public final class CIFWGaussianBlur: CIFilterWrapper {
+	override var name: String {
+		return "CIGaussianBlur"
+	}
+	
+	public init(radius: Float = 10.00) {
+		super.init()
+
+		parameters["inputRadius"] = NSNumber(value: radius)	// An NSNumber object whose attribute type is CIAttributeTypeDistance, default is 10.00, range 0.00 - 100.00
+	}
+}
+
+public final class CIFWVignette: CIFilterWrapper {
+	override var name: String {
+		return "CIVignette"
+	}
+	
+	public init(radius: Float = 1.0, intensity: Float = 0.0) {
+		super.init()
+
+		parameters["inputRadius"] = NSNumber(value: radius)
+		parameters["inputIntensity"] = NSNumber(value: intensity)
+	}
+}
