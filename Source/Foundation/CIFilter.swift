@@ -46,19 +46,20 @@ public final class CIFWColorCube: CIFilterWrapper {
         }
     }
     
-    public init(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
+    public init(dimension: Int = 2, data: Data, colorSpace: CGColorSpace? = nil) {
         super.init()
+        
+        func initParameters(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
+            self.dimension = dimension
+            self.data = data
+            self.colorSpace = colorSpace
+        }
+        
         initParameters(dimension: dimension, data: data, colorSpace: colorSpace)
     }
     
     override public var name: String {
         return "CIColorCubeWithColorSpace"
-    }
-    
-    private func initParameters(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
-        self.dimension = dimension
-        self.data = data
-        self.colorSpace = colorSpace
     }
     
     // cubeDimension should be divided by 256 and >= 2 and <= 128
@@ -99,10 +100,6 @@ public final class CIFWConvolution: CIFilterWrapper {
         case CIConvolution7X7
         case CIConvolution9Horizontal
         case CIConvolution9Vertical
-        
-        var name: String {
-            return rawValue
-        }
     }
     
     public var kind: Kind
@@ -117,44 +114,79 @@ public final class CIFWConvolution: CIFilterWrapper {
         }
     }
     
-    public init(kind: Kind, weights: [CGFloat], bias: CGFloat) {
+    public init(kind: Kind, weights: [CGFloat], bias: CGFloat = 0) {
         self.kind = kind
         super.init()
+        
+        func initParameters(weights: [CGFloat], bias: CGFloat) {
+            self.weights = weights
+            self.bias = bias
+        }
         
         initParameters(weights: weights, bias: bias)
     }
     
-    private func initParameters(weights: [CGFloat], bias: CGFloat) {
-        self.weights = weights
-        self.bias = bias
-    }
-    
     override public var name: String {
-        return kind.name
+        return kind.rawValue
     }
 }
 
 public final class CIFWGaussianBlur: CIFilterWrapper {
-	override var name: String {
-		return "CIGaussianBlur"
-	}
-	
-	public init(radius: Float = 10.00) {
-		super.init()
+    enum Key: String {
+        case inputRadius
+    }
+    
+    public var radius: Float = 10 {
+        didSet {
+            print("ssss")
+            parameters[Key.inputRadius.rawValue] = radius
+        }
+    }
+    
+    public init(radius: Float = 10) {
+        super.init()
 
-		parameters["inputRadius"] = NSNumber(value: radius)	// An NSNumber object whose attribute type is CIAttributeTypeDistance, default is 10.00, range 0.00 - 100.00
-	}
+        func initParameters(radius: Float) {
+            self.radius = radius
+        }
+        
+        initParameters(radius: radius)
+    }
+    
+    override public var name: String {
+        return "CIGaussianBlur"
+    }
 }
 
 public final class CIFWVignette: CIFilterWrapper {
-	override var name: String {
-		return "CIVignette"
-	}
-	
-	public init(radius: Float = 1.0, intensity: Float = 0.0) {
-		super.init()
-
-		parameters["inputRadius"] = NSNumber(value: radius)
-		parameters["inputIntensity"] = NSNumber(value: intensity)
-	}
+    enum Key: String {
+        case inputRadius
+        case inputIntensity
+    }
+    
+    public var radius: Float = 1 {
+        didSet {
+            parameters[Key.inputRadius.rawValue] = radius
+        }
+    }
+    public var intensity: Float = 0 {
+        didSet {
+            parameters[Key.inputIntensity.rawValue] = intensity
+        }
+    }
+    
+    public init(radius: Float = 1, intensity: Float = 0) {
+        super.init()
+        
+        func initParameters(radius: Float, intensity: Float) {
+            self.radius = radius
+            self.intensity = intensity
+        }
+        
+        initParameters(radius: radius, intensity: intensity)
+    }
+    
+    override public var name: String {
+        return "CIVignette"
+    }
 }

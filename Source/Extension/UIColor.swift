@@ -15,7 +15,6 @@ public extension UIColor {
         let blue = CGFloat(rgbValue & 0xFF) / 255.0
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
-}
 
 	func rgbToHSV() -> (CGFloat, CGFloat, CGFloat) {
 		let rgb = (ciColor.red, ciColor.green, ciColor.blue)
@@ -48,3 +47,4 @@ public extension UIColor {
 		
 		return hsv
 	}
+}
