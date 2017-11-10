@@ -138,7 +138,6 @@ public final class CIFWGaussianBlur: CIFilterWrapper {
     
     public var radius: Float = 10 {
         didSet {
-            print("ssss")
             parameters[Key.inputRadius.rawValue] = radius
         }
     }
