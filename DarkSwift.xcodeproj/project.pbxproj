@@ -40,6 +40,7 @@
 		42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DB4BDE1E9C6BBE00243EC4 /* Math.swift */; };
 		42F23AD61FB172FD00CBA016 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F23AD51FB172FD00CBA016 /* CIImage.swift */; };
 		42F23AE31FB2095700CBA016 /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F23AE21FB2095700CBA016 /* CIFilter.swift */; };
+		42F23AF41FB44D5400CBA016 /* FileLineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F23AF31FB44D5400CBA016 /* FileLineReader.swift */; };
 		42F43DC41E926BAE00F30C95 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F43DC31E926BAE00F30C95 /* System.swift */; };
 		42FF21B21F8E1759006BD295 /* LineLimitedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FF21B11F8E1759006BD295 /* LineLimitedTextView.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		42DB4BDE1E9C6BBE00243EC4 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		42F23AD51FB172FD00CBA016 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
 		42F23AE21FB2095700CBA016 /* CIFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
+		42F23AF31FB44D5400CBA016 /* FileLineReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLineReader.swift; sourceTree = "<group>"; };
 		42F43DC31E926BAE00F30C95 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		42FF21B11F8E1759006BD295 /* LineLimitedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineLimitedTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +236,7 @@
 				423FC4B51E908CEF009E1008 /* Layout.swift */,
 				42C225831F11C91E002AC779 /* Selectable.swift */,
 				42F23AE21FB2095700CBA016 /* CIFilter.swift */,
+				42F23AF31FB44D5400CBA016 /* FileLineReader.swift */,
 			);
 			name = Foundation;
 			path = Source/Foundation;
@@ -403,6 +406,7 @@
 				42256D5A1F1700000043BD5A /* TransitionViewController.swift in Sources */,
 				42256D4F1F16FFED0043BD5A /* Data.swift in Sources */,
 				42256D541F16FFED0043BD5A /* UIColor.swift in Sources */,
+				42F23AF41FB44D5400CBA016 /* FileLineReader.swift in Sources */,
 				42CE79FE1E8DFB2E00834C18 /* Screen.swift in Sources */,
 				42256D581F16FFED0043BD5A /* URL.swift in Sources */,
 				42F43DC41E926BAE00F30C95 /* System.swift in Sources */,

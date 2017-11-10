@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,26 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="这是一个abcdefgABCDEFG" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c7C-2R-kei" customClass="LineLimitedTextView" customModule="DarkSwift">
-                                <rect key="frame" x="67.5" y="120" width="240" height="20"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="24T-mV-Zf1">
+                                <rect key="frame" x="67" y="253.5" width="240" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="6qN-4c-6Bk"/>
-                                    <constraint firstAttribute="height" constant="20" id="FXr-VT-2MZ"/>
+                                    <constraint firstAttribute="width" constant="240" id="AGU-gs-NlC"/>
+                                    <constraint firstAttribute="height" constant="160" id="xrW-JB-rn8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="c7C-2R-kei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7k2-Mh-az0"/>
-                            <constraint firstItem="c7C-2R-kei" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="by0-0X-zUw"/>
+                            <constraint firstItem="24T-mV-Zf1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hgs-ja-Tkf"/>
+                            <constraint firstItem="24T-mV-Zf1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sBM-zo-274"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="heightConstraint" destination="FXr-VT-2MZ" id="O2Y-1S-PpH"/>
-                        <outlet property="textView" destination="c7C-2R-kei" id="Fqz-nm-ujh"/>
+                        <outlet property="imageView" destination="24T-mV-Zf1" id="MeF-EX-oQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
