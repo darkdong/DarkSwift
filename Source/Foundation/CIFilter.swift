@@ -9,48 +9,59 @@
 import Foundation
 
 public class CIFilterWrapper {
-    var name: String {
+    public var name: String {
         return ""
     }
-    var parameters = [String: Any]()
+    public var parameters = [String: Any]()
 }
 
 public final class CIFWColorCube: CIFilterWrapper {
-    public enum Kind {
-        case CIColorCube
-        case CIColorCubeWithColorSpace(CGColorSpace?)
-        
-        var name: String {
-            switch self {
-            case .CIColorCube:
-                return "CIColorCube"
-            case .CIColorCubeWithColorSpace:
-                return "CIColorCubeWithColorSpace"
+    enum Key: String {
+        case inputCubeDimension
+        case inputCubeData
+        case inputColorSpace
+    }
+    
+    public var dimension = 0 {
+        didSet {
+            let minDimension = 2
+            let maxDimension = 128
+            if dimension < minDimension {
+                dimension = minDimension
             }
+            if dimension > maxDimension {
+                dimension = maxDimension
+            }
+            parameters[Key.inputCubeDimension.rawValue] = dimension
+        }
+    }
+    public var data: Data! {
+        didSet {
+            parameters[Key.inputCubeData.rawValue] = data
+        }
+    }
+    public var colorSpace: CGColorSpace? {
+        didSet {
+            parameters[Key.inputColorSpace.rawValue] = colorSpace
         }
     }
     
-    var kind: Kind
-    
-    override var name: String {
-        return kind.name
-    }
-    
-    public init(kind: Kind, cubeDimension: Int, cubeData: Data) {
-        self.kind = kind
+    public init(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
         super.init()
-        
-        parameters["inputCubeDimension"] = cubeDimension
-        parameters["inputCubeData"] = cubeData
-        switch kind {
-        case .CIColorCubeWithColorSpace(let cgColorSpace):
-            parameters["inputColorSpace"] = cgColorSpace
-        default:
-            break
-        }
+        initParameters(dimension: dimension, data: data, colorSpace: colorSpace)
     }
     
-    // cubeDimension should be divided by 256
+    override public var name: String {
+        return "CIColorCubeWithColorSpace"
+    }
+    
+    private func initParameters(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
+        self.dimension = dimension
+        self.data = data
+        self.colorSpace = colorSpace
+    }
+    
+    // cubeDimension should be divided by 256 and >= 2 and <= 128
     public static func standardColorCubeData(cubeDimension: Int) -> Data {
         let components = 4
         let capacity = cubeDimension * cubeDimension * cubeDimension * components
@@ -77,6 +88,11 @@ public final class CIFWColorCube: CIFilterWrapper {
 }
 
 public final class CIFWConvolution: CIFilterWrapper {
+    enum Key: String {
+        case inputWeights
+        case inputBias
+    }
+    
     public enum Kind: String {
         case CIConvolution3X3
         case CIConvolution5X5
@@ -89,18 +105,31 @@ public final class CIFWConvolution: CIFilterWrapper {
         }
     }
     
-    var kind: Kind
-    
-    override var name: String {
-        return kind.name
+    public var kind: Kind
+    public var weights: [CGFloat] = [] {
+        didSet {
+            parameters[Key.inputWeights.rawValue] = CIVector(values: weights, count: weights.count)
+        }
+    }
+    public var bias: CGFloat = 0 {
+        didSet {
+            parameters[Key.inputBias.rawValue] = bias
+        }
     }
     
-    //MARK: FIXME bias must be 0, or crash when converting CIImage to UIImage because CIImage's extent is infinite
-    public init(kind: Kind, weights: [CGFloat], bias: CGFloat = 0) {
+    public init(kind: Kind, weights: [CGFloat], bias: CGFloat) {
         self.kind = kind
         super.init()
         
-        parameters["inputWeights"] = CIVector(values: weights, count: weights.count)
-        parameters["inputBias"] = bias
+        initParameters(weights: weights, bias: bias)
+    }
+    
+    private func initParameters(weights: [CGFloat], bias: CGFloat) {
+        self.weights = weights
+        self.bias = bias
+    }
+    
+    override public var name: String {
+        return kind.name
     }
 }
