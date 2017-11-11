@@ -1,5 +1,5 @@
 //
-//  CIFilter.swift
+//  ImageFilter.swift
 //  DarkSwift
 //
 //  Created by Dark Dong on 2017/11/7.
@@ -8,14 +8,17 @@
 
 import Foundation
 
-open class CIFilterWrapper {
-    public var name: String {
-        return ""
+public class ImageFilter {
+    public private(set) var name: String
+    public var parameters: [String: Any]
+    
+    public init(name: String, parameters: [String: Any] = [:]) {
+        self.name = name
+        self.parameters = parameters
     }
-    public var parameters = [String: Any]()
 }
 
-public final class CIFWColorCube: CIFilterWrapper {
+public final class ImageColorCubeFilter: ImageFilter {
     enum Key: String {
         case inputCubeDimension
         case inputCubeData
@@ -47,7 +50,7 @@ public final class CIFWColorCube: CIFilterWrapper {
     }
     
     public init(dimension: Int = 2, data: Data, colorSpace: CGColorSpace? = nil) {
-        super.init()
+        super.init(name: "CIColorCubeWithColorSpace")
         
         func initParameters(dimension: Int, data: Data, colorSpace: CGColorSpace?) {
             self.dimension = dimension
@@ -56,10 +59,6 @@ public final class CIFWColorCube: CIFilterWrapper {
         }
         
         initParameters(dimension: dimension, data: data, colorSpace: colorSpace)
-    }
-    
-    override public var name: String {
-        return "CIColorCubeWithColorSpace"
     }
     
     // cubeDimension should be divided by 256 and >= 2 and <= 128
@@ -87,8 +86,7 @@ public final class CIFWColorCube: CIFilterWrapper {
         return data
     }
 }
-
-public final class CIFWConvolution: CIFilterWrapper {
+public final class ImageConvolutionFilter: ImageFilter {
     enum Key: String {
         case inputWeights
         case inputBias
@@ -116,8 +114,8 @@ public final class CIFWConvolution: CIFilterWrapper {
     
     public init(kind: Kind, weights: [CGFloat], bias: CGFloat = 0) {
         self.kind = kind
-        super.init()
-        
+        super.init(name: kind.rawValue)
+
         func initParameters(weights: [CGFloat], bias: CGFloat) {
             self.weights = weights
             self.bias = bias
@@ -125,13 +123,9 @@ public final class CIFWConvolution: CIFilterWrapper {
         
         initParameters(weights: weights, bias: bias)
     }
-    
-    override public var name: String {
-        return kind.rawValue
-    }
 }
 
-public final class CIFWGaussianBlur: CIFilterWrapper {
+public final class ImageGaussianBlurFilter: ImageFilter {
     enum Key: String {
         case inputRadius
     }
@@ -143,7 +137,7 @@ public final class CIFWGaussianBlur: CIFilterWrapper {
     }
     
     public init(radius: Float = 10) {
-        super.init()
+        super.init(name: "CIGaussianBlur")
 
         func initParameters(radius: Float) {
             self.radius = radius
@@ -151,13 +145,9 @@ public final class CIFWGaussianBlur: CIFilterWrapper {
         
         initParameters(radius: radius)
     }
-    
-    override public var name: String {
-        return "CIGaussianBlur"
-    }
 }
 
-public final class CIFWVignette: CIFilterWrapper {
+public final class ImageVignetteFilter: ImageFilter {
     enum Key: String {
         case inputRadius
         case inputIntensity
@@ -175,17 +165,13 @@ public final class CIFWVignette: CIFilterWrapper {
     }
     
     public init(radius: Float = 1, intensity: Float = 0) {
-        super.init()
-        
+        super.init(name: "CIVignette")
+
         func initParameters(radius: Float, intensity: Float) {
             self.radius = radius
             self.intensity = intensity
         }
         
         initParameters(radius: radius, intensity: intensity)
-    }
-    
-    override public var name: String {
-        return "CIVignette"
     }
 }

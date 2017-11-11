@@ -24,7 +24,7 @@ public extension CIImage {
         }
     }
     
-    func applyingFilter(_ filter: CIFilterWrapper?) -> CIImage {
+    func applyingFilter(_ filter: ImageFilter?) -> CIImage {
         if let filter = filter {
             return applyingFilter(filter.name, parameters: filter.parameters)
         } else {
