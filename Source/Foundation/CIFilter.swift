@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CIFilterWrapper {
+open class CIFilterWrapper {
     public var name: String {
         return ""
     }
