@@ -11,7 +11,8 @@ import Foundation
 public class ImageFilter {
     public private(set) var name: String
     public var parameters: [String: Any]
-    
+    public var isEnabled = true
+
     public init(name: String, parameters: [String: Any] = [:]) {
         self.name = name
         self.parameters = parameters
@@ -27,13 +28,13 @@ public final class ImageColorCubeFilter: ImageFilter {
     
     public var dimension = 0 {
         didSet {
-            let minDimension = 2
-            let maxDimension = 128
-            if dimension < minDimension {
-                dimension = minDimension
+            let min = 2
+            let max = 128
+            if dimension < min {
+                dimension = min
             }
-            if dimension > maxDimension {
-                dimension = maxDimension
+            if dimension > max {
+                dimension = max
             }
             parameters[Key.inputCubeDimension.rawValue] = dimension
         }
