@@ -98,17 +98,13 @@ public extension UIView {
         return nil
     }
 
-    func snapshotImage(scale: CGFloat? = nil) -> UIImage? {
-        let newScale = scale ?? UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, newScale)
-        if let context = UIGraphicsGetCurrentContext() {
-            layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
-        } else {
-            return nil
-        }
+    func snapshotImage(scale: CGFloat = 1) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale * scale)
+        let context = UIGraphicsGetCurrentContext()!
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     func clips(to path: UIBezierPath) {

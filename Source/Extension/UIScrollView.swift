@@ -24,9 +24,8 @@ public extension UIScrollView {
         }
     }
     
-    func visibleContentImage(scale: CGFloat? = nil) -> UIImage? {
-        let newScale = scale ?? UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(bounds.size, true, newScale)
+    func visibleContentImage(scale: CGFloat = 1) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, true, UIScreen.main.scale * scale)
         let context = UIGraphicsGetCurrentContext()!
         context.translateBy(x: -contentOffset.x, y: -contentOffset.y)
         layer.render(in: context)
