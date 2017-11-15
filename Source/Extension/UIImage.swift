@@ -160,6 +160,10 @@ public extension UIImage {
         return cgImage?.dataProvider?.data as Data?
     }
     
+    var pixelSize: CGSize {
+        return size * scale
+    }
+    
     func filter(by filter: ImageFilter?) -> UIImage? {
         let rect = CGRect(origin: CGPoint.zero, size: size * scale)
         return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImageWithScale(scale)
