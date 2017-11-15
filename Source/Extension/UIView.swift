@@ -98,8 +98,8 @@ public extension UIView {
         return nil
     }
 
-    func snapshotImage(scale: CGFloat = 1) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale * scale)
+    func snapshotImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()!
         layer.render(in: context)
         let image = UIGraphicsGetImageFromCurrentImageContext()

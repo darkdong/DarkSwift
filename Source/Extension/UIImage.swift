@@ -169,37 +169,24 @@ public extension UIImage {
         return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImageWithScale(scale)
     }
     
-    func imageToFillSize(_ targetSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
-        let newScale = scale ?? self.scale
-        let scaleX = targetSize.width / size.width
-        let scaleY = targetSize.height / size.height
-        let maxScale = max(scaleX, scaleY)
-        let scaledSize = size * maxScale
-        let scaledImage = resize(to: scaledSize, scale: newScale)
-        let x = (scaledSize.width - targetSize.width) / 2
-        let y = (scaledSize.height - targetSize.height) / 2
-        let rect = CGRect(origin: CGPoint(x: x, y: y), size: targetSize)
-        return scaledImage?.crop(to: rect)
+    func imageToFillSize(_ targetSize: CGSize) -> UIImage? {
+        let scaledRect = size.scaledRectToFillSize(targetSize)
+        let scaledImage = resize(to: scaledRect.size)
+        return scaledImage?.crop(to: scaledRect)
     }
     
-    func imageToFitSize(_ targetSize: CGSize, paddingColor: UIColor? = nil, scale: CGFloat? = nil) -> UIImage? {
-        let newScale = scale ?? self.scale
+    func imageToFitSize(_ targetSize: CGSize, paddingColor: UIColor? = nil) -> UIImage? {
         if let color = paddingColor {
-            UIGraphicsBeginImageContextWithOptions(targetSize, true, newScale)
+            UIGraphicsBeginImageContextWithOptions(targetSize, true, scale)
             let context = UIGraphicsGetCurrentContext()!
             context.setFillColor(color.cgColor)
             context.fill(CGRect(origin: CGPoint.zero, size: targetSize))
         } else {
-            UIGraphicsBeginImageContextWithOptions(targetSize, false, newScale)
+            UIGraphicsBeginImageContextWithOptions(targetSize, false, scale)
         }
-        let scaleX = targetSize.width / size.width
-        let scaleY = targetSize.height / size.height
-        let minScale = min(scaleX, scaleY)
-        let scaledSize = size * minScale
-        let scaledImage = resize(to: scaledSize, scale: newScale)
-        let x = (targetSize.width - scaledSize.width) / 2
-        let y = (targetSize.height - scaledSize.height) / 2
-        scaledImage?.draw(at: CGPoint(x: x, y: y))
+        let scaledRect = size.scaledRectToFitSize(targetSize)
+        let scaledImage = resize(to: scaledRect.size)
+        scaledImage?.draw(at: scaledRect.origin)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

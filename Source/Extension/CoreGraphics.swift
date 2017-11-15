@@ -62,6 +62,30 @@ public extension CGSize {
     var center: CGPoint {
         return CGPoint(x: width / 2, y: height / 2)
     }
+    
+    @inline(__always) func scaleToFillSize(_ targetSize: CGSize) -> CGFloat {
+        return max(targetSize.width / width, targetSize.height / height)
+    }
+    
+    @inline(__always) func scaleToFitSize(_ targetSize: CGSize) -> CGFloat {
+        return min(targetSize.width / width, targetSize.height / height)
+    }
+    
+    func scaledRectToFillSize(_ targetSize: CGSize) -> CGRect {
+        let scale = scaleToFillSize(targetSize)
+        let scaledSize = self * scale
+        let x = (scaledSize.width - targetSize.width) / 2
+        let y = (scaledSize.height - targetSize.height) / 2
+        return CGRect(origin: CGPoint(x: x, y: y), size: targetSize)
+    }
+    
+    func scaledRectToFitSize(_ targetSize: CGSize) -> CGRect {
+        let scale = scaleToFitSize(targetSize)
+        let scaledSize = self * scale
+        let x = (targetSize.width - scaledSize.width) / 2
+        let y = (targetSize.height - scaledSize.height) / 2
+        return CGRect(origin: CGPoint(x: x, y: y), size: targetSize)
+    }
 }
 
 public extension CGRect {
