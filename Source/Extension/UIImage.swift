@@ -169,13 +169,13 @@ public extension UIImage {
         return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImageWithScale(scale)
     }
     
-    func imageToFillSize(_ targetSize: CGSize) -> UIImage? {
-        let scaledRect = size.scaledRectToFillSize(targetSize)
+    func imageForFillingSize(_ targetSize: CGSize) -> UIImage? {
+        let scaledRect = size.scaledRectForFillingSize(targetSize)
         let scaledImage = resize(to: scaledRect.size)
         return scaledImage?.crop(to: scaledRect)
     }
     
-    func imageToFitSize(_ targetSize: CGSize, paddingColor: UIColor? = nil) -> UIImage? {
+    func imageForFittingSize(_ targetSize: CGSize, paddingColor: UIColor? = nil) -> UIImage? {
         if let color = paddingColor {
             UIGraphicsBeginImageContextWithOptions(targetSize, true, scale)
             let context = UIGraphicsGetCurrentContext()!
@@ -184,7 +184,7 @@ public extension UIImage {
         } else {
             UIGraphicsBeginImageContextWithOptions(targetSize, false, scale)
         }
-        let scaledRect = size.scaledRectToFitSize(targetSize)
+        let scaledRect = size.scaledRectForFittingSize(targetSize)
         let scaledImage = resize(to: scaledRect.size)
         scaledImage?.draw(at: scaledRect.origin)
         let image = UIGraphicsGetImageFromCurrentImageContext()
