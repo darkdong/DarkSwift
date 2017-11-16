@@ -193,6 +193,6 @@ public extension UIImage {
     }
     
     var desc: String {
-        return "size: \(size), scale: \(scale), pixelSize: \(pixelSize) orientation: \(imageOrientation)"
+        return "size: \(size), scale: \(scale), pixelSize: \(pixelSize) orientation: \(imageOrientation.rawValue)"
     }
 }
