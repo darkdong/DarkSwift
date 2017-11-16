@@ -191,4 +191,8 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
+    
+    var desc: String {
+        return "size: \(size), scale: \(scale), pixelSize: \(pixelSize) orientation: \(imageOrientation)"
+    }
 }
