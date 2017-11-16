@@ -107,13 +107,18 @@ public extension UIImage {
     }
     
     func crop(to rect: CGRect) -> UIImage? {
-        let t = CGAffineTransform(scaleX: scale, y: scale)
-        let pixelRect = rect.applying(t)
-        if let cgImage = cgImage?.cropping(to: pixelRect) {
+        if let cgImage = cgImage?.cropping(to: rect * scale) {
             return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
         } else {
             return nil
         }
+    }
+    
+    func cropToSquare() -> UIImage? {
+        let squareSideLength = min(size.width, size.height)
+        let squareSize = CGSize(width: squareSideLength, height: squareSideLength)
+        let rect = size.scaledRectForFillingSize(squareSize)
+        return crop(to: rect)
     }
     
     func resize(to newSize: CGSize, scale: CGFloat? = nil) -> UIImage? {
