@@ -151,11 +151,12 @@ public extension UIImage {
         return rotatedImage
     }
     
-    func sameImageWithScale(_ scale: CGFloat) -> UIImage? {
+    func sameImage(scale: CGFloat? = nil) -> UIImage? {
+        let newScale = scale ?? UIScreen.main.scale
         if let cgImage = self.cgImage {
-            return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
+            return UIImage(cgImage: cgImage, scale: newScale, orientation: imageOrientation)
         } else if let ciImage = self.ciImage {
-            return UIImage(ciImage: ciImage, scale: scale, orientation: imageOrientation)
+            return UIImage(ciImage: ciImage, scale: newScale, orientation: imageOrientation)
         } else {
             return nil
         }
@@ -171,7 +172,7 @@ public extension UIImage {
     
     func filter(by filter: ImageFilter?) -> UIImage? {
         let rect = CGRect(origin: CGPoint.zero, size: size * scale)
-        return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImageWithScale(scale)
+        return CIImage(image: self)?.applyingFilter(filter).uiImage(rectForInfinite: rect)?.sameImage(scale: scale)
     }
     
     func imageForFillingSize(_ targetSize: CGSize) -> UIImage? {
