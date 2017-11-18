@@ -151,6 +151,31 @@ public extension UIImage {
         return rotatedImage
     }
     
+	func horizonalMirror() -> UIImage {
+		var flippedOrientation: UIImageOrientation = .up
+		
+		switch imageOrientation {
+		case .up:
+			flippedOrientation = .upMirrored
+		case .down:
+			flippedOrientation = .downMirrored
+		case .right:
+			flippedOrientation = .leftMirrored
+		case .left:
+			flippedOrientation = .rightMirrored
+		case .upMirrored:
+			flippedOrientation = .up
+		case .downMirrored:
+			flippedOrientation = .down
+		case .leftMirrored:
+			flippedOrientation = .right
+		case .rightMirrored:
+			flippedOrientation = .left
+		}
+		
+		return UIImage(cgImage: cgImage!, scale: scale, orientation: flippedOrientation)
+	}
+    
     func sameImage(scale: CGFloat? = nil) -> UIImage? {
         let newScale = scale ?? UIScreen.main.scale
         if let cgImage = self.cgImage {
