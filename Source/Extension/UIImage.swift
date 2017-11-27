@@ -95,12 +95,12 @@ public extension UIImage {
         return tintedImage
     }
     
-    func blend(by image: UIImage, mode: CGBlendMode = .normal, isOpaque: Bool = false, alpha: CGFloat = 1, position: CGPoint? = nil) -> UIImage? {
-        //FIXME: both self and image should use size with scale 1
-        let pos = position ?? CGPoint(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2)
-        UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale)
+    func blend(with image: UIImage, at position: CGPoint? = nil, mode: CGBlendMode = .normal, alpha: CGFloat = 1) -> UIImage? {
+        let blendingImage = image.sameImage(scale: scale)!
+        let position = position ?? CGPoint(x: (size.width - blendingImage.size.width) / 2, y: (size.height - blendingImage.size.height) / 2)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero)
-        image.draw(at: pos, blendMode: mode, alpha: alpha)
+        blendingImage.draw(at: position, blendMode: mode, alpha: alpha)
         let blendedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return blendedImage
