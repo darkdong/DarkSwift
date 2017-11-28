@@ -60,7 +60,7 @@ public extension URL {
         let stdPath = standardizedFileURL.path
         let relativeStdPath = url.standardizedFileURL.path
         if stdPath.hasPrefix(relativeStdPath) {
-            let index = relativeStdPath.index(relativeStdPath.startIndex, offsetBy: relativeStdPath.characters.count)
+            let index = relativeStdPath.index(relativeStdPath.startIndex, offsetBy: relativeStdPath.count)
             return String(stdPath[index...])
         }
         return nil
