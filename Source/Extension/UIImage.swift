@@ -248,6 +248,22 @@ public extension UIImage {
         return image
     }
     
+	func imageWithInsets(insets: UIEdgeInsets, insetsColor: UIColor = .white, targetSize: CGSize) -> UIImage? {
+		UIGraphicsBeginImageContextWithOptions(targetSize, false, scale)
+		let context = UIGraphicsGetCurrentContext()
+		context?.setFillColor(insetsColor.cgColor)
+		context?.fill(CGRect(origin: .zero, size: targetSize))
+		
+		let origin = CGPoint(x: insets.left, y: insets.top)
+		let width = targetSize.width - insets.left - insets.right
+		let height = targetSize.height - insets.top - insets.bottom
+		let size = CGSize(width: width, height: height)
+		self.draw(in: CGRect(origin: origin, size: size))
+		let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return imageWithInsets
+	}
+	
     var desc: String {
         return "size: \(size), scale: \(scale), pixelSize: \(pixelSize) orientation: \(imageOrientation.rawValue)"
     }
