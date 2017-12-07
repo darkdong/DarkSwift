@@ -9,15 +9,15 @@
 import Foundation
 import AVFoundation
 
-class AudioPlayer: NSObject {
-    static let shared = AudioPlayer()
+public class AudioPlayer: NSObject {
+    public static let shared = AudioPlayer()
     
     private var player: AVAudioPlayer?
     private var completionHandler: ((URL?, Bool) -> Void)?
     
     //play long audio file such as background music, song music, etc.
     //This method can enter background mode and recover properly in foreground mode
-    func play(file: URL?, delay: TimeInterval = 0, numberOfLoops: Int = 0, volume: Float = 1, completionHandler: ((URL?, Bool) -> Void)? = nil) {
+    public func play(file: URL?, delay: TimeInterval = 0, numberOfLoops: Int = 0, volume: Float = 1, completionHandler: ((URL?, Bool) -> Void)? = nil) {
         guard let file = file else {
             return
         }
@@ -27,7 +27,7 @@ class AudioPlayer: NSObject {
         }
     }
     
-    func play(data: Data?, delay: TimeInterval = 0, numberOfLoops: Int = 0, volume: Float = 1, completionHandler: ((URL?, Bool) -> Void)? = nil) {
+    public func play(data: Data?, delay: TimeInterval = 0, numberOfLoops: Int = 0, volume: Float = 1, completionHandler: ((URL?, Bool) -> Void)? = nil) {
         guard let data = data else {
             return
         }
@@ -37,11 +37,11 @@ class AudioPlayer: NSObject {
         }
     }
     
-    func pause() {
+    public func pause() {
         player?.pause()
     }
     
-    func stop() {
+    public func stop() {
         player?.stop()
     }
     
@@ -62,7 +62,7 @@ class AudioPlayer: NSObject {
 //MARK: - AVAudioPlayerDelegate
 
 extension AudioPlayer: AVAudioPlayerDelegate {
-    @objc func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    @objc public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         completionHandler?(player.url, flag)
     }
 }
