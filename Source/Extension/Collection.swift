@@ -1,5 +1,5 @@
 //
-//  Array.swift
+//  Collection.swift
 //  DarkSwift
 //
 //  Created by Dark Dong on 2017/4/18.
@@ -46,6 +46,13 @@ public extension Sequence {
 public extension Array {
     var randomIndex: Int {
         return Int(arc4random_uniform(UInt32(count)))
+    }
+    
+    var random: Element? {
+        guard !isEmpty else {
+            return nil
+        }
+        return self[randomIndex]
     }
     
     func randoms(_ count: Int ) -> [Element] {
