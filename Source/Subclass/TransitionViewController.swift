@@ -25,14 +25,8 @@ open class TransitionViewController: UIViewController {
     }
     
     public var backgroundStyle = BackgroundStyle.color(UIColor(white: 0, alpha: 0.66))
-    
     public var presentationTransition = Transition()
-    public var presentationAnimation: (() -> Void) = {}
-    public var presentationCompletion: ((Bool) -> Void)?
-    
     public var dismissalTransition = Transition()
-    public var dismissalAnimation: (() -> Void) = {}
-    public var dismissalCompletion: ((Bool) -> Void)?
     
     private var shouldPresent = true
     
@@ -70,22 +64,22 @@ open class TransitionViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if shouldPresent {
-            UIView.animate(withDuration: presentationTransition.duration, delay: presentationTransition.delay, usingSpringWithDamping: presentationTransition.dampingRatio, initialSpringVelocity: presentationTransition.velocity, options: presentationTransition.options, animations: {
-                self.presentationTransition.animation()
-                self.presentationAnimation()
-            }, completion: { (finished) in
-                self.presentationCompletion?(finished)
-            })
+            startPresenting()
+            UIView.animate(withDuration: presentationTransition.duration, delay: presentationTransition.delay, usingSpringWithDamping: presentationTransition.dampingRatio, initialSpringVelocity: presentationTransition.velocity, options: presentationTransition.options, animations: presentationTransition.animation, completion: presentationTransition.completion)
             shouldPresent = false
         }
     }
     
+    //Subclass should override this method to customize animation for presenting
+    open func startPresenting() {
+    }
+    
+    //Subclass should override this method to customize animation for dismissing
+    open func startDismissing() {
+    }
+    
     public func dismiss(completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: dismissalTransition.duration, delay: dismissalTransition.delay, usingSpringWithDamping: dismissalTransition.dampingRatio, initialSpringVelocity: dismissalTransition.velocity, options: dismissalTransition.options, animations: {
-            self.dismissalTransition.animation()
-            self.dismissalAnimation()
-        }, completion: { (finished) in
-            self.dismissalCompletion?(finished)
-        })
+        startDismissing()
+        UIView.animate(withDuration: dismissalTransition.duration, delay: dismissalTransition.delay, usingSpringWithDamping: dismissalTransition.dampingRatio, initialSpringVelocity: dismissalTransition.velocity, options: dismissalTransition.options, animations: dismissalTransition.animation, completion: dismissalTransition.completion)
     }
 }
