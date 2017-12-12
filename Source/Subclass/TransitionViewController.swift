@@ -11,7 +11,7 @@ import UIKit
 open class TransitionViewController: UIViewController {
     public enum BackgroundStyle {
         case effect(UIVisualEffect, UIImage?)
-        case color(UIColor?)
+        case color(UIColor)
     }
     
     public struct Transition {
@@ -23,13 +23,18 @@ open class TransitionViewController: UIViewController {
         public var animation: (() -> Void) = {}
         public var completion: ((Bool) -> Void)?
     }
-
+    
     public var backgroundStyle = BackgroundStyle.color(UIColor(white: 0, alpha: 0.66))
-
-    public var presentTransition = Transition()
-    public var dismissTransition = Transition()
-
-    var shouldPresent = true
+    
+    public var presentationTransition = Transition()
+    public var presentationAnimation: (() -> Void) = {}
+    public var presentationCompletion: ((Bool) -> Void)?
+    
+    public var dismissalTransition = Transition()
+    public var dismissalAnimation: (() -> Void) = {}
+    public var dismissalCompletion: ((Bool) -> Void)?
+    
+    private var shouldPresent = true
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +49,18 @@ open class TransitionViewController: UIViewController {
             snapshotView.image = image
             view.insertSubview(snapshotView, aboveSubview: blurView)
             
-            presentTransition.animation = {
+            presentationTransition.animation = {
                 snapshotView.alpha = 0
             }
-            dismissTransition.animation = {
+            dismissalTransition.animation = {
                 snapshotView.alpha = 1
             }
         case let .color(color):
-            presentTransition.animation = { [unowned self] in
+            view.backgroundColor = nil
+            presentationTransition.animation = { [unowned self] in
                 self.view.backgroundColor = color
             }
-            dismissTransition.animation = { [unowned self] in
+            dismissalTransition.animation = { [unowned self] in
                 self.view.backgroundColor = nil
             }
         }
@@ -64,31 +70,22 @@ open class TransitionViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if shouldPresent {
-            willPresent()
-            UIView.animate(withDuration: presentTransition.duration, delay: presentTransition.delay, usingSpringWithDamping: presentTransition.dampingRatio, initialSpringVelocity: presentTransition.velocity, options: presentTransition.options, animations: presentTransition.animation, completion: {
-                _ in
-                self.didPresent()
+            UIView.animate(withDuration: presentationTransition.duration, delay: presentationTransition.delay, usingSpringWithDamping: presentationTransition.dampingRatio, initialSpringVelocity: presentationTransition.velocity, options: presentationTransition.options, animations: {
+                self.presentationTransition.animation()
+                self.presentationAnimation()
+            }, completion: { (finished) in
+                self.presentationCompletion?(finished)
             })
             shouldPresent = false
         }
     }
     
-    //Subclass should override this method to customize animation for presenting
-    open func willPresent() {
-    }
-    
-    //Subclass should override this method to customize animation for dismissing
-    open func willDismiss() {
-    }
-
-    open func didPresent() {
-    }
-    
     public func dismiss(completion: (() -> Void)? = nil) {
-        willDismiss()
-        
-        UIView.animate(withDuration: dismissTransition.duration, delay: dismissTransition.delay, usingSpringWithDamping: dismissTransition.dampingRatio, initialSpringVelocity: dismissTransition.velocity, options: dismissTransition.options, animations: dismissTransition.animation, completion: { _ in
-            self.dismiss(animated: false, completion: completion)
+        UIView.animate(withDuration: dismissalTransition.duration, delay: dismissalTransition.delay, usingSpringWithDamping: dismissalTransition.dampingRatio, initialSpringVelocity: dismissalTransition.velocity, options: dismissalTransition.options, animations: {
+            self.dismissalTransition.animation()
+            self.dismissalAnimation()
+        }, completion: { (finished) in
+            self.dismissalCompletion?(finished)
         })
     }
 }

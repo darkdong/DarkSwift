@@ -32,6 +32,7 @@
 		42ABD1E21F5672C20006A194 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABD1E11F5672C20006A194 /* UINavigationBar.swift */; };
 		42AF72B61FD9333F00D1B9B9 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AF72B51FD9333E00D1B9B9 /* Date.swift */; };
 		42B2C8321F5D5FC70015E756 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2C8311F5D5FC70015E756 /* UINavigationController.swift */; };
+		42B9B1841FDBF8B40030B0CF /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B9B1831FDBF8B40030B0CF /* Number.swift */; };
 		42BCF5D11FA044BA00AFBCE4 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCF5D01FA044BA00AFBCE4 /* UIDevice.swift */; };
 		42C225841F11C91E002AC779 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C225831F11C91E002AC779 /* Selectable.swift */; };
 		42CE79CC1E8DEB3A00834C18 /* DarkSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */; };
@@ -91,6 +92,7 @@
 		42ABD1E11F5672C20006A194 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		42AF72B51FD9333E00D1B9B9 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		42B2C8311F5D5FC70015E756 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		42B9B1831FDBF8B40030B0CF /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		42BCF5D01FA044BA00AFBCE4 /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		42C225831F11C91E002AC779 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		42CE79C21E8DEB3A00834C18 /* DarkSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarkSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 				4265F5421F2C474A00B68078 /* UIScrollView.swift */,
 				42256D4A1F16FFED0043BD5A /* URL.swift */,
 				421BDDA01F1F9B30003976B7 /* Bundle.swift */,
+				42B9B1831FDBF8B40030B0CF /* Number.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				423FC4B61E908CEF009E1008 /* Layout.swift in Sources */,
 				42256D4E1F16FFED0043BD5A /* CoreGraphics.swift in Sources */,
 				42256D551F16FFED0043BD5A /* UIImage.swift in Sources */,
+				42B9B1841FDBF8B40030B0CF /* Number.swift in Sources */,
 				42256D511F16FFED0043BD5A /* SKNode.swift in Sources */,
 				42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */,
 				421BDDA31F1F9D5A003976B7 /* MultiContentButton.swift in Sources */,
