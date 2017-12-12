@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension UInt32 {
+public extension UInt32 {
     var random: UInt32 {
         return arc4random_uniform(self)
     }
