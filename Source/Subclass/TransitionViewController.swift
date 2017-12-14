@@ -79,10 +79,14 @@ open class TransitionViewController: UIViewController {
     }
     
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        startDismissing()
-        UIView.animate(withDuration: dismissalTransition.duration, delay: dismissalTransition.delay, usingSpringWithDamping: dismissalTransition.dampingRatio, initialSpringVelocity: dismissalTransition.velocity, options: dismissalTransition.options, animations: dismissalTransition.animation, completion: { finished in
-            self.dismissalTransition.completion?(finished)
+        if flag {
+            startDismissing()
+            UIView.animate(withDuration: dismissalTransition.duration, delay: dismissalTransition.delay, usingSpringWithDamping: dismissalTransition.dampingRatio, initialSpringVelocity: dismissalTransition.velocity, options: dismissalTransition.options, animations: dismissalTransition.animation, completion: { finished in
+                self.dismissalTransition.completion?(finished)
+                super.dismiss(animated: false, completion: completion)
+            })
+        } else {
             super.dismiss(animated: false, completion: completion)
-        })
+        }
     }
 }
