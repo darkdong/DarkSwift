@@ -13,3 +13,9 @@ public extension UInt32 {
         return arc4random_uniform(self)
     }
 }
+
+public extension Int {
+    var random: Int {
+        return Int(UInt32(self).random)
+    }
+}
