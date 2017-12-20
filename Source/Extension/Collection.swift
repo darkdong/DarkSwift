@@ -80,6 +80,16 @@ public extension Array {
         return nextIndex >= endIndex ? startIndex : nextIndex
     }
     
+    // iterate two adjacent elements in the same time
+    func iterate2(_ iterator: ((_ e1: Element?, _ e2: Element?) -> Void)) {
+        var prev: Element? = nil
+        for e in self {
+            iterator(prev, e)
+            prev = e
+        }
+        iterator(prev, nil)
+    }
+    
     //if processor is presented, return empty permutations
     //if processor is not presented, return all permutations
     func permutation(_ length: Int? = nil, processor: (([Element]) -> Void)? = nil) -> [[Element]] {
