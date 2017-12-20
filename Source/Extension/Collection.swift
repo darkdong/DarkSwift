@@ -81,13 +81,13 @@ public extension Array {
     }
     
     // iterate two adjacent elements in the same time
-    func iterate2(_ iterator: ((_ e1: Element?, _ e2: Element?) -> Void)) {
-        var prev: Element? = nil
-        for e in self {
-            iterator(prev, e)
-            prev = e
+    func iterate2(_ iterator: ((_ e1: Element, _ e2: Element) -> Void)) {
+        guard count >= 2 else {
+            return
         }
-        iterator(prev, nil)
+        for i in 0...count-2 {
+            iterator(self[i], self[i+1])
+        }
     }
     
     //if processor is presented, return empty permutations
