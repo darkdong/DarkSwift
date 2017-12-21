@@ -9,14 +9,8 @@
 import UIKit
 
 public extension UINavigationBar {
-    // the magic key string
-    private static let keyHidesShadow = "hidesShadow"
-    var isHairlineHidden: Bool {
-        get {
-            return value(forKey: UINavigationBar.keyHidesShadow) as! Bool
-        }
-        set {
-            setValue(newValue, forKey: UINavigationBar.keyHidesShadow)
-        }
-    }
+    func hideHairline() {
+		setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+		shadowImage = UIImage()
+	}
 }
