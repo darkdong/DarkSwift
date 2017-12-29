@@ -18,7 +18,7 @@ import AVFoundation
 //    }
 //}
 
-public class System: NSObject {
+public struct System {
     public static var rootViewController: UIViewController? {
         return UIApplication.shared.delegate?.window??.rootViewController
     }

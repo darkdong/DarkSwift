@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Screen: NSObject {
+public struct Screen {
     public struct Height {
         public static let statusBar: CGFloat = 20
         public static let navigationBar: CGFloat = 44
@@ -25,7 +25,8 @@ public class Screen: NSObject {
         public static let phone5 = CGSize(width: 320, height: 568) // @2x:  640 x 1136
         public static let phone6 = CGSize(width: 375, height: 667) // @2x:  750 x 1334
         public static let phone6Plus = CGSize(width: 414, height: 736) // @3x: 1242 x 2208
-        
+        public static let phoneX = CGSize(width: 375, height: 812) // @3x: 1125 x 2436
+
         public static let pad = CGSize(width: 768, height: 1024) // @2x: 1536 x 2048
         public static let padPro = CGSize(width: 1024, height: 1366) // @2x: 2048 x 2732
     }
@@ -56,6 +57,10 @@ public class Screen: NSObject {
         return devicePortraitSize.height == DevicePortraitSize.phone6Plus.height
     }
     
+    public static var isPhoneX: Bool {
+        return devicePortraitSize.height == DevicePortraitSize.phoneX.height
+    }
+    
     public static var isPad: Bool {
         return devicePortraitSize.height == DevicePortraitSize.pad.height
     }
@@ -66,7 +71,6 @@ public class Screen: NSObject {
     
     //use scale if we have two layouts: phone and pad
     public static var scale: CGFloat = {
-        
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             let w = DesignPortraitWidth.phone
@@ -78,6 +82,8 @@ public class Screen: NSObject {
                 return DevicePortraitSize.phone6.width / w
             } else if isPhone6Plus {
                 return DevicePortraitSize.phone6Plus.width / w
+            } else if isPhoneX {
+                return DevicePortraitSize.phoneX.width / w
             } else {
                 return 1
             }
@@ -106,6 +112,8 @@ public class Screen: NSObject {
             return DevicePortraitSize.phone6.width / DesignPortraitWidth.universal
         case DevicePortraitSize.phone6Plus.height:
             return DevicePortraitSize.phone6Plus.width / DesignPortraitWidth.universal
+        case DevicePortraitSize.phoneX.height:
+            return DevicePortraitSize.phoneX.width / DesignPortraitWidth.universal
         case DevicePortraitSize.pad.height:
             return DevicePortraitSize.pad.width / DesignPortraitWidth.universal
         case DevicePortraitSize.padPro.height:
