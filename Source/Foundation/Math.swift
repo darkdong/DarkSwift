@@ -15,6 +15,13 @@ public struct Math {
         return x1 == x2 ? y1 : y1 + (x - x1) * (y2 - y1) / (x2 - x1)
     }
     
+    public static func closestPagingPoint(to point: CGFloat, pageSize: CGFloat, offset: CGFloat = 0) -> CGFloat {
+        let index = point / pageSize
+        let floorPoint = floor(index) * pageSize + offset
+        let ceilPoint = ceil(index) * pageSize + offset
+        return abs(floorPoint - point) < abs(ceilPoint - point) ? floorPoint : ceilPoint
+    }
+    
     //find bit 1 from right to left
     // bitPositions(13) -> 0x00001101 -> [1, 3, 4] 
     public static func bitmaskPositions(_ bitsRepresentation: UInt) -> [Int] {
