@@ -16,9 +16,9 @@ public struct Math {
     }
     
     public static func closestPagingPoint(to point: CGFloat, pageSize: CGFloat, offset: CGFloat = 0) -> CGFloat {
-        let index = point / pageSize
-        let floorPoint = floor(index) * pageSize + offset
-        let ceilPoint = ceil(index) * pageSize + offset
+        let floatIndex = point / pageSize
+        let floorPoint = floor(floatIndex) * pageSize + offset
+        let ceilPoint = ceil(floatIndex) * pageSize + offset
         return abs(floorPoint - point) < abs(ceilPoint - point) ? floorPoint : ceilPoint
     }
     
