@@ -86,7 +86,7 @@ open class TransitionViewController: UIViewController {
                 self.dismiss(animated: false, completion: completion)
             })
         } else {
-            self.dismiss(animated: false, completion: completion)
+            dismiss(animated: false, completion: completion)
         }
     }
 }

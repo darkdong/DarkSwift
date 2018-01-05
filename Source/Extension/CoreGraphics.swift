@@ -144,6 +144,10 @@ public extension CGRect {
 }
 
 public extension UIEdgeInsets {
+    static func * (insets: UIEdgeInsets, scale: CGFloat) -> UIEdgeInsets {
+        return UIEdgeInsets(top: insets.top * scale, left: insets.left * scale, bottom: insets.bottom * scale, right: insets.right * scale)
+    }
+    
     static func + (left: UIEdgeInsets, right: UIEdgeInsets) -> UIEdgeInsets {
         return UIEdgeInsets(top: left.top + right.top, left: left.left + right.left, bottom: left.bottom + right.bottom, right: left.right + right.right)
     }

@@ -33,6 +33,10 @@ public extension UIScrollView {
         UIGraphicsEndImageContext()
         return image
     }
+    
+    var contentOffsetForCentering: CGPoint {
+        return CGPoint(x: (contentSize.width - frame.width) / 2, y: (contentSize.height - frame.height) / 2)
+    }
 }
 
 public extension UITableView {
