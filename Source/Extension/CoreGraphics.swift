@@ -141,6 +141,13 @@ public extension CGRect {
     func inset(_ insets: UIEdgeInsets) -> CGRect {
         return CGRect(x: origin.x + insets.left, y: origin.y + insets.top, width: width - insets.left - insets.right, height: height - insets.top - insets.bottom)
     }
+    
+    func rotate(_ radian: CGFloat) -> CGRect {
+        let t = CGAffineTransform(rotationAngle: radian)
+        let path = UIBezierPath(rect: self)
+        path.apply(t)
+        return path.bounds
+    }
 }
 
 public extension UIEdgeInsets {
