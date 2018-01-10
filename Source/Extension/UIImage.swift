@@ -121,6 +121,11 @@ public extension UIImage {
         return crop(to: rect)
     }
     
+    func scale(to newScale: CGFloat) -> UIImage? {
+        let newSize = size * newScale
+        return resize(to: newSize)
+    }
+    
     func resize(to newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
         draw(in: CGRect(origin: CGPoint.zero, size: newSize))
