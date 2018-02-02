@@ -243,7 +243,7 @@ public extension UIImage {
         return CIImage(image: self)!.oriented(forExifOrientation: Int32(orientation.rawValue)).uiImage()!
     }
     
-    var data: Data? {
+    var rawData: Data? {
         return cgImage?.dataProvider?.data as Data?
     }
     
