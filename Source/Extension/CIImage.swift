@@ -31,4 +31,22 @@ public extension CIImage {
             return self
         }
     }
+    
+    func applyingAlpha(_ alpha: CGFloat) -> CIImage {
+        let name = "CIConstantColorGenerator"
+        let key = "inputColor"
+        let backgroundFilter = CIFilter(name: name)!
+        backgroundFilter.setValue(CIColor(red: 0, green: 0, blue: 0, alpha: 0), forKey: key)
+        let backgroundImage = backgroundFilter.outputImage!
+        
+        let alphaFilter = CIFilter(name: name)!
+        alphaFilter.setValue(CIColor(red: 0, green: 0, blue: 0, alpha: alpha), forKey: key)
+        let alphaImage = alphaFilter.outputImage!
+        
+        let parameters: [String: Any] = [
+            "inputBackgroundImage": backgroundImage,
+            "inputMaskImage": alphaImage
+        ]
+        return applyingFilter("CIBlendWithAlphaMask", parameters: parameters)
+    }
 }

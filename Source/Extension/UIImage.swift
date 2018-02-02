@@ -152,6 +152,11 @@ public extension UIImage {
         return rotatedImage
     }
     
+    func alpha(to alpha: CGFloat) -> UIImage {
+        let rect = CGRect(origin: CGPoint.zero, size: pixelSize)
+        return CIImage(image: self)!.applyingAlpha(alpha).uiImage(rectForInfinite: rect)!
+    }
+    
 	func horizonalMirror() -> UIImage {
 		var flippedOrientation: UIImageOrientation = .up
 		
@@ -211,6 +216,31 @@ public extension UIImage {
         } else {
             return nil
         }
+    }
+    
+    var upOrientedImage: UIImage {
+        guard imageOrientation != .up else {
+            return self
+        }
+        var orientation: CGImagePropertyOrientation = .right
+        
+        switch imageOrientation {
+        case .down:
+            orientation = .down
+        case .left:
+            orientation = .left
+        case .upMirrored:
+            orientation = .upMirrored
+        case .downMirrored:
+            orientation = .downMirrored
+        case .leftMirrored:
+            orientation = .leftMirrored
+        case .rightMirrored:
+            orientation = .rightMirrored
+        default:
+            break
+        }
+        return CIImage(image: self)!.oriented(forExifOrientation: Int32(orientation.rawValue)).uiImage()!
     }
     
     var data: Data? {
