@@ -11,6 +11,7 @@
 		421BDDA31F1F9D5A003976B7 /* MultiContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421BDDA21F1F9D5A003976B7 /* MultiContentButton.swift */; };
 		421FB8211FD8D7C8002B59E5 /* HoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421FB8201FD8D7C7002B59E5 /* HoleView.swift */; };
 		421FB8231FD8D7EC002B59E5 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421FB8221FD8D7EC002B59E5 /* AudioPlayer.swift */; };
+		422496AC202441B200F9865D /* ScrollViewPaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422496AB202441B200F9865D /* ScrollViewPaging.swift */; };
 		42256D4C1F16FFED0043BD5A /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D3E1F16FFED0043BD5A /* CALayer.swift */; };
 		42256D4D1F16FFED0043BD5A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D3F1F16FFED0043BD5A /* Collection.swift */; };
 		42256D4E1F16FFED0043BD5A /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42256D401F16FFED0043BD5A /* CoreGraphics.swift */; };
@@ -71,6 +72,7 @@
 		421BDDA21F1F9D5A003976B7 /* MultiContentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiContentButton.swift; sourceTree = "<group>"; };
 		421FB8201FD8D7C7002B59E5 /* HoleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoleView.swift; sourceTree = "<group>"; };
 		421FB8221FD8D7EC002B59E5 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		422496AB202441B200F9865D /* ScrollViewPaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewPaging.swift; sourceTree = "<group>"; };
 		42256D3E1F16FFED0043BD5A /* CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		42256D3F1F16FFED0043BD5A /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		42256D401F16FFED0043BD5A /* CoreGraphics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				42C225831F11C91E002AC779 /* Selectable.swift */,
 				42F23AE21FB2095700CBA016 /* ImageFilter.swift */,
 				42F23AF31FB44D5400CBA016 /* FileLineReader.swift */,
+				422496AB202441B200F9865D /* ScrollViewPaging.swift */,
 			);
 			name = Foundation;
 			path = Source/Foundation;
@@ -407,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42DB4BDF1E9C6BBE00243EC4 /* Math.swift in Sources */,
+				422496AC202441B200F9865D /* ScrollViewPaging.swift in Sources */,
 				42F23AE31FB2095700CBA016 /* ImageFilter.swift in Sources */,
 				42ABD1E21F5672C20006A194 /* UINavigationBar.swift in Sources */,
 				421BDDA11F1F9B30003976B7 /* Bundle.swift in Sources */,
