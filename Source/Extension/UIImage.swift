@@ -34,7 +34,7 @@ public extension UIImage {
         self.init(cgImage: image.cgImage!)
     }
     
-    convenience init?(data: Data, width: Int, height: Int, bitmapInfo: CGBitmapInfo = CGBitmapInfo()) {
+    convenience init?(rawData: Data, width: Int, height: Int, bitmapInfo: CGBitmapInfo = CGBitmapInfo()) {
         let numberOfComponents = 4
         let releaseDataCallback: CGDataProviderReleaseDataCallback = { (pixelsDataPointer, _, _) in
             //release underlying data to prevent memory leak
@@ -44,7 +44,7 @@ public extension UIImage {
         // CGDataProvider just "access" underlying data and doesn't retain it
         // Underlying data may be dealloced while this image is using
         // We must retain underlying data until CGDataProvider is released
-        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(data as NSData).toOpaque(), data: (data as NSData).bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
+        let dataProvider = CGDataProvider(dataInfo: Unmanaged.passRetained(rawData as NSData).toOpaque(), data: (rawData as NSData).bytes, size: width * height * numberOfComponents, releaseData: releaseDataCallback)
         let bitsPerComponent = 8
 
         if let dataProvider = dataProvider, let cgImage = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerComponent * numberOfComponents, bytesPerRow: width * numberOfComponents, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent) {
