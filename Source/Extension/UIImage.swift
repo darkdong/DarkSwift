@@ -257,8 +257,9 @@ public extension UIImage {
     }
     
     func imageForFillingSize(_ targetSize: CGSize) -> UIImage? {
+        let newScale = size.scaleForFillingSize(targetSize)
         let scaledRect = size.scaledRectForFillingSize(targetSize)
-        let scaledImage = resize(to: scaledRect.size)
+        let scaledImage = scale(to: newScale)
         return scaledImage?.crop(to: scaledRect)
     }
     
@@ -271,8 +272,9 @@ public extension UIImage {
         } else {
             UIGraphicsBeginImageContextWithOptions(targetSize, false, scale)
         }
+        let newScale = size.scaleForFittingSize(targetSize)
         let scaledRect = size.scaledRectForFittingSize(targetSize)
-        let scaledImage = resize(to: scaledRect.size)
+        let scaledImage = scale(to: newScale)
         scaledImage?.draw(at: scaledRect.origin)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
