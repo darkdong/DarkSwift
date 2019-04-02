@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIScrollView {
-    func scrollToEnd(animated: Bool, scrollDirection: UICollectionViewScrollDirection = .vertical) {
+	func scrollToEnd(animated: Bool, scrollDirection: UICollectionView.ScrollDirection = .vertical) {
         switch scrollDirection {
         case .vertical:
             let diff = contentSize.height + contentInset.bottom - frame.height
@@ -21,7 +21,9 @@ public extension UIScrollView {
             if (diff > 0) {
                 setContentOffset(CGPoint(x: diff, y: contentOffset.y), animated: animated)
             }
-        }
+		@unknown default:
+			fatalError()
+		}
     }
     
     func visibleContentImage(extraScale: CGFloat = 1) -> UIImage? {

@@ -46,7 +46,7 @@ public extension UIFont {
     
     @objc convenience init(swizzledCoder aDecoder: NSCoder) {
         if let fontDescriptor = aDecoder.decodeObject(forKey: "UIFontDescriptor") as? UIFontDescriptor {
-            let key = UIFontDescriptor.AttributeName("NSCTFontUIUsageAttribute")
+			let key = UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")
             if let fontAttribute = fontDescriptor.fontAttributes[key] as? String {
                 var fontName = ""
                 switch fontAttribute {

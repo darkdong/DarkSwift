@@ -31,7 +31,7 @@ public extension Layoutable {
         return points
     }
     
-    static func horizontalCenterPoints(forItems items: [Layoutable], in rect: CGRect, verticalAlignment: UIControlContentVerticalAlignment = .center) -> [CGPoint] {
+    static func horizontalCenterPoints(forItems items: [Layoutable], in rect: CGRect, verticalAlignment: UIControl.ContentVerticalAlignment = .center) -> [CGPoint] {
         if items.isEmpty {
             return []
         } else if items.count == 1 {
@@ -55,7 +55,7 @@ public extension Layoutable {
         }
     }
     
-    static func verticalCenterPoints(forItems items: [Layoutable], in rect: CGRect, horizontalAlignment: UIControlContentHorizontalAlignment = .center) -> [CGPoint] {
+    static func verticalCenterPoints(forItems items: [Layoutable], in rect: CGRect, horizontalAlignment: UIControl.ContentHorizontalAlignment = .center) -> [CGPoint] {
         if items.isEmpty {
             return []
         } else if items.count == 1 {
@@ -104,7 +104,7 @@ public extension Layoutable {
         }
     }
 
-    func centerX(in rect: CGRect, horizontalAlignment: UIControlContentHorizontalAlignment = .center) -> CGFloat {
+    func centerX(in rect: CGRect, horizontalAlignment: UIControl.ContentHorizontalAlignment = .center) -> CGFloat {
         switch horizontalAlignment {
         case .left:
             return rect.minX + size.width/2
@@ -115,7 +115,7 @@ public extension Layoutable {
         }
     }
     
-    func centerY(in rect: CGRect, verticalAlignment: UIControlContentVerticalAlignment = .center) -> CGFloat {
+    func centerY(in rect: CGRect, verticalAlignment: UIControl.ContentVerticalAlignment = .center) -> CGFloat {
         switch verticalAlignment {
         case .top:
             return coordinateSystemOrigin == .upperLeft ? rect.minY + size.height/2 : rect.maxY - size.height/2
@@ -126,7 +126,7 @@ public extension Layoutable {
         }
     }
     
-    func centerPoint(in rect: CGRect, horizontalAlignment: UIControlContentHorizontalAlignment = .center, verticalAlignment: UIControlContentVerticalAlignment = .center) -> CGPoint {
+	func centerPoint(in rect: CGRect, horizontalAlignment: UIControl.ContentHorizontalAlignment = .center, verticalAlignment: UIControl.ContentVerticalAlignment = .center) -> CGPoint {
         let cx = centerX(in: rect, horizontalAlignment: horizontalAlignment)
         let cy = centerY(in: rect, verticalAlignment: verticalAlignment)
         return CGPoint(x: cx, y: cy)
@@ -156,7 +156,7 @@ public enum CoordinateSystemOrigin {
 }
 
 public enum Alignment {
-    case horizontal(UIControlContentVerticalAlignment)
-    case vertical(UIControlContentHorizontalAlignment)
+	case horizontal(UIControl.ContentVerticalAlignment)
+	case vertical(UIControl.ContentHorizontalAlignment)
     case tabular(Int, Int, CGSize)
 }

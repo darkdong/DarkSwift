@@ -39,7 +39,7 @@ public extension String {
     }
     
     func attributedString(font: UIFont? = nil, color: UIColor? = nil) -> NSMutableAttributedString {
-        var attributes = [NSAttributedStringKey: Any]()
+        var attributes = [NSAttributedString.Key: Any]()
         
         if let font = font {
             attributes[.font] = font

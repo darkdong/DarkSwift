@@ -158,7 +158,7 @@ public extension UIImage {
     }
     
 	func horizonalMirror() -> UIImage {
-		var flippedOrientation: UIImageOrientation = .up
+		var flippedOrientation: UIImage.Orientation = .up
 		
 		switch imageOrientation {
 		case .up:
@@ -177,13 +177,15 @@ public extension UIImage {
 			flippedOrientation = .right
 		case .rightMirrored:
 			flippedOrientation = .left
+		@unknown default:
+			fatalError()
 		}
 		
 		return UIImage(cgImage: cgImage!, scale: scale, orientation: flippedOrientation)
 	}
     
 	func verticalMirror() -> UIImage {
-		var flippedOrientation: UIImageOrientation = .up
+		var flippedOrientation: UIImage.Orientation = .up
 
 		switch imageOrientation {
 		case .up:
@@ -202,6 +204,8 @@ public extension UIImage {
 			flippedOrientation = .left
 		case .rightMirrored:
 			flippedOrientation = .right
+		@unknown default:
+			fatalError()
 		}
 		
 		return UIImage(cgImage: cgImage!, scale: scale, orientation: flippedOrientation)
