@@ -79,7 +79,7 @@ public final class ImageColorCubeFilter: ImageFilter {
                     let r = UInt8(ir * scale + revise(at: ir))
                     let g = UInt8(ig * scale + revise(at: ig))
                     let b = UInt8(ib * scale + revise(at: ib))
-                    let rgbaData = Data(bytes: [r, g, b, UInt8.max])
+                    let rgbaData = Data([r, g, b, UInt8.max])
                     data.append(rgbaData)
                 }
             }

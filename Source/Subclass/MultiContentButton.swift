@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension UIControlState: Hashable {
+extension UIControl.State: Hashable {
     public var hashValue: Int {
         return Int(rawValue)
     }
 }
 
 open class MultiContentButton: UIButton {
-    public typealias StateContent = [UIControlState: Content]
+	public typealias StateContent = [UIControl.State: Content]
     
     public struct Content {
         var text: String?
@@ -80,7 +80,7 @@ open class MultiContentButton: UIButton {
     }
     
     //convenience for other states
-    public func addContentList(_ contents: [Content], for state: UIControlState) {
+	public func addContentList(_ contents: [Content], for state: UIControl.State) {
         for i in 0..<stateContentList.count {
             stateContentList[i][state] = contents[i]
         }

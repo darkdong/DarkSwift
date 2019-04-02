@@ -78,17 +78,17 @@ public extension UINavigationController {
 
     private var transitionToPresent: CATransition {
         let transition = CATransition()
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionMoveIn
-        transition.subtype = kCATransitionFromTop
+		transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+		transition.type = CATransitionType.moveIn
+		transition.subtype = CATransitionSubtype.fromTop
         return transition
     }
     
     private var transitionToDismiss: CATransition {
         let transition = CATransition()
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionReveal
-        transition.subtype = kCATransitionFromBottom
+		transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+		transition.type = CATransitionType.reveal
+		transition.subtype = CATransitionSubtype.fromBottom
         return transition
     }
 }

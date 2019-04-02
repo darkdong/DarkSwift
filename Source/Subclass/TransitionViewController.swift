@@ -19,7 +19,7 @@ open class TransitionViewController: UIViewController {
         public var delay: TimeInterval = 0
         public var dampingRatio: CGFloat = 1
         public var velocity: CGFloat = 0
-        public var options: UIViewAnimationOptions = []
+		public var options: UIView.AnimationOptions = []
         public var animation: (() -> Void) = {}
         public var completion: ((Bool) -> Void)?
     }

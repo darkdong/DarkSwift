@@ -22,8 +22,8 @@ open class LineLimitedTextView: UITextView {
     private func commonInit() {
         textContainer.lineFragmentPadding = 0
         textContainerInset = UIEdgeInsets.zero
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: .UITextViewTextDidChange, object: nil)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nil)
     }
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -42,7 +42,7 @@ open class LineLimitedTextView: UITextView {
         let size = CGSize(width: frame.width - textContainerInset.left - textContainerInset.right - textContainer.lineFragmentPadding, height: CGFloat.infinity)
         let boundingRect = attributedText.boundingRect(with: size, options: [.usesLineFragmentOrigin], context: nil)
         let lineSpacing: CGFloat
-        if attributedText.length > 0, let paragraphStyle = attributedText.attribute(NSAttributedStringKey.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle {
+		if attributedText.length > 0, let paragraphStyle = attributedText.attribute(NSAttributedString.Key.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle {
             lineSpacing = paragraphStyle.lineSpacing
         } else {
             lineSpacing = 0
@@ -67,7 +67,7 @@ open class LineLimitedTextView: UITextView {
         if attributedText.length > 0 {
             return attributedText.attributedSubstring(from: NSMakeRange(0, 1)).size().height
         } else {
-            var attributes = [NSAttributedStringKey: Any]()
+			var attributes = [NSAttributedString.Key: Any]()
             if let font = font {
                 attributes[.font] = font
             }

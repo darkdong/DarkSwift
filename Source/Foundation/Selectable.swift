@@ -69,7 +69,7 @@ public struct ExclusiveSelection<T> where T: Equatable, T: Selectable {
     
     public mutating func select(_ newSelected: T?) {
         if let newSelected = newSelected {
-            selectedIndex = candidates.index(of: newSelected)
+			selectedIndex = candidates.firstIndex(of: newSelected)
         } else {
             selectedIndex = nil
         }

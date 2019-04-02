@@ -108,7 +108,7 @@ public extension UIButton {
         }
         if let image = backgroundImage(for: [.selected]) {
             let tinted = tint(image)
-            if UIEdgeInsetsEqualToEdgeInsets(image.capInsets, UIEdgeInsets.zero) {
+            if image.capInsets == UIEdgeInsets.zero {
                 setBackgroundImage(tinted, for: [.selected, .highlighted])
             } else {
                 setBackgroundImage(tinted?.resizableImage(withCapInsets: image.capInsets), for: [.selected, .highlighted])
